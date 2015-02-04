@@ -8,6 +8,7 @@ class list_node(object):
 class linked_list(object):
     def __init__(self, *args):
         self.head = None
+        self._size = 0
         # if args:
         #    self.head = args[0]
 
@@ -19,6 +20,7 @@ class linked_list(object):
         """
         new_node = list_node(val, self.head)
         self.head = new_node
+        self._size += 1
 
     def pop(self):
         """
@@ -26,3 +28,25 @@ class linked_list(object):
         accordingly.
         """
         self.head = self.head.next
+        self._size -= 1
+    
+    def size(self):
+        return self._size
+
+    def search(self, val):
+        temp = self.head
+        while temp is not None:
+            if temp.data == val:
+                return temp
+            else:
+                temp = temp.next
+        return None
+
+
+a = linked_list()
+a.insert('a')
+a.insert('b')
+a.insert('c')
+a.insert('d')
+a.size()
+
