@@ -49,6 +49,10 @@ class Linked_List(object):
         return self._size
 
     def search(self, val):
+        """
+        Search through the Linked_List to look for given value if found return 
+        the List_Node if not found return None
+        """
         temp = self.head
         while temp is not None:
             if temp.data == val:

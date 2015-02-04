@@ -41,7 +41,12 @@ def test_size():
     for something in range(100):
         s.insert(something)
     assert s.size() is 100
-
+    s.pop()
+    assert s.size() is 99
+    s.insert(0)
+    assert s.size() is 100
+    s.remove(0)
+    assert s.size is 99
 
 # search(val)
 def test_search():
@@ -59,7 +64,15 @@ def test_remove():
     assert a.head
     a.remove('val')
     assert not a.head
-
+    for something in range(100):
+        a.insert(something)
+    a.remove(99)
+    assert a.head.data is 98    
+    a.remove(0)
+    temp = a.head
+    while temp.next:
+        temp = temp.next
+    assert temp.data is 1
 
 # display()
 def test_display():
