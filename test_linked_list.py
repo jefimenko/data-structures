@@ -1,27 +1,27 @@
 # test constructor
-from linked_list import list_node
-from linked_list import linked_list
+from linked_list import List_Node
+from linked_list import Linked_List
 
 
 def test_constructor_ln():
     # Test constructing a node with no reference to another node.
-    a = list_node('asdf')
+    a = List_Node('asdf')
     assert a
-    assert not list_node.next
+    assert not a.next
 
 
 def test_node_attributes():
-    a = list_node(5, list_node(3))
+    a = List_Node(5, List_Node(3))
     assert a.data == 5
     # Test value for .next attribute.
     assert a.next
     assert a.next.data == 3
 
 
-def test_linked_list_cons():
+def test_Linked_List_cons():
     # Verify that an empty linked list is created.
-    a = linked_list()
-    assert isinstance(a, linked_list)
+    a = Linked_List()
+    assert isinstance(a, Linked_List)
     assert a.head is None
 
 # Test creating a populated linked list.
@@ -29,7 +29,7 @@ def test_linked_list_cons():
 
 # Test insert(val) and pop()
 def test_insert_pop():
-    b = linked_list()
+    b = Linked_List()
     b.insert(5)
     assert b.head.data is 5
     b.pop()
@@ -38,7 +38,7 @@ def test_insert_pop():
 
 # size()
 def test_size():
-    s = linked_list()
+    s = Linked_List()
     assert s.size() is 0
     for something in range(100):
         s.insert(something)
@@ -47,23 +47,35 @@ def test_size():
 
 # search(val)
 def test_search():
-    a = linked_list()
+    a = Linked_List()
     a.insert('a')
     a.insert(1)
-    assert a.search(1) is 1
-    assert a.search('a') is 'a'
+    assert a.search(1).data is 1
+    assert a.search('a').data is 'a'
 
 
 # remove(node)
 def test_remove():
-    pass
+    a = Linked_List()
+    a.insert('val')
+    assert a.head
+    a.remove('val')
+    assert not a.head
 
 
-# print()
-def test_print():
-    pass
+# display()
+def test_display():
+    a = Linked_List()
+    a.display()
+    a.insert('a')
+    a.insert(1)
+    a.display()
 
 
 # test __str__
 def test_str():
-    pass
+    a = Linked_List()
+    print a
+    a.insert('b')
+    a.insert(2)
+    print a
