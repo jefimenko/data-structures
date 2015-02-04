@@ -63,15 +63,22 @@ class linked_list(object):
         output = "("
         temp = self.head
         while not(temp is None):
-            if temp.next == None:
-                output += temp.data
+            if isinstance(temp.data, str):
+                if temp.next is None:
+                    output += "'" + temp.data + "'"
+                else:
+                    output += "'" + temp.data + "', "
+                temp = temp.next
             else:
-                output += temp.data + ", "
-            temp = temp.next
+                if temp.next is None:
+                    output += str(temp.data)
+                else:
+                    output += str(temp.data) + ", "
+                temp = temp.next
         print output + ")"
 
-b = list_node(500000000)
-print b
+b = list_node(50)
+print b.data
 
 a = linked_list()
 a.insert('a')
@@ -89,6 +96,7 @@ a.insert('e')
 a.insert('f')
 a.insert('g')
 a.insert('h')
+a.insert(1)
 a.display()
 
 print a.size()
