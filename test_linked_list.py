@@ -24,8 +24,6 @@ def test_Linked_List_cons():
     assert isinstance(a, Linked_List)
     assert a.head is None
 
-# Test creating a populated linked list.
-
 
 # Test insert(val) and pop()
 def test_insert_pop():

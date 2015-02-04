@@ -1,18 +1,27 @@
-# class for list node
 class List_Node(object):
+    """
+    List_Node class to create a node that reference another node used by
+    the Linked_List class
+    """
     def __init__(self, data, next=None):
         self.data = data
         self.next = next
 
-# class for linked list
 class Linked_List(object):
-    def __init__(self, *args):
+    """
+    Linked_List class to have values connected to on another using List_Node
+    """
+    def __init__(self):
+        """
+        Create an empty Linked_List with a size of 0
+        """
         self.head = None
         self._size = 0
-        # if args:
-        #    self.head = args[0]
 
     def __str__(self):
+        """
+        print the Linked_List in a string when the Linked_List is called
+        """
         return self.display_prep()
 
     def insert(self, val):
