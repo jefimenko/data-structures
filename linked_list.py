@@ -12,6 +12,9 @@ class linked_list(object):
         # if args:
         #    self.head = args[0]
 
+    def __str__(self):
+        return self.display_prep()
+
     def insert(self, val):
         """
         From a given val, create a new node with .data attribute set to val
@@ -64,7 +67,14 @@ class linked_list(object):
 
     def display(self):
         """
-        Print a string representation of the list, where the most recently
+        using the display_prep method print the string representation of this 
+        list
+        """
+        print display_prep
+
+    def display_prep(self):
+        """
+        return a string representation of the list, where the most recently
         added is the leftmost to appear in the console.
         """
         output = "("
@@ -79,4 +89,4 @@ class linked_list(object):
             else:
                 output += dummy + ')'
             temp = temp.next
-        print output
+        return output
