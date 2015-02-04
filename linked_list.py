@@ -29,8 +29,11 @@ class linked_list(object):
         """
         self.head = self.head.next
         self._size -= 1
-    
+
     def size(self):
+        """
+        Return an integer equal to the number of nodes in the list.
+        """
         return self._size
 
     def search(self, val):
@@ -60,43 +63,20 @@ class linked_list(object):
                     temp = temp.next
 
     def display(self):
+        """
+        Print a string representation of the list, where the most recently
+        added is the leftmost to appear in the console.
+        """
         output = "("
         temp = self.head
-        while not(temp is None):
-            if isinstance(temp.data, str):
-                if temp.next is None:
-                    output += "'" + temp.data + "'"
-                else:
-                    output += "'" + temp.data + "', "
-                temp = temp.next
+        while temp is not None:
+            dummy = temp.data
+            if isinstance(dummy, str):
+                dummy = "'" + dummy + "'"
+            dummy = str(dummy)
+            if temp.next:
+                output += dummy + ", "
             else:
-                if temp.next is None:
-                    output += str(temp.data)
-                else:
-                    output += str(temp.data) + ", "
-                temp = temp.next
-        print output + ")"
-
-b = list_node(50)
-print b.data
-
-a = linked_list()
-a.insert('a')
-a.insert('b')
-a.insert('c')
-a.insert('d')
-print a.size()
-
-a.remove('a')
-a.remove('d')
-a.remove('c')
-print a.head.data
-
-a.insert('e')
-a.insert('f')
-a.insert('g')
-a.insert('h')
-a.insert(1)
-a.display()
-
-print a.size()
+                output += dummy + ')'
+            temp = temp.next
+        print output
