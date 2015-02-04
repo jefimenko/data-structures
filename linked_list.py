@@ -4,7 +4,8 @@ class list_node(object):
         self.data = data
         self.next = next
 
-class link_list(object):
+#class for linked list
+class linked_list(object):
     def __init__(self, *args):
         self.head = None
         #if args:
