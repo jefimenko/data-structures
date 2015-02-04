@@ -64,11 +64,14 @@ class Linked_List(object):
     def remove(self, node_id):
         """
         Remove a node with that has a given value, node id.
+        For linked lists with multiple nodes with identical values,
+        only the leftmost/most recently added occurence will be removed.
         """
         temp = self.head
         if temp.data == node_id:
             self.head = temp.next
             self._size -= 1
+            break
         else:
             while not(temp.next is None):
                 if temp.next.data == node_id:
