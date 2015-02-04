@@ -1,11 +1,11 @@
 # class for list node
-class list_node(object):
+class List_Node(object):
     def __init__(self, data, next=None):
         self.data = data
         self.next = next
 
 # class for linked list
-class linked_list(object):
+class Linked_List(object):
     def __init__(self, *args):
         self.head = None
         self._size = 0
@@ -21,7 +21,7 @@ class linked_list(object):
         and rearrange the list so the head is the new node with a reference
         to the old head.
         """
-        new_node = list_node(val, self.head)
+        new_node = List_Node(val, self.head)
         self.head = new_node
         self._size += 1
 
