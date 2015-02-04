@@ -42,11 +42,33 @@ class linked_list(object):
                 temp = temp.next
         return None
 
+    def remove(self, node_id):
+        """
+        Remove a node with that has a given value, node id.
+        """
+        temp = self.head
+        if temp.data == node_id:
+            self.head = temp.next
+        else:
+            while not(temp.next is None):
+                if temp.next.data == node_id:
+                    temp.next = temp.next.next
+                    break
+                else:
+                    temp = temp.next
+
+
+b = list_node(500000000)
+print b
 
 a = linked_list()
 a.insert('a')
 a.insert('b')
 a.insert('c')
 a.insert('d')
-a.size()
+print a.size()
 
+a.remove('a')
+a.remove('d')
+a.remove('c')
+print a.head.data
