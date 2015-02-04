@@ -70,7 +70,7 @@ class linked_list(object):
         using the display_prep method print the string representation of this 
         list
         """
-        print display_prep
+        print self.display_prep()
 
     def display_prep(self):
         """
