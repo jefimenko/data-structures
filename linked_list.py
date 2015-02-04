@@ -49,10 +49,12 @@ class linked_list(object):
         temp = self.head
         if temp.data == node_id:
             self.head = temp.next
+            self._size -= 1
         else:
             while not(temp.next is None):
                 if temp.next.data == node_id:
                     temp.next = temp.next.next
+                    self._size -= 1
                     break
                 else:
                     temp = temp.next
@@ -88,3 +90,5 @@ a.insert('f')
 a.insert('g')
 a.insert('h')
 a.display()
+
+print a.size()
