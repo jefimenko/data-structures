@@ -46,7 +46,7 @@ def test_size():
     s.insert(0)
     assert s.size() is 100
     s.remove(0)
-    assert s.size is 99
+    assert s.size() is 99
 
 # search(val)
 def test_search():
