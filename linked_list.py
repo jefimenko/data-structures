@@ -57,6 +57,16 @@ class linked_list(object):
                 else:
                     temp = temp.next
 
+    def display(self):
+        output = "("
+        temp = self.head
+        while not(temp is None):
+            if temp.next == None:
+                output += temp.data
+            else:
+                output += temp.data + ", "
+            temp = temp.next
+        print output + ")"
 
 b = list_node(500000000)
 print b
@@ -72,3 +82,9 @@ a.remove('a')
 a.remove('d')
 a.remove('c')
 print a.head.data
+
+a.insert('e')
+a.insert('f')
+a.insert('g')
+a.insert('h')
+a.display()
