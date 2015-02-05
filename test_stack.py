@@ -7,7 +7,7 @@ from stack import Stack
 def create_stack(request):
     a = Stack()
     for x in range(10):
-        a.push(val)
+        a.push(x)
     a.push('val')
 
     # Unbind a from stack for teardown.
