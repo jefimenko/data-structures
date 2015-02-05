@@ -7,6 +7,7 @@ class List_Node(object):
         self.data = data
         self.next = next
 
+
 class Linked_List(object):
     """
     Linked_List class to have values connected to on another using List_Node
@@ -22,6 +23,9 @@ class Linked_List(object):
         """
         print the Linked_List in a string when the Linked_List is called
         """
+        return self.display_prep()
+
+    def __repr__(self):
         return self.display_prep()
 
     def insert(self, val):
@@ -71,7 +75,6 @@ class Linked_List(object):
         if temp.data == node_id:
             self.head = temp.next
             self._size -= 1
-            break
         else:
             while not(temp.next is None):
                 if temp.next.data == node_id:
@@ -95,7 +98,7 @@ class Linked_List(object):
         """
         output = "("
         temp = self.head
-        while temp is not None:
+        while temp:
             dummy = temp.data
             if isinstance(dummy, str):
                 dummy = "'" + dummy + "'"
@@ -103,6 +106,6 @@ class Linked_List(object):
             if temp.next:
                 output += dummy + ", "
             else:
-                output += dummy + ')'
+                output += dummy
             temp = temp.next
-        return output
+        return output + ")"
