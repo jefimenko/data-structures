@@ -82,3 +82,8 @@ def test_verifysize(create_stack):
         c.pop()
     except IndexError:
         assert True
+
+    for d in range(5):
+        alleged_size += 1
+        c.push(d)
+        assert c.size == alleged_size
