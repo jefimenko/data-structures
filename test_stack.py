@@ -11,9 +11,12 @@ def create_stack(request):
         a.push(x)
     a.push('val')
 
+    def unbind(a):
+        a = None
+
     # Unbind a from stack for teardown practice.
     def cleanup():
-        a = None
+        unbind(a)
 
     request.addfinalizer(cleanup)
 
