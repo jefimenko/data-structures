@@ -2,7 +2,10 @@ import pytest
 from stack import Level
 from stack import Stack
 
-
+"""
+Create a stack using fixtures to be used later
+Currently running for every function
+"""
 @pytest.fixture(scope='function')
 def create_stack(request):
     # Create a populated stack for testing.
@@ -32,12 +35,13 @@ def test_level_cons():
     c = Level('asdf')
     assert c.data == 'asdf'
 
-
+#Test contructor for Stack
 def test_stack_cons():
     s = Stack()
     assert s.top is None
     assert s.size is 0
 
+#test push function on empty and populated stack
 def test_push():
     a = Stack()
     a.push(1)
@@ -45,7 +49,7 @@ def test_push():
     a.push(2)
     assert a.top.data is 2
 
-
+#test pop function on empty stack
 def test_pop():
     a = Stack()
     try:
