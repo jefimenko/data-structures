@@ -3,7 +3,7 @@ from stack import Level
 from stack import Stack
 
 
-@pytext.fixture(scope='function')
+@pytest.fixture(scope='function')
 def create_stack(request):
     a = Stack()
     for x in range(10):
@@ -42,3 +42,11 @@ def test_push():
     assert a.top.data is 1
     a.push(2)
     assert a.top.data is 2
+
+def test_pop():
+    a = Stack()
+    
+    try:
+        a.pop()
+    except IndexError:
+        assert True
