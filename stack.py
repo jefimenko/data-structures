@@ -18,4 +18,5 @@ class Stack(object):
             raise IndexError("Can't pop empty Stack")
         result = self.top
         self.top = self.top.under
+        self.size -= 1
         return result
