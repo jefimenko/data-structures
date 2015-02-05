@@ -35,3 +35,10 @@ def test_stack_cons():
     s = Stack()
     assert s.top is None
     assert s.size is 0
+
+def test_push():
+    a = Stack()
+    a.push(1)
+    assert a.top.data is 1
+    a.push(2)
+    assert a.top.data is 2
