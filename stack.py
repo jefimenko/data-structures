@@ -11,7 +11,7 @@ class Stack(object):
 
     def push(self, val):
         self.top = Level(val, self.top)
-        self._size += 1
+        self.size += 1
 
     def pop(self):
         if self._size == 0:
