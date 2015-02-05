@@ -32,6 +32,7 @@ class Linked_List(object):
         """
         new_node = List_Node(val, self.head)
         self.head = new_node
+        #self.head = List_Node(val, self.head)
         self._size += 1
 
     def pop(self):
@@ -39,8 +40,13 @@ class Linked_List(object):
         Remove the item at the head of the linked list, and rearrange
         accordingly.
         """
-        self.head = self.head.next
         self._size -= 1
+        result = self.head
+        self.head = self.head.next
+        return result
+
+        #we didnt return anything and no documentation of popping an empty
+        #we can use remove head self.remove(head)
 
     def size(self):
         """
@@ -69,9 +75,7 @@ class Linked_List(object):
         """
         temp = self.head
         if temp.data == node_id:
-            self.head = temp.next
-            self._size -= 1
-            break
+            self.pop()
         else:
             while not(temp.next is None):
                 if temp.next.data == node_id:
@@ -99,6 +103,7 @@ class Linked_List(object):
             dummy = temp.data
             if isinstance(dummy, str):
                 dummy = "'" + dummy + "'"
+                #output = "'{}'".format(dummy)
             dummy = str(dummy)
             if temp.next:
                 output += dummy + ", "
@@ -106,3 +111,11 @@ class Linked_List(object):
                 output += dummy + ')'
             temp = temp.next
         return output
+
+"""
+    def __iter__(self):
+        current = self.head
+        while current:
+            yield current
+            current = current.pointer
+"""
