@@ -78,6 +78,7 @@ def test_pushpop(create_stack):
 def test_verifysize(create_stack):
     c = create_stack
 
+    # Test size for decreasing stack size with pop().
     alleged_size = 11
     assert c.size == alleged_size
     while c.size > 0:
@@ -90,6 +91,7 @@ def test_verifysize(create_stack):
     except IndexError:
         assert True
 
+    # Test size for increasing stack size with push().
     for d in range(5):
         alleged_size += 1
         c.push(d)
