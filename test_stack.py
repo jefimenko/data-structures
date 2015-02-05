@@ -6,8 +6,11 @@ from stack import Stack
 # Tests for Levels object
 def test_level_cons():
     # For no data passed into Level(), this should fail
-    a = Level()
+    try:
+        a = Level()
+    except TypeError:
+        assert True
     b = Level(1)
     assert b.data == 1
-    c = Level('asdf)
+    c = Level('asdf')
     assert c.data == 'asdf'
