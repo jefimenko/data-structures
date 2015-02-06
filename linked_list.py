@@ -36,7 +36,6 @@ class Linked_List(object):
         """
         new_node = List_Node(val, self.head)
         self.head = new_node
-        #self.head = List_Node(val, self.head)
         self._size += 1
 
     def pop(self):
@@ -47,10 +46,7 @@ class Linked_List(object):
         self._size -= 1
         result = self.head
         self.head = self.head.next
-        return result
-
-        #we didnt return anything and no documentation of popping an empty
-        #we can use remove head self.remove(head)
+        return result.data
 
     def size(self):
         """
