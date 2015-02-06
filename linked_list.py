@@ -21,7 +21,7 @@ class Linked_List(object):
 
     def __str__(self):
         """
-        print the Linked_List in a string when the Linked_List is called
+        Print the Linked_List in a string when the Linked_List is called.
         """
         return self.display_prep()
 
@@ -30,17 +30,17 @@ class Linked_List(object):
 
     def insert(self, val):
         """
-        From a given val, create a new node with .data attribute set to val
-        and rearrange the list so the head is the new node with a reference
-        to the old head.
+        From a given val, create a new node.
+
+        Set .data attribute to val and rearrange the list so the head is 
+        the new node with a reference to the old head.
         """
         self.head = List_Node(val, self.head)
         self._size += 1
 
     def pop(self):
         """
-        Remove the item at the head of the linked list and rearrange
-        accordingly.
+        Remove the item at the head of the linked list.
         """
         self._size -= 1
         result = self.head
@@ -70,6 +70,7 @@ class Linked_List(object):
     def remove(self, node):
         """
         Remove a node with that has a given value, node id.
+
         For linked lists with multiple nodes with identical values,
         only the leftmost/most recently added occurence will be removed.
         """
@@ -87,15 +88,15 @@ class Linked_List(object):
 
     def display(self):
         """
-        using the display_prep method print the string representation of this 
-        list
+        Print the string representation of this list.
         """
         print self.display_prep()
 
     def display_prep(self):
         """
-        return a string representation of the list, where the most recently
-        added is the leftmost to appear in the console.
+        Return a string representation of the list.
+
+        The most recently added is the leftmost to appear in the console.
         """
         temp = self.head
         output = "("
