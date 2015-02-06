@@ -34,8 +34,7 @@ class Linked_List(object):
         and rearrange the list so the head is the new node with a reference
         to the old head.
         """
-        new_node = List_Node(val, self.head)
-        self.head = new_node
+        self.head = List_Node(val, self.head)
         self._size += 1
 
     def pop(self):
