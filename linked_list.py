@@ -40,7 +40,7 @@ class Linked_List(object):
 
     def pop(self):
         """
-        Remove the item at the head of the linked list, and rearrange
+        Remove the item at the head of the linked list and rearrange
         accordingly.
         """
         self._size -= 1
@@ -56,8 +56,9 @@ class Linked_List(object):
 
     def search(self, val):
         """
-        Search through the Linked_List to look for given value if found return 
-        the List_Node if not found return None
+        Search through the Linked_List for given value. 
+
+        If found return the List_Node if not found return None
         """
         temp = self.head
         while temp is not None:
@@ -67,18 +68,18 @@ class Linked_List(object):
                 temp = temp.next
         return None
 
-    def remove(self, node_id):
+    def remove(self, node):
         """
         Remove a node with that has a given value, node id.
         For linked lists with multiple nodes with identical values,
         only the leftmost/most recently added occurence will be removed.
         """
         temp = self.head
-        if temp.data == node_id:
+        if temp.data == node.data:
             self.pop()
         else:
             while not(temp.next is None):
-                if temp.next.data == node_id:
+                if temp.next.data == node.data:
                     temp.next = temp.next.next
                     self._size -= 1
                     break
@@ -100,10 +101,10 @@ class Linked_List(object):
         output = "("
         temp = self.head
         while temp:
-            dummy = temp.data
+            dummy = str(temp.data).encode('utf-8')
             if isinstance(dummy, str):
                 dummy = "'" + dummy + "'"
-                #output = "'{}'".format(dummy)
+                #dummy = "'{}'".format(dummy)
             dummy = str(dummy)
             if temp.next:
                 output += dummy + ", "

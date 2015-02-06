@@ -45,7 +45,8 @@ def test_size():
     assert s.size() is 99
     s.insert(0)
     assert s.size() is 100
-    s.remove(0)
+    m = List_Node(0)
+    s.remove(m)
     assert s.size() is 99
 
 # search(val)
@@ -62,13 +63,16 @@ def test_remove():
     a = Linked_List()
     a.insert('val')
     assert a.head
-    a.remove('val')
+    b = List_Node('val')
+    a.remove(b)
     assert not a.head
     for something in range(100):
         a.insert(something)
-    a.remove(99)
+    c = List_Node(99)
+    a.remove(c)
     assert a.head.data is 98    
-    a.remove(0)
+    d = List_Node(0)
+    a.remove(d)
     temp = a.head
     while temp.next:
         temp = temp.next
