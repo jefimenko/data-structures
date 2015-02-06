@@ -70,13 +70,14 @@ def test_remove():
         a.insert(something)
     c = List_Node(99)
     a.remove(c)
-    assert a.head.data is 98    
+    assert a.head.data is 98
     d = List_Node(0)
     a.remove(d)
     temp = a.head
     while temp.next:
         temp = temp.next
     assert temp.data is 1
+
 
 # display()
 def test_display():
@@ -85,12 +86,15 @@ def test_display():
     a.insert('a')
     a.insert(1)
     a.display()
+    assert a.display_prep() == "(1, 'a')"
 
 
 # test __str__
 def test_str():
     a = Linked_List()
     print a
+    a.insert('When A Café')
     a.insert('b')
     a.insert(2)
     print a
+    assert a.display_prep() == "(2, 'b', 'When A Café')"

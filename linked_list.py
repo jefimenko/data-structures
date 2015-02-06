@@ -97,17 +97,20 @@ class Linked_List(object):
         return a string representation of the list, where the most recently
         added is the leftmost to appear in the console.
         """
-        output = "("
         temp = self.head
+        output = "("
+
         while temp:
-            dummy = str(temp.data).encode('utf-8')
-            if isinstance(dummy, str):
-                dummy = "'" + dummy + "'"
-                #dummy = "'{}'".format(dummy)
-            dummy = str(dummy)
-            if temp.next:
-                output += dummy + ", "
+            dummy = temp.data
+            if isinstance(temp.data, str or unicode):
+                dummy = "'{}'".format(dummy.encode('utf-8'))
+
+            if temp is self.head:
+                output = "{}{}".format(output, dummy)
             else:
-                output += dummy
+                dummy = str(dummy)
+                output = "{}, {}".format(output, dummy)
             temp = temp.next
+
+
         return output + ")"
