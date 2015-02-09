@@ -10,8 +10,8 @@ class Queue(object):
         self._size = 0
 
     def enqueue(self, val):
-        temp = Node(val, self.tail)
-        self.tail = temp
+        self.tail = Node(val, self.tail)
+        self._size += 1
 
     def dequeue(self):
         pass
