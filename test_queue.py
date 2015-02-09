@@ -18,10 +18,10 @@ def make_popd_q():
     return q
 
 def test_node_init():
-    b = Node('a')
-    assert b.data == 'a'
-    c = Node('a', b)
-    assert c.next.data == 'a'
+    b = Node(u'a')
+    assert b.data == u'a'
+    c = Node(u'a', b)
+    assert c.next.data == u'a'
 
 def test_queue_init(make_empty_q):
     # Create an empty Queue.
@@ -37,12 +37,12 @@ def test_enqueue(make_empty_q, make_popd_q):
     q.enqueue(1)
     assert q.tail.data == 1
     # Test enqueue() for a queue with something in it.
-    q.enqueue('a')
+    q.enqueue(u'a')
     assert q.tail.data =='a'
     # Test enqueue() for a queue with many items in it.
     k = make_popd_q
-    k.enqueue('hello')
-    assert k.tail.data == 'hello'
+    k.enqueue(u'hello')
+    assert k.tail.data == u'hello'
 
 
 def test_dequeue(make_empty_q, make_popd_q):
@@ -66,12 +66,12 @@ def test_size(make_empty_q, make_popd_q):
         q.enqueue(a)
         assert q.size() == a
     q.dequeue()
-    assert q.size == 4
+    assert q.size() == 4
 
     k = make_popd_q
     # Test for size() for a queue already containing more items.
     assert k.size() == 21
     k.dequeue()
     assert k.size() == 20
-    k.enqueue()
-    assert k.sze() == 21
+    k.enqueue(u'A')
+    assert k.size() == 21
