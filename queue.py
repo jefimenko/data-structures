@@ -10,7 +10,12 @@ class Queue(object):
         self._size = 0
 
     def enqueue(self, val):
-        self.tail = Node(val, self.tail)
+        # For the first case with an empty queue
+        if not self._size:
+            self.head = Node(val)
+            self.tail = self.head
+        else:
+            self.tail = Node(val, self.tail)
         self._size += 1
 
     def dequeue(self):
