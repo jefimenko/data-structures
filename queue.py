@@ -19,6 +19,8 @@ class Queue(object):
         self._size += 1
 
     def dequeue(self):
+        if not self._size:
+            raise IndexError('Cannot dequeue an item from an empty Queue.')
         temp = self.head
         self.head = self.head.next
         self._size -= 1

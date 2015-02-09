@@ -48,10 +48,8 @@ def test_enqueue(make_empty_q, make_popd_q):
 def test_dequeue(make_empty_q, make_popd_q):
     # Test dequeue() for an empty queue.
     q = make_empty_q
-    try:
+    with pytest.raises(IndexError):
         q.dequeue()
-    except:
-        assert True
     # Test dequeue() for a queue containing items.
     k = make_popd_q
     assert make_popd_q.dequeue() == 0
