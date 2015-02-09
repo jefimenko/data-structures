@@ -1,4 +1,10 @@
 def balanceness(paren_series):
+    """
+    Determine the state of a series of parenthesis.
+
+    Return 1, 0, and -1 respectively for open, balanced, and broken
+    series of parenthesis.
+    """
     indicator = 0
     for paren in paren_series:
         print paren
