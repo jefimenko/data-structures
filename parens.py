@@ -1,4 +1,4 @@
-def balanceness(paren_series):
+def balanceness(char_series):
     """
     Determine the state of a series of parenthesis.
 
@@ -6,11 +6,10 @@ def balanceness(paren_series):
     series of parenthesis.
     """
     indicator = 0
-    for paren in paren_series:
-        print paren
-        if paren == u'(':
+    for chara in char_series:
+        if chara == u'(':
             indicator += 1
-        elif paren == u')':
+        elif chara == u')':
             indicator -= 1
 
         # At any point in time, if a ')' precedes a '(', then the series
