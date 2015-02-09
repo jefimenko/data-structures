@@ -14,4 +14,10 @@ class Queue(object):
         self._size += 1
 
     def dequeue(self):
-        pass  
+        temp = self.head
+        self.head = self.head.next
+        self._size -= 1
+        return temp.data
+
+    def size(self):
+        return self._size
