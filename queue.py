@@ -10,8 +10,21 @@ class Queue(object):
         self._size = 0
 
     def enqueue(self, val):
-        self.tail = Node(val, self.tail)
+        # For the first case with an empty queue
+        if not self._size:
+            self.head = Node(val)
+            self.tail = self.head
+        else:
+            self.tail = Node(val, self.tail)
         self._size += 1
 
     def dequeue(self):
-        pass  
+        if not self._size:
+            raise IndexError('Cannot dequeue an item from an empty Queue.')
+        temp = self.head
+        self.head = self.head.next
+        self._size -= 1
+        return temp.data
+
+    def size(self):
+        return self._size
