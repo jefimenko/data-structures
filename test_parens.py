@@ -5,7 +5,8 @@ def test_balanced():
     assert balanceness(u'()') is 0
     # Extension of the simple case.
     assert balanceness(u'((()))') is 0
-
+    # Empty string is considered 'balanced'
+    assert balanceness(u'') is 0
 
 def test_balanced_longer():
     assert balanceness(u'()()') is 0
