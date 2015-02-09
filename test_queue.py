@@ -1,4 +1,5 @@
 from queue import Queue
+from queue import Node
 import pytest
 
 # Create an empty queue for testing.
@@ -16,11 +17,18 @@ def make_popd_q():
     q.enqueue('asdf')
     return q
 
+def test_node_init():
+    b = Node('a')
+    assert b.data == 'a'
+    c = Node('a', b)
+    assert c.next.data == 'a'
 
-
-def test_init(make_empty_q):
+def test_queue_init(make_empty_q):
     # Create an empty Queue.
-    assert make_empty_q
+    d = make_empty_q
+    assert d
+    assert d.head == None
+    assert d.tail == None
 
 
 def test_enqueue(make_empty_q, make_popd_q):
