@@ -52,7 +52,9 @@ def test_dequeue(make_empty_q, make_popd_q):
         q.dequeue()
     # Test dequeue() for a queue containing items.
     k = make_popd_q
-    assert make_popd_q.dequeue() == 0
+    for x in range(20):
+        assert k.dequeue() == x
+    assert k.dequeue() == 'asdf'
 
 
 def test_size(make_empty_q, make_popd_q):

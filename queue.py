@@ -15,7 +15,8 @@ class Queue(object):
             self.head = Node(val)
             self.tail = self.head
         else:
-            self.tail = Node(val, self.tail)
+            self.tail.next = Node(val)
+            self.tail = self.tail.next
         self._size += 1
 
     def dequeue(self):
