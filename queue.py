@@ -14,4 +14,4 @@ class Queue(object):
         self._size += 1
 
     def dequeue(self):
-        pass
+        pass  
