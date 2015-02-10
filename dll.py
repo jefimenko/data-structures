@@ -38,6 +38,9 @@ class DoublyLinkedList(object):
             self.tail.prev.next = self.tail
 
     def pop(self):
+        """
+        Remove the very first ListItem from the list
+        """
         # Empty list
         try:
             temp = self.head.data
@@ -52,3 +55,48 @@ class DoublyLinkedList(object):
             self.head = self.head.next
             self.head.prev = None
         return temp
+
+    def shift(self):
+        """
+        Remove the very last ListItem from the list
+        """
+        # Empty list
+        try:
+            temp = self.tail.data
+        except AttributeError:
+            raise IndexError
+        # List of one
+        if self.head is self.tail:
+            self.head = self.tail = None
+        else:
+            self.tail = self.tail.prev
+            self.tail.next = None
+        return temp
+
+    def remove(self, val):
+        """
+        Remove the ListItem with data the same as val
+        """
+        temp = self.head
+        try:
+            if self.head.data == val:
+                # At the head
+                self.pop()
+            elif self.tail.data == val:
+                # At the tail
+                self.shift()
+            else:
+                while temp.next:
+                    # Begin looking for val
+                    if temp.next.data == val:
+                        temp.next = temp.next.next
+                        temp.next.prev = temp
+                        break
+                    else:
+                        temp = temp.next
+                else:
+                    # Go through the whole list without finding val
+                    raise ValueError
+        # If the list is empty
+        except AttributeError:
+            raise IndexError
