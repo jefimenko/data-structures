@@ -17,11 +17,13 @@ def make_popd_q():
     q.enqueue('asdf')
     return q
 
+
 def test_node_init():
     b = Node(u'a')
     assert b.data == u'a'
     c = Node(u'a', b)
     assert c.next.data == u'a'
+
 
 def test_queue_init(make_empty_q):
     # Create an empty Queue.
@@ -52,7 +54,9 @@ def test_dequeue(make_empty_q, make_popd_q):
         q.dequeue()
     # Test dequeue() for a queue containing items.
     k = make_popd_q
-    assert make_popd_q.dequeue() == 0
+    for x in range(20):
+        assert k.dequeue() == x
+    assert k.dequeue() == 'asdf'
 
 
 def test_size(make_empty_q, make_popd_q):
