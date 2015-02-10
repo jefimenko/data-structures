@@ -124,7 +124,7 @@ def test_DLL_rm(mk_dll):
         current = current.next
     the_nexts_value = current.next.data
     populated.remove(the_nexts_value)
-    assert not the_nexts_value == current.next.data
+    assert the_nexts_value + 1 == current.next.data
 
     # Try to remove a value that isn't there
     with pytest.raises(ValueError):
