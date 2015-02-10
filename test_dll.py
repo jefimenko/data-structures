@@ -7,12 +7,15 @@ def test_LI_cons():
     item = ListItem(5)
     assert item.data == 5
     assert item.next is None
-    assert item.previous is None
+    assert item.prev is None
 
 
 # Test a ListItem linked to other ListItems
 def test_LI_cnect():
-    pass
+    selected = ListItem('this one', ListItem('the next one'), ListItem('the previous one'))
+    assert selected.data == 'this one'
+    assert selected.next.data == 'the next one'
+    assert selected.prev.data == 'the previous one'
 
 
 def test_DLL_cons():
