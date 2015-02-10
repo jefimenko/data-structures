@@ -88,8 +88,10 @@ def test_DLL_pop(mk_dll):
     with pytest.raises(IndexError):
         zeroth.pop()
     populated = mk_dll
-    for x in range(20):
-        assert populated.pop() == x
+    for twice in range(2):
+        for x in range(20):
+            assert populated.pop() == x
+
 
 
 # shift() item off the tail
