@@ -30,14 +30,24 @@ def test_DLL_cons():
 # insert(val) at the start of the list
 def test_DLL_ins():
     dbl = DoublyLinkedList()
+    # First case with an empty list
     dbl.insert('insert')
     assert dbl.head.data == 'insert'
     assert dbl.tail.data == 'insert'
+    assert dbl.head.next is None
+    assert dbl.head.prev is None
+    assert dbl.tail.next is None
+    assert dbl.tail.next is None
+
     dbl.insert('next')
     assert dbl.head.data == 'next'
+    # Test for updating of prev in in the second item
+    assert dbl.head.next.prev.data == 'next'
     assert dbl.tail.data == 'insert'
+
     dbl.insert('final')
     assert dbl.head.data == 'final'
+    assert dbl.head.next.prev.data == 'next'
     assert dbl.tail.data == 'insert'
 
 
@@ -47,12 +57,20 @@ def test_DLL_app():
     dbl.append('append')
     assert dbl.head.data == 'append'
     assert dbl.tail.data == 'append'
+    assert dbl.head.next is None
+    assert dbl.head.prev is None
+    assert dbl.tail.next is None
+    assert dbl.tail.prev is None
+
     dbl.append('next')
     assert dbl.head.data == 'append'
     assert dbl.tail.data == 'next'
+    assert dbl.tail.prev.next.data == 'next'
+
     dbl.append('final')
     assert dbl.head.data == 'append'
     assert dbl.tail.data == 'final'
+    assert dbl.tail.prev.next.data == 'final'
 
 
 @pytest.fixture(scope='function')
