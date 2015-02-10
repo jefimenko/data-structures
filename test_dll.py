@@ -93,7 +93,7 @@ def test_DLL_pop(mk_dll):
 
 
 # shift() item off the tail
-def test_DLL_pop(mk_dll):
+def test_DLL_shift(mk_dll):
     zeroth = DoublyLinkedList()
     with pytest.raises(IndexError):
         zeroth.shift()
