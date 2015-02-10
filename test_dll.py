@@ -1,5 +1,6 @@
 from dll import ListItem
 from dll import DoublyLinkedList
+import pytest
 
 
 # Test an isolated ListItem
@@ -54,9 +55,22 @@ def test_DLL_app():
     assert dbl.tail.data == 'final'
 
 
+@pytest.fixture(scope='function')
+def mk_popd_dll(request):
+    something = DoublyLinkedList()
+    for x in range(20):
+        something.append(x)
+    return something
+
+
 # pop() item off the start of the list and return it's value
-def test_DLL_pop():
-    pass
+def test_DLL_pop(mk_popd_dll):
+    zeroth = DoublyLinkedList()
+    with pytest.raises(IndexError):
+        zeroth.pop()
+    populated = mk_popd_dll
+    for x in range(20):
+        assert populated.pop() == x
 
 
 # remove(val) an item with val from somewhere in the list
