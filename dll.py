@@ -36,3 +36,19 @@ class DoublyLinkedList(object):
         else:
             self.tail = ListItem(val, prev=self.tail)
             self.tail.prev.next = self.tail
+
+    def pop(self):
+        # Empty list
+        try:
+            temp = self.head.data
+        except AttributeError:
+            raise IndexError
+
+        # List of one
+        if self.head is self.tail:
+            self.head = self.tail = None
+        # List of more than one
+        else:
+            self.head = self.head.next
+            self.head.prev = None
+        return temp
