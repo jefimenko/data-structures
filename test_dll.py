@@ -19,18 +19,39 @@ def test_LI_cnect():
 
 
 def test_DLL_cons():
-    pass
     # Test an empty list
+    dbl = DoublyLinkedList()
+    assert dbl
+    assert dbl.head is None
+    assert dbl.tail is None
 
 
 # insert(val) at the start of the list
 def test_DLL_ins():
-    pass
+    dbl = DoublyLinkedList()
+    dbl.insert('insert')
+    assert dbl.head.data == 'insert'
+    assert dbl.tail.data == 'insert'
+    dbl.insert('next')
+    assert dbl.head.data == 'next'
+    assert dbl.tail.data == 'insert'
+    dbl.insert('final')
+    assert dbl.head.data == 'final'
+    assert dbl.tail.data == 'insert'
 
 
 # append(val) at the end of the list
 def test_DLL_app():
-    pass
+    dbl = DoublyLinkedList()
+    dbl.append('append')
+    assert dbl.head.data == 'append'
+    assert dbl.tail.data == 'append'
+    dbl.append('next')
+    assert dbl.head.data == 'append'
+    assert dbl.tail.data == 'next'
+    dbl.append('final')
+    assert dbl.head.data == 'append'
+    assert dbl.tail.data == 'final'
 
 
 # pop() item off the start of the list and return it's value
