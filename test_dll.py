@@ -2,12 +2,17 @@ from dll import ListItem
 from dll import DoublyLinkedList
 
 
+# Test an isolated ListItem
 def test_LI_cons():
-    pass
-    # Test value
-    # Test next
-    # Test previous
+    item = ListItem(5)
+    assert item.data == 5
+    assert item.next is None
+    assert item.previous is None
 
+
+# Test a ListItem linked to other ListItems
+def test_LI_cnect():
+    pass
 
 
 def test_DLL_cons():
