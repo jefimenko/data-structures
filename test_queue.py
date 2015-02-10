@@ -17,11 +17,13 @@ def make_popd_q():
     q.enqueue('asdf')
     return q
 
+
 def test_node_init():
     b = Node(u'a')
     assert b.data == u'a'
     c = Node(u'a', b)
     assert c.next.data == u'a'
+
 
 def test_queue_init(make_empty_q):
     # Create an empty Queue.
