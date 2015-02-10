@@ -23,6 +23,7 @@ class Queue(object):
         if not self._size:
             self.head = Node(val)
             self.tail = self.head
+            # self.head = self.tail = Node(val)
         else:
             self.tail = Node(val, self.tail)
         self._size += 1
@@ -31,9 +32,11 @@ class Queue(object):
         """
         Return a value that is at the front/head of the queue
         """
+        # use try
         if not self._size:
             raise IndexError('Cannot dequeue an item from an empty Queue.')
         temp = self.head
+        # if only 1 item then the tail has to be None as well!
         self.head = self.head.next
         self._size -= 1
         return temp.data
