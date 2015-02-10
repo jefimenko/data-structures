@@ -56,23 +56,56 @@ def test_DLL_app():
 
 
 @pytest.fixture(scope='function')
-def mk_popd_dll(request):
+def mk_dll(request):
     something = DoublyLinkedList()
-    for x in range(20):
-        something.append(x)
+    for a in range(2):
+        for x in range(20):
+            something.append(x)
     return something
 
 
 # pop() item off the start of the list and return it's value
-def test_DLL_pop(mk_popd_dll):
+def test_DLL_pop(mk_dll):
     zeroth = DoublyLinkedList()
     with pytest.raises(IndexError):
         zeroth.pop()
-    populated = mk_popd_dll
+    populated = mk_dll
     for x in range(20):
         assert populated.pop() == x
 
 
+# shift() item off the tail
+def test_DLL_pop(mk_dll):
+    zeroth = DoublyLinkedList()
+    with pytest.raises(IndexError):
+        zeroth.shift()
+    populated = mk_dll
+    for x in range(19, -1, -1):
+        assert populated.shift() == x
+
+
 # remove(val) an item with val from somewhere in the list
-def test_DLL_rm():
-    pass
+def test_DLL_rm(mk_dll):
+    zeroth = DoublyLinkedList()
+    with pytest.raises(IndexError):
+        zeroth.remove(3)
+    populated = mk_dll
+    # Remove from the head
+    assert populated.head.data == 0
+    populated.remove(0)
+    assert populated.head.data == 1
+    # Remove from the tail
+    assert populated.tail.data == 19
+    populated.remove(19)
+    assert populated.tail.data == 18
+    # Remove from the middle
+    current = populated.head
+    for a in range(5):
+        current = current.next
+    the_nexts_value = current.next.data
+    populated.remove(the_nexts_value)
+    assert not the_nexts_value == current.next.data
+
+    # Try to remove a value that isn't there
+    with pytest.raises(ValueError):
+        populated.remove('not there')
