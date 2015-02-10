@@ -47,7 +47,7 @@ def test_DLL_ins():
 
     dbl.insert('final')
     assert dbl.head.data == 'final'
-    assert dbl.head.next.prev.data == 'next'
+    assert dbl.head.next.prev.data == 'final'
     assert dbl.tail.data == 'insert'
 
 
