@@ -62,7 +62,11 @@ def test_create_populated():
 
 # Pop off a heap
 def test_pop():
-    pass
+    abh = Binheap([1, 2, 3, 4, 5, 6])
+    for x in range(6, 0, -1):
+        assert abh.pop() == x
+
     # onto an empty heap
-    # onto a heap with a unbalanced parent
-    # onto a heap with a balanced parent
+    print abh.values
+    with pytest.raises(IndexError):
+        abh.pop()
