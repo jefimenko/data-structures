@@ -30,5 +30,5 @@ class Priority_Queue(object):
     def peek(self):
         if self.high.size():
             return self.high.head.data
-        else:
+        elif self.low.size():
             return self.low.head.data
