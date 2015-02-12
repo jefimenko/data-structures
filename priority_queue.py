@@ -8,6 +8,14 @@ class Priority_Queue(object):
         self.low = Queue()
 
     def insert(self, item, priority="high"):
+        """
+        Insert a queue first by priority, then by first-in-last-out.
+
+        Priority_Queue does not track the absolute order that all items
+        were inserted into the queue, and only provides Priority_Queue
+        behavior through pop() and insert() functions.
+        Priority levels are abritrarily set to only 'high' or 'low'.
+        """
         if priority == "high":
             self.high.enqueue(item)
         elif priority == "low":
@@ -28,6 +36,11 @@ class Priority_Queue(object):
             return self.low.dequeue()
 
     def peek(self):
+        """
+        Returns the value of the next item to be returned from pop().
+
+        If the queue is empty, None is returned.
+        """
         if self.high.size():
             return self.high.head.data
         elif self.low.size():
