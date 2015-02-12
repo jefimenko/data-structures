@@ -59,6 +59,12 @@ def test_pop(m_eq, m_lbh, m_hbl):
         assert m_lbh.pop() == x
         assert m_hbl.pop() == x
 
+    # Only high priority items in the list.
+    q = Priority_Queue()
+    q.insert('hey', 'high')
+    q.insert('last', 'high')
+    assert q.pop() == 'hey'
+    assert q.pop() == 'last'
 
 # Test peek()
 def test_peek(m_eq, m_lbh, m_hbl):
@@ -66,5 +72,12 @@ def test_peek(m_eq, m_lbh, m_hbl):
 
     assert m_lbh.peek() == -1
     assert m_hbl.peek() == -1
+
+    # Only low priority items in the list.
+    q = Priority_Queue()
+    q.insert('eh', 'low')
+    assert q.peek() == 'eh'
+    q.insert('again', 'low')
+    assert q.peek() == 'eh'
     # Does peek look at the next to be popped, or the next chronologically
     # enqueued item?
