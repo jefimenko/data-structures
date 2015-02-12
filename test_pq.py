@@ -4,7 +4,7 @@ import pytest
 
 @pytest.fixture(scope='function')
 def m_eq(request):
-    return Priority_Queue
+    return Priority_Queue()
 
 
 @pytest.fixture(scope='function')
@@ -46,15 +46,25 @@ def test_insert(m_eq, m_lbh, m_hbl):
 
 # Test pop()
 def test_pop(m_eq, m_lbh, m_hbl):
-    pass
-    # Empty Q
-    # Low before high
-    # High before low
+
+    # Empty 
+    assert not m_eq.pop()
+    # Low before high priority and high before low enqueued should not
+    # affect the order of these when popped off
+    for x in range(-1, -6, -1):
+        assert m_lbh.pop() == x
+        assert m_hbl.pop() == x
+    for x in range(5):
+        assert m_lbh.pop() == x
+        assert m_hbl.pop() == x
 
 
 # Test peek()
 def test_peek(m_eq, m_lbh, m_hbl):
-    pass
+    with pytest.raises():
+        m_eq.peek()
+    assert m_lbh.peek() == -1
+    assert m_hbl.peek() == -1
     # Empty Q
     # Low before high
     # High before low
