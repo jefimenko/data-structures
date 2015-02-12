@@ -7,7 +7,7 @@ class Priority_Queue(object):
         self.high = Queue()
         self.low = Queue()
 
-    def insert(item, priority="high"):
+    def insert(self, item, priority="high"):
         if priority == "high":
             self.high.enqueue(item)
         elif priority == "low":
@@ -15,7 +15,7 @@ class Priority_Queue(object):
         else:
             raise ValueError("Priorty must be literal 'high' or 'low'.")
 
-    def pop():
+    def pop(self):
         """
         Dequeue higher priority objects first, then those of lower priority.
 
@@ -27,7 +27,7 @@ class Priority_Queue(object):
         else:
             return self.low.dequeue()
 
-    def peek():
+    def peek(self):
         if self.high.size():
             return self.high.head.data
         else:
