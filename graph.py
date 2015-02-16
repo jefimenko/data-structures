@@ -36,7 +36,10 @@ class Graph(object):
         return self.g.has_key(n)
 
     def neighbors(self, n):
-        return self.g[n]
+        try:
+            return self.g[n]
+        except KeyError:
+            raise IndexError("Node doesn't exist")
 
     def adjacent(self, n1, n2):
         return n2 in self.g[n1] or n1 in self.g[n2]
