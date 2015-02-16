@@ -3,10 +3,15 @@ class Graph(object):
         self.g = {}
 
     def nodes(self):
-        pass
+        return self.g.keys()
 
     def edges(self):
-        pass
+        result = []
+        for key, value in self.g.iteritems():
+            for v in value:
+                if v:
+                    result.append((key, v))
+        return result
 
     def add_node(self, n):
         self.g[n] = []

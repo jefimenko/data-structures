@@ -104,3 +104,18 @@ def test_adjacent():
         g.adjacent(1, 'still note here')
     with pytest.raises(IndexError):
         g.adjacent('dne', 1)
+
+def test_nodes():
+    g = Graph()
+    assert g.nodes() == []
+    for x in range(0, 10):
+        g.add_node(x)
+    assert g.nodes() == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+def test_edges():
+    g = Graph()
+    g.add_node(9)
+    for x in range(0, 5):
+        g.add_edge(9, x)
+    for y in g.edges():
+        assert y in [(9, 0), (9, 1), (9, 2), (9, 3), (9, 4)]
