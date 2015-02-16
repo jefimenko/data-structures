@@ -96,4 +96,11 @@ def test_neighbors():
 
 
 def test_adjacent():
-    pass
+    g = Graph()
+    with pytest.raises(IndexError):
+        g.adjacent(1, 'not here')
+    g.add_node(1)
+    with pytest.raises(IndexError):
+        g.adjacent(1, 'still note here')
+    with pytest.raises(IndexError):
+        g.adjacent('dne', 1)

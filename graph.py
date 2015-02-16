@@ -42,4 +42,7 @@ class Graph(object):
             raise IndexError("Node doesn't exist")
 
     def adjacent(self, n1, n2):
-        return n2 in self.g[n1] or n1 in self.g[n2]
+        try:
+            return n2 in self.g[n1] or n1 in self.g[n2]
+        except KeyError:
+            raise IndexError("One or more nodes doesn't exist")
