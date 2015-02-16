@@ -12,7 +12,12 @@ class Graph(object):
         self.g[n] = []
 
     def add_edge(self, n1, n2):
-        self.g[n1] = self.g[n1].append(n2)
+        if not self.g.has_key(n1):
+            self.add_node(n1)
+        elif not self.g.has_key(n2):
+            self.add_node(n2)
+        self.g[n1].append(n2)
+
 
     def del_node(self, n):
         pass
