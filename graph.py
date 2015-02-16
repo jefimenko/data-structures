@@ -19,10 +19,18 @@ class Graph(object):
         self.g[n1].append(n2)
 
     def del_node(self, n):
-        del self.g[n]
+        try:
+            del self.g[n]
+        except KeyError:
+            raise IndexError("Node doesn't exist")
 
     def del_edge(self, n1, n2):
-        self.g[n1].remove(n2)
+        try:
+            self.g[n1].remove(n2)
+        except ValueError:
+            pass
+        except KeyError:
+            raise IndexError("First node doesn't exist")
 
     def has_node(self, n):
         return self.g.has_key(n)
