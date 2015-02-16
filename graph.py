@@ -16,10 +16,10 @@ class Graph(object):
         returns a list of tuples the corresponds to the edges
         """
         result = []
-        for key, value in self.g.iteritems():
-            for v in value:
-                if v:
-                    result.append((key, v))
+        for key, values in self.g.iteritems():
+            for value in values:
+                if value:
+                    result.append((key, value))
         return result
 
     def add_node(self, n):
