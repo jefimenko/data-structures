@@ -9,10 +9,10 @@ class Graph(object):
         pass
 
     def add_node(self, n):
-        pass
+        self.g[n] = []
 
     def add_edge(self, n1, n2):
-        pass
+        self.g[n1] = self.g[n1].append(n2)
 
     def del_node(self, n):
         pass
