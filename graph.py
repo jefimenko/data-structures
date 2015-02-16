@@ -14,22 +14,21 @@ class Graph(object):
     def add_edge(self, n1, n2):
         if not self.g.has_key(n1):
             self.add_node(n1)
-        elif not self.g.has_key(n2):
+        if not self.g.has_key(n2):
             self.add_node(n2)
         self.g[n1].append(n2)
 
-
     def del_node(self, n):
-        pass
+        del self.g[n]
 
     def del_edge(self, n1, n2):
-        pass
+        self.g[n1].remove(n2)
 
     def has_node(self, n):
-        pass
+        return self.g.has_key(n)
 
     def neighbors(self, n):
-        pass
+        return self.g[n]
 
     def adjacent(self, n1, n2):
-        pass
+        return n2 in self.g[n1] or n1 in self.g[n2]
