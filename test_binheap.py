@@ -39,8 +39,6 @@ def test_push():
     assert ebh.values[6] == 5
 
 
-
-
 # Create a populated heap
 def test_create_populated():
 
@@ -63,6 +61,7 @@ def test_create_populated():
 # Pop off a heap
 def test_pop():
     abh = Binheap([1, 2, 3, 4, 5, 6])
+
     for x in range(6, 0, -1):
         assert abh.pop() == x
 
