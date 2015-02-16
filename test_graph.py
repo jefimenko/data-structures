@@ -1,19 +1,20 @@
 from graph import Graph
 import pytest
 
+# Test Graph constructor
 def test_graph_cons():
     # Test an empty Graph
     g = Graph()
     assert g.g == {}
 
-
+# Test adding a node
 def test_add_node():
     g = Graph()
     g.add_node('a')
     assert g.g.has_key('a')
 
 
-# Adding edges.
+# Test adding edges and if 2nd node is missing.
 def test_add_to():
     g = Graph()
     g.add_node('a')
@@ -22,7 +23,7 @@ def test_add_to():
     # B should have no references to other nodes.
     assert not g.g['b']
 
-
+# Test adding edges and if 1st node is missing.
 def test_add_from():
     g = Graph()
     g.add_node('b')
@@ -31,13 +32,13 @@ def test_add_from():
     # B should still have no references.
     assert not g.g['b']
 
-
+# Test adding edges and if both nodes is missing.
 def test_add_out():
     g = Graph()
     g.add_edge('a', 'b')
     assert g.g['a'] == ['b']
 
-
+# Test deleting a node
 def test_del_node():
     g = Graph()
     with pytest.raises(IndexError): 
@@ -47,7 +48,7 @@ def test_del_node():
     g.del_node('a')
     assert not g.g.has_key('a')
 
-
+# Test deleting a node with an edge
 def test_multi_node():
     g = Graph()
     g.add_node(1)
@@ -57,7 +58,7 @@ def test_multi_node():
     assert not g.g.has_key(1)
     assert g.g.has_key(2)
 
-
+# Test deleting an edge
 def test_del_edge():
     g = Graph()
     for x in range(10):
@@ -75,26 +76,26 @@ def test_del_edge():
     with pytest.raises(IndexError):
         g.g[0][8]
 
-
+# Test if a Graph has a node
 def test_has_node():
     g = Graph()
     assert not g.has_node(1)
     g.add_node(1)
     assert g.has_node(1)
 
-
+# Test if edges are returns for a node
 def test_neighbors():
     g = Graph()
     with pytest.raises(IndexError):
-        g.neighbors(1)
+        g.neighbors(1) # Empty Graph
     g.add_node('asdf')
     g.add_edge('asdf', 2)
     g.add_node(3)
-    assert g.neighbors('asdf') == [2]
+    assert g.neighbors('asdf') == [2] # Empty
     assert g.neighbors(2) == []
     assert g.neighbors(3) == []
 
-
+# Test if if an edge exist between two nodes
 def test_adjacent():
     g = Graph()
     with pytest.raises(IndexError):
@@ -105,6 +106,7 @@ def test_adjacent():
     with pytest.raises(IndexError):
         g.adjacent('dne', 1)
 
+# Test if nodes() returns a list of nodes
 def test_nodes():
     g = Graph()
     assert g.nodes() == []
@@ -112,6 +114,7 @@ def test_nodes():
         g.add_node(x)
     assert g.nodes() == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+# Test if edges() return a list of tuples of edges
 def test_edges():
     g = Graph()
     g.add_node(9)
