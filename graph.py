@@ -46,6 +46,9 @@ class Graph(object):
         """
         try:
             del self.g[n]
+            for node in self.g.iterkeys():
+                if n in self.g[node]:
+                    self.g[node].remove(n)
         except KeyError:
             raise IndexError("Node doesn't exist")
 
