@@ -86,3 +86,31 @@ class Graph(object):
             return n2 in self.g[n1] or n1 in self.g[n2]
         except KeyError:
             raise IndexError("One or more nodes doesn't exist")
+
+    def traverse(self, node, result=""):
+        if len(self.g[node]) != 0:
+            for edge_node in self.g[node]:
+                result = '{}{}'.format(node, self.traverse(edge_node, result))
+        return '{}{}'.format(node, result)
+
+    def depth_first_traversal_helper(self, node, result):
+        if self.g[node]:
+            for edge_node in self.g[node]:
+                # import pdb; pdb.set_trace()
+                result = '{}{}'.format(result, edge_node)
+                result = self.depth_first_traversal_helper(edge_node, result)
+        return result
+
+    def depth_first_traversal(self, node):
+        return self.depth_first_traversal_helper(node, node)
+
+    def breadth_first_traversal_helper(self, node, result):
+        if self.g[node]:
+            for edge_node in self.g[node]:
+                # import pdb; pdb.set_trace()
+                result = self.breadth_first_traversal_helper(edge_node, result)
+                result = '{}{}'.format(result, edge_node)
+        return result
+
+    def breadth_first_traversal(self, node):
+        return self.breadth_first_traversal_helper(node, node)

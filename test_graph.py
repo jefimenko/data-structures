@@ -122,3 +122,27 @@ def test_edges():
         g.add_edge(9, x)
     for y in g.edges():
         assert y in [(9, 0), (9, 1), (9, 2), (9, 3), (9, 4)]
+
+# def test_traverse():
+#     g = Graph()
+#     g.add_node(1)
+#     g.add_edge(1, 2)
+#     g.add_edge(2, 4)
+#     g.add_edge(1, 3)
+#     print g.traverse(1)
+#     assert g.traverse is '1234'
+
+def test_breadth():
+    g = Graph()
+    g.add_node(1)
+    g.add_edge(1, 2)
+    g.add_edge(2, 4)
+    g.add_edge(1, 3)
+    g.add_edge(4, 5)
+    g.add_edge(4, 6)
+    g.add_edge(4, 9)
+    g.add_edge(6, 10)
+    g.add_edge(3, 7)
+    g.add_edge(8, 6)
+    assert g.depth_first_traversal(1) == '1245610937'
+    assert g.breadth_first_traversal(1) == '1234756910'
