@@ -132,7 +132,31 @@ def test_edges():
 #     print g.traverse(1)
 #     assert g.traverse is '1234'
 
-def test_breadth():
+
+def test_breadth(popd_graph):
+    g = popd_graph
+    assert g.breadth_first_traversal(1) == '1234756910'
+
+
+def test_breadth(popd_graph):
+    g = popd_graph
+    assert g.depth_first_traversal(1) == '1245610937'
+
+
+def test_bfloop(popd_graph):
+    g = popd_graph
+    g.add_edge(10, 7)
+    assert g.breadth_first_traversal(1) == '1234756910'
+
+
+def test_depthfloop(popd_graph):
+    g = popd_graph
+    g.add_edge(10, 7)
+    assert g.depth_first_traversal(1) == '1245610937'
+
+
+@pytest.fixture(scope='function')
+def popd_graph(request):
     g = Graph()
     g.add_node(1)
     g.add_edge(1, 2)
@@ -144,5 +168,5 @@ def test_breadth():
     g.add_edge(6, 10)
     g.add_edge(3, 7)
     g.add_edge(8, 6)
-    assert g.depth_first_traversal(1) == '1245610937'
-    assert g.breadth_first_traversal(1) == '1234756910'
+
+    return g
