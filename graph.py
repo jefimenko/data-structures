@@ -113,20 +113,37 @@ class Graph(object):
                 result = self.depth_first_traversal(edge_node,result)
         return result
 
-    def breadth_first_traversal(self, node,result=""):
-        if self.g[node]:
-            for edge_node in self.g[node]:
-                result = self.breadth_first_traversal(edge_node,result)
-        result = '{}{}'.format(result, node)
+    def breadth_first_traversal_helper(self, children , result):
+        for child in children:
+            for grandchild in self.g[child]:
+                result = '{}{}'.format(result, grandchild)
+
+        return grandchildren, result
+
+    def breadth_first_traversal(self, node):
+        """
+        Iterate over a graph and return a path as a string.
+        """
+        children = self.g[node]
+
+        grandchildren, result = self.breadth_iterator(children, [], node)
+
+        while grandchildren:
+            children = grandchildren
+
+            grandchildren, result = self.breadth_iterator(children, [], result)
+
         return result
 
-    # def breadth_first_traversal_helper(self, node, result):
-    #     if self.g[node]:
-    #         for edge_node in self.g[node]:
-    #             # import pdb; pdb.set_trace()
-    #             result = self.breadth_first_traversal_helper(edge_node, result)
-    #             result = '{}{}'.format(result, edge_node)
-    #     return result
+    def breadth_iterator(self, children, grandchildren, result):
+        """
+        Traverse a graph by generations.
 
-    # def breadth_first_traversal(self, node):
-    #     return self.breadth_first_traversal_helper(node, node)
+        Simultaneously grow a result string from list of current generations
+        and create a list of the next generation.
+        """
+        for child in children:
+            result = '{}{}'.format(result, child)
+            grandchildren += self.g[child]
+
+        return grandchildren, result
