@@ -142,12 +142,12 @@ def test_breadth(popd_graph):
     assert g.depth_first_traversal(1) == '1245610937'
 
 
-# def test_bfloop(popd_graph):
-#     g = popd_graph
-#     g.add_edge(10, 7)
-#     g.add_edge(9, 2)
-#     g.add_edge(9, 3)
-#     assert g.breadth_first_traversal(1) == '1234756910'
+def test_bfloop(popd_graph):
+    g = popd_graph
+    g.add_edge(10, 7)
+    g.add_edge(9, 2)
+    g.add_edge(9, 3)
+    assert g.breadth_first_traversal(1) == '1234756910'
 
 
 def test_depthfloop(popd_graph):

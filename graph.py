@@ -127,7 +127,7 @@ class Graph(object):
         """
         children = self.g[node]
 
-        grandchildren, result = self.breadth_iterator(children, [], node)
+        grandchildren, result = self.breadth_iterator(children, [], str(node))
 
         while grandchildren:
             children = grandchildren
@@ -144,7 +144,8 @@ class Graph(object):
         and create a list of the next generation.
         """
         for child in children:
-            result = '{}{}'.format(result, child)
-            grandchildren += self.g[child]
+            if str(child) not in result:
+                result = '{}{}'.format(result, child)
+                grandchildren += self.g[child]
 
         return grandchildren, result
