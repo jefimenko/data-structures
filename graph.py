@@ -83,7 +83,7 @@ class Graph(object):
         Return if an edge exist between two nodes
         """
         try:
-            return n2 in self.g[n1] or n1 in self.g[n2]
+            return n2 in self.g[n1]
         except KeyError:
             raise IndexError("One or more nodes doesn't exist")
 
@@ -107,10 +107,11 @@ class Graph(object):
     #     return result
 
     def depth_first_traversal(self, node,result=""):
-        result = '{}{}'.format(result, node)
-        if self.g[node]:
-            for edge_node in self.g[node]:
-                result = self.depth_first_traversal(edge_node,result)
+        if not str(node) in result:
+            result = '{}{}'.format(result, node)
+            if self.g[node]:
+                for edge_node in self.g[node]:
+                    result = self.depth_first_traversal(edge_node,result)
         return result
 
     def breadth_first_traversal_helper(self, children , result):
