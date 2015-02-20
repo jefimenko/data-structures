@@ -87,25 +87,6 @@ class Graph(object):
         except KeyError:
             raise IndexError("One or more nodes doesn't exist")
 
-    # def traverse(self, node, result=""):
-    #     result = '{}{}'.format(result, node)
-    #     if self.g[node]:
-    #         for edge_node in self.g[node]:
-    #             result = self.traverse(edge_node,result)
-    #     return result
-    #     # if len(self.g[node]) != 0:
-    #     #     for edge_node in self.g[node]:
-    #     #         result = '{}{}'.format(node, self.traverse(edge_node, result))
-    #     # return '{}{}'.format(node, result)
-
-    # def depth_first_traversal_helper(self, node, result):
-    #     if self.g[node]:
-    #         for edge_node in self.g[node]:
-    #             # import pdb; pdb.set_trace()
-    #             result = '{}{}'.format(result, edge_node)
-    #             result = self.depth_first_traversal_helper(edge_node, result)
-    #     return result
-
     def depth_first_traversal(self, node,result=""):
         if not str(node) in result:
             result = '{}{}'.format(result, node)
@@ -113,13 +94,6 @@ class Graph(object):
                 for edge_node in self.g[node]:
                     result = self.depth_first_traversal(edge_node,result)
         return result
-
-    def breadth_first_traversal_helper(self, children , result):
-        for child in children:
-            for grandchild in self.g[child]:
-                result = '{}{}'.format(result, grandchild)
-
-        return grandchildren, result
 
     def breadth_first_traversal(self, node):
         """
