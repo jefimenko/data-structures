@@ -94,7 +94,7 @@ class Graph(object):
         if not str(node) in result:
             result = '{}{}'.format(result, node)
             if self.g[node]:
-                for edge_node in self.g[node]:
+                for edge_node, weight in self.g[node]:
                     result = self.depth_first_traversal(edge_node,result)
         return result
 
