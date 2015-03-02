@@ -122,14 +122,29 @@ def test_edges():
     for y in g.edges():
         assert y in [(9, 0), (9, 1), (9, 2), (9, 3), (9, 4)]
 
-# def test_traverse():
-#     g = Graph()
-#     g.add_node(1)
-#     g.add_edge(1, 2)
-#     g.add_edge(2, 4)
-#     g.add_edge(1, 3)
-#     print g.traverse(1)
-#     assert g.traverse is '1234'
+
+def test_ew_add_first():
+    g = Graph()
+    g.add_edge(1, 2, 3)
+    assert g.g[1][0][1] == 3
+
+
+def test_ew_add(popd_graph_weighted):
+    g = popd_graph_weighted
+    assert 1 in [pair[1] for pair in g.g[1]]
+    assert 9 in [pair[1] for pair in g.g[8]]
+
+
+def test_ew_rem(popd_graph_weighted):
+    g = popd_graph_weighted
+    g.del_edge(1, 2)
+    assert 2 not in [pair[0] for pair in g.g[1]]
+
+
+def test_ew_rem_last():
+    g = Graph()
+    with pytest.raises(IndexError):
+        g.del_edge(1, 2)
 
 
 def test_breadth(popd_graph):
@@ -171,5 +186,22 @@ def popd_graph(request):
     g.add_edge(6, 10)
     g.add_edge(3, 7)
     g.add_edge(8, 6)
+
+    return g
+
+
+@pytest.fixture(scope='function')
+def popd_graph_weighted(request):
+    g = Graph()
+    g.add_node(1)
+    g.add_edge(1, 2, 1)
+    g.add_edge(2, 4, 2)
+    g.add_edge(1, 3, 3)
+    g.add_edge(4, 5, 4)
+    g.add_edge(4, 6, 5)
+    g.add_edge(4, 9, 6)
+    g.add_edge(6, 10, 7)
+    g.add_edge(3, 7, 8)
+    g.add_edge(8, 6, 9)
 
     return g

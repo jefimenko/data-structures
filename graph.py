@@ -60,6 +60,7 @@ class Graph(object):
             for num in range(len(self.g[n1])):
                 if self.g[n1][num][0] == n2:
                     self.g[n1].remove(self.g[n1][num])
+                    break
         except ValueError:
             pass
         except KeyError:
