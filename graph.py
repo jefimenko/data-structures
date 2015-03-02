@@ -102,7 +102,7 @@ class Graph(object):
         """
         Iterate over a graph and return a path as a string.
         """
-        children = self.g[node]
+        children = [pair[0] for pair in self.g[node]]
 
         grandchildren, result = self.breadth_iterator(children, [], str(node))
 
@@ -123,6 +123,6 @@ class Graph(object):
         for child in children:
             if str(child) not in result:
                 result = '{}{}'.format(result, child)
-                grandchildren += self.g[child]
+                grandchildren += [pair[0] for pair in self.g[child]]
 
         return grandchildren, result
