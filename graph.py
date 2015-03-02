@@ -28,7 +28,7 @@ class Graph(object):
         """
         self.g[n] = []
 
-    def add_edge(self, n1, n2):
+    def add_edge(self, n1, n2, w=0):
         """
         Add an edge between two nodes
 
@@ -38,7 +38,7 @@ class Graph(object):
             self.add_node(n1)
         if not self.g.has_key(n2):
             self.add_node(n2)
-        self.g[n1].append(n2)
+        self.g[n1].append((n2, w))
 
     def del_node(self, n):
         """
@@ -57,7 +57,9 @@ class Graph(object):
         Delete an edge from the Graph. If an edge doesn't exist pass
         """
         try:
-            self.g[n1].remove(n2)
+            for x in range(len(self.g[n1]) - 1):
+                if self.g[n1][x[0]] == n2:
+                    self.g[n1].remove(x)
         except ValueError:
             pass
         except KeyError:
