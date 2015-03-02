@@ -1,7 +1,7 @@
 # data-structures
 Code Fellows Dev Accelerator: This repository will be for implementations of classic data structures in python.
 
-[![Travis](https://travis-ci.org/jefimenko/data-structures)](https://travis-ci.org/jefimenko/data-structures)
+[![Travis](https://travis-ci.org/jefimenko/data-structures.svg?branch=wtd_graph)](https://travis-ci.org/jefimenko/data-structures.svg?branch=wtd_graph)
 
 
 parens.py:
