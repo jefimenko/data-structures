@@ -7,7 +7,7 @@ class Priority_Queue(object):
         self.high = Queue()
         self.low = Queue()
 
-    def insert(self, item, priority="high"):
+    def insert(self, item, priority=None):
         """
         Insert a queue first by priority, then by first-in-last-out.
 
