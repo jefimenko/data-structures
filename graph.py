@@ -19,7 +19,7 @@ class Graph(object):
         for key, values in self.g.iteritems():
             for value in values:
                 if value:
-                    result.append((key, value))
+                    result.append((key, value[0]))
         return result
 
     def add_node(self, n):
@@ -57,9 +57,9 @@ class Graph(object):
         Delete an edge from the Graph. If an edge doesn't exist pass
         """
         try:
-            for x in range(len(self.g[n1]) - 1):
-                if self.g[n1][x[0]] == n2:
-                    self.g[n1].remove(x)
+            for num in range(len(self.g[n1])):
+                if self.g[n1][num][0] == n2:
+                    self.g[n1].remove(self.g[n1][num])
         except ValueError:
             pass
         except KeyError:
@@ -76,7 +76,8 @@ class Graph(object):
         Return the edges for a node in a list
         """
         try:
-            return self.g[n]
+            edges = [node[0] for node in self.g[n]]
+            return edges
         except KeyError:
             raise IndexError("Node doesn't exist")
 
@@ -85,7 +86,7 @@ class Graph(object):
         Return if an edge exist between two nodes
         """
         try:
-            return n2 in self.g[n1]
+            return n2 in self.neighbors(n1)
         except KeyError:
             raise IndexError("One or more nodes doesn't exist")
 
