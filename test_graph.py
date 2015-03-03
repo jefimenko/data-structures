@@ -220,7 +220,7 @@ def test_djkst_short():
     g.add_edge('e', 'f', 3)
     g.add_edge('f', 'a', 8)
 
-    assert g.dijkstra('a') == ['a', 'e', 'd'], 4
+    assert g.dijkstra('a', 'd') == (['a', 'e', 'd'], 4)
 
 
 def test_djkst_long():
@@ -235,4 +235,14 @@ def test_djkst_long():
     g.add_edge('e', 'f', 1)
     g.add_edge('f', 'd', 1)
 
-    assert g.dijkstra('a') == ['a', 'b', 'c', 'e', 'f', 'd'], 5
+    assert g.dijkstra('a', 'd') == (['a', 'b', 'c', 'e', 'f', 'd'], 5)
+
+
+def test_djkst_loop():
+    g = Graph()
+    g.add_node('a')
+    g.add_edge('a', 'b', 1)
+    g.add_edge('b', 'a', 1)
+    g.add_edge('b', 'c', 12345)
+
+    assert g.dijkstra('a', 'c') == (['a', 'b', 'c'], 12346)
