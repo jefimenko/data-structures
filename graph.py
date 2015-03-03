@@ -127,3 +127,7 @@ class Graph(object):
                 grandchildren += [pair[0] for pair in self.g[child]]
 
         return grandchildren, result
+
+
+def dijkstra(self, start):
+    pass
