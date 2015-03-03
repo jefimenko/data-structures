@@ -128,6 +128,22 @@ class Graph(object):
 
         return grandchildren, result
 
+    def dijkstra(self, start, end):
+        # set a temp current value to start
+        current = start
+        path = [start]
+        path_weight = 0
 
-def dijkstra(self, start):
-    pass
+        while not current == end:
+            # Set weight to infinity for first case
+            weight = float('inf')
+            skinniest = None
+            for child in self.g[current]:
+                if child[1] < weight:
+                    skinniest = child[0]
+                    weight = child[1]
+            path.append(skinniest)
+            path_weight += weight
+            current = skinniest
+
+        return path, path_weight
