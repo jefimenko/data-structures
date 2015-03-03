@@ -205,3 +205,44 @@ def popd_graph_weighted(request):
     g.add_edge(8, 6, 9)
 
     return g
+
+
+def test_djkst_short():
+    g = Graph()
+    g.add_node('a')
+    g.add_edge('a', 'b', 9)
+    g.add_edge('a', 'e', 3)
+    g.add_edge('b', 'c', 6)
+    g.add_edge('b', 'e', 9000)
+    g.add_edge('c', 'd', 6)
+    g.add_edge('e', 'c', 5)
+    g.add_edge('e', 'd', 1)
+    g.add_edge('e', 'f', 3)
+    g.add_edge('f', 'a', 8)
+
+    assert g.dijkstra('a', 'd') == (['a', 'e', 'd'], 4)
+
+
+def test_djkst_long():
+    g = Graph()
+    g.add_node('a')
+    g.add_edge('a', 'b', 1)
+    g.add_edge('a', 'e', 9000)
+    g.add_edge('b', 'c', 1)
+    g.add_edge('c', 'e', 1)
+    g.add_edge('c', 'd', 6)
+    g.add_edge('e', 'd', 3)
+    g.add_edge('e', 'f', 1)
+    g.add_edge('f', 'd', 1)
+
+    assert g.dijkstra('a', 'd') == (['a', 'b', 'c', 'e', 'f', 'd'], 5)
+
+
+def test_djkst_loop():
+    g = Graph()
+    g.add_node('a')
+    g.add_edge('a', 'b', 1)
+    g.add_edge('b', 'a', 1)
+    g.add_edge('b', 'c', 12345)
+
+    assert g.dijkstra('a', 'c') == (['a', 'b', 'c'], 12346)
