@@ -139,7 +139,7 @@ class Graph(object):
             weight = float('inf')
             skinniest = None
             for child in self.g[current]:
-                if child[1] < weight:
+                if child[1] < weight and child[0] not in path:
                     skinniest = child[0]
                     weight = child[1]
             path.append(skinniest)
@@ -147,3 +147,43 @@ class Graph(object):
             current = skinniest
 
         return path, path_weight
+
+    def find_paths(self, start, end, result=[], path=[]):
+        if start is end: # found
+            # import pdb; pdb.set_trace()
+            path.append(end)
+            result.append(path[:])
+            # path.pop()
+        elif not start in path: # not loop
+            if self.g[start]: # not empty
+                path.append(start)
+                for edge_node, weight in self.g[start]:
+                    self.find_paths(edge_node, end, result, path)
+                path.pop()
+            else: # dead end
+                path.pop()
+        return result
+
+    def get_path_weight(self, path):
+        weight = 0
+        # for index, node in enumerate(path)[:-1]:
+        #     weight += self.g[node][path[index + 1][1]]
+        for num in range(len(path)-1):
+            n1 = path[num]
+            n2 = path[num + 1]
+            for node in self.g[n1]:
+                if node[0] == n2:
+                    weight += node[1]
+                    break
+        return weight
+
+    def find_shortest_path(self, start, end):
+        paths = self.find_paths(start, end, [], [])
+        weight = float('inf')
+        shortest_path = []
+        for path in paths:
+            sum = self.get_path_weight(path)
+            if sum < weight:
+                weight = sum
+                shortest_path = path
+        return shortest_path, weight
