@@ -3,9 +3,12 @@ class Bst(object):
     def __init__(self, value=None):
         self.tree = {}
         self.top = None
+        self._size = 0
+
         if not value is None:
             self.tree[value] = {'depth': 1}
             self.top = value
+            self._size += 1
 
     def insert(self, value):
         current = self.top
@@ -29,7 +32,11 @@ class Bst(object):
                     #actual insert
                     self.tree[value] = {'depth': depth}
                     self.tree[current][child] = value
+                    self._size += 1
                     return
                 else:
                     current = traverse
-            depth +=1
+            depth += 1
+
+    def size(self):
+        return self._size
