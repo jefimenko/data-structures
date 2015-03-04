@@ -38,14 +38,24 @@ def test_insert(empty_tree):
     assert tree.tree == expect
 
 
-def test_size_emptree():
-    t = bst.Bst()
+def test_size_emptree(empty_tree):
+    t = empty_tree
     assert t.size() == 0
 
 
 def test_size_tree(filled_tree):
     t = filled_tree
     assert t.size() == 15
+
+
+def test_depth_emptree(empty_tree):
+    t = empty_tree
+    assert t.depth() == 0
+
+
+def test_depth_tree(filled_tree):
+    t = filled_tree
+    assert t.depth() == 10
 
 
 @pytest.fixture(scope='function')
