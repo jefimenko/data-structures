@@ -57,6 +57,15 @@ def test_depth_tree(filled_tree):
     t = filled_tree
     assert t.depth() == 10
 
+def test_contains(filled_tree):
+    t = filled_tree
+    for num in reversed(range(10)):
+        assert t.contains(num) is True
+    for num in range(10, 15):
+        assert t.contains(num) is True
+    for num in range(20, 25):
+        assert t.contains(num) is False
+
 
 @pytest.fixture(scope='function')
 def filled_tree():

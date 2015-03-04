@@ -44,6 +44,9 @@ class Bst(object):
                     current = traverse
             depth += 1
 
+    def contains(self, value):
+        return value in self.tree
+
     def size(self):
         return self._size
 
