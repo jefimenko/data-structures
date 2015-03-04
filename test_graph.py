@@ -208,6 +208,9 @@ def popd_graph_weighted(request):
 
 
 def test_djkst_short():
+    """
+    Test for a short path has lowest weight graph with Dijkstra
+    """
     g = Graph()
     g.add_node('a')
     g.add_edge('a', 'b', 9)
@@ -222,8 +225,10 @@ def test_djkst_short():
 
     assert g.dijkstra('a', 'd') == (['a', 'e', 'd'], 4)
 
-
 def test_djkst_long():
+    """
+    Test for a long path has lowest weight graph with Dijkstra 
+    """
     g = Graph()
     g.add_node('a')
     g.add_edge('a', 'b', 1)
@@ -239,6 +244,9 @@ def test_djkst_long():
 
 
 def test_djkst_loop():
+    """
+    Test a graph with a loop with Dijkstra
+    """
     g = Graph()
     g.add_node('a')
     g.add_edge('a', 'b', 1)
@@ -246,8 +254,13 @@ def test_djkst_loop():
     g.add_edge('b', 'c', 12345)
 
     assert g.dijkstra('a', 'c') == (['a', 'b', 'c'], 12346)
+    assert g.dijkstra('a', 'a') == (['a'], 0)
+
 
 def test_find_paths():
+    """
+    Test find path, get path weight and the shortest path 
+    """
     g = Graph()
     g.add_edge('a', 'b', 1)
     g.add_edge('b', 'c', 1)
@@ -258,6 +271,9 @@ def test_find_paths():
     assert g.find_shortest_path('a', 'c') == (['a', 'c'], 1)
 
 def test_real_short():
+    """
+    Test with the shortest path having the lowest weight
+    """
     g = Graph()
     g.add_node('a')
     g.add_edge('a', 'b', 9)
@@ -270,11 +286,13 @@ def test_real_short():
     g.add_edge('e', 'f', 3)
     g.add_edge('f', 'a', 8)
 
-    print g.find_paths('a','d',[],[])
     assert g.find_shortest_path('a', 'd') == (['a', 'e', 'd'], 4)
 
 
 def test_real_long():
+    """
+    Test the longest path having the shortest weight
+    """
     g = Graph()
     g.add_node('a')
     g.add_edge('a', 'b', 1)
@@ -287,22 +305,12 @@ def test_real_long():
     g.add_edge('f', 'd', 1)
 
     assert g.find_shortest_path('a', 'd') == (['a', 'b', 'c', 'e', 'f', 'd'], 5)
-
-# def test_short():
-#     g = Graph()
-#     g.add_edge('a', 'b', 10000)
-#     g.add_edge('b', 'd', 1)
-#     g.add_edge('a', 'c', 1)
-#     g.add_edge('c', 'd', 2)
-#     g.add_edge('c', 'e', 1)
-#     g.add_edge('e', 'd', 2)
-#     g.add_edge('a', 'd', 3)
-#     assert g.find_shortest_path('a', 'd') == (['a','b','d'], 2)
-
-
-
+    assert g.find_shortest_path('a', 'a') == (['a'], 0)
 
 def test_real_loop():
+    """
+    Test shortest_path with a loop
+    """
     g = Graph()
     g.add_node('a')
     g.add_edge('a', 'b', 1)

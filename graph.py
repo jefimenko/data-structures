@@ -129,6 +129,9 @@ class Graph(object):
         return grandchildren, result
 
     def dijkstra(self, start, end):
+        """
+        Find a path always using smallest weight and return the path and weight
+        """
         # set a temp current value to start
         current = start
         path = [start]
@@ -149,26 +152,31 @@ class Graph(object):
         return path, path_weight
 
     def find_paths(self, start, end, result=[], path=[]):
-        if start is end: # found
-            # import pdb; pdb.set_trace()
+        """
+        Find all paths possible with a start and an end nodes
+
+        and return a list with possibles path inside 
+        """
+        if start is end:
             path.append(end)
             result.append(path[:])
-            # path.pop()
-        elif not start in path: # not loop
-            if self.g[start]: # not empty
+            path.pop()
+
+        elif start not in path:
+            if self.g[start]:
                 path.append(start)
                 for edge_node, weight in self.g[start]:
                     self.find_paths(edge_node, end, result, path)
                 path.pop()
-            else: # dead end
-                path.pop()
+
         return result
 
     def get_path_weight(self, path):
+        """
+        Return the weight of a path when giving the path as a list
+        """
         weight = 0
-        # for index, node in enumerate(path)[:-1]:
-        #     weight += self.g[node][path[index + 1][1]]
-        for num in range(len(path)-1):
+        for num in range(len(path) - 1):
             n1 = path[num]
             n2 = path[num + 1]
             for node in self.g[n1]:
@@ -178,6 +186,9 @@ class Graph(object):
         return weight
 
     def find_shortest_path(self, start, end):
+        """
+        Return the shortest path to two nodes and the weight of the path
+        """
         paths = self.find_paths(start, end, [], [])
         weight = float('inf')
         shortest_path = []
