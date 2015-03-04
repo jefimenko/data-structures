@@ -150,18 +150,17 @@ class Graph(object):
 
     def find_paths(self, start, end, result=[], path=[]):
         if start is end: # found
-            # import pdb; pdb.set_trace()
             path.append(end)
             result.append(path[:])
-            # path.pop()
-        elif not start in path: # not loop
+            path.pop()
+
+        elif start not in path: # not loop
             if self.g[start]: # not empty
                 path.append(start)
                 for edge_node, weight in self.g[start]:
                     self.find_paths(edge_node, end, result, path)
                 path.pop()
-            else: # dead end
-                path.pop()
+
         return result
 
     def get_path_weight(self, path):

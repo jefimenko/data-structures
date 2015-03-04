@@ -247,6 +247,7 @@ def test_djkst_loop():
 
     assert g.dijkstra('a', 'c') == (['a', 'b', 'c'], 12346)
 
+
 def test_find_paths():
     g = Graph()
     g.add_edge('a', 'b', 1)
@@ -257,36 +258,37 @@ def test_find_paths():
     assert g.get_path_weight(['a','b','c']) == 2
     assert g.find_shortest_path('a', 'c') == (['a', 'c'], 1)
 
-# def test_real_short():
-#     g = Graph()
-#     g.add_node('a')
-#     g.add_edge('a', 'b', 9)
-#     g.add_edge('a', 'e', 3)
-#     g.add_edge('b', 'c', 6)
-#     g.add_edge('b', 'e', 9000)
-#     g.add_edge('c', 'd', 6)
-#     g.add_edge('e', 'c', 5)
-#     g.add_edge('e', 'd', 1)
-#     g.add_edge('e', 'f', 3)
-#     g.add_edge('f', 'a', 8)
 
-#     print g.find_paths('a','d',[],[])
-#     assert g.find_shortest_path('a', 'd') == (['a', 'e', 'd'], 4)
+def test_real_short():
+    g = Graph()
+    g.add_node('a')
+    g.add_edge('a', 'b', 9)
+    g.add_edge('a', 'e', 3)
+    g.add_edge('b', 'c', 6)
+    g.add_edge('b', 'e', 9000)
+    g.add_edge('c', 'd', 6)
+    g.add_edge('e', 'c', 5)
+    g.add_edge('e', 'd', 1)
+    g.add_edge('e', 'f', 3)
+    g.add_edge('f', 'a', 8)
+
+    print g.find_paths('a','d',[],[])
+    assert g.find_shortest_path('a', 'd') == (['a', 'e', 'd'], 4)
 
 
-# def test_real_long():
-#     g = Graph()
-#     g.add_node('a')
-#     g.add_edge('a', 'b', 1)
-#     g.add_edge('a', 'e', 9000)
-#     g.add_edge('b', 'c', 1)
-#     g.add_edge('c', 'e', 1)
-#     g.add_edge('c', 'd', 6)
-#     g.add_edge('e', 'd', 3)
-#     g.add_edge('e', 'f', 1)
-#     g.add_edge('f', 'd', 1)
+def test_real_long():
+    g = Graph()
+    g.add_node('a')
+    g.add_edge('a', 'b', 1)
+    g.add_edge('a', 'e', 9000)
+    g.add_edge('b', 'c', 1)
+    g.add_edge('c', 'e', 1)
+    g.add_edge('c', 'd', 6)
+    g.add_edge('e', 'd', 3)
+    g.add_edge('e', 'f', 1)
+    g.add_edge('f', 'd', 1)
 
-#     assert g.find_shortest_path('a', 'd') == (['a', 'b', 'c', 'e', 'f', 'd'], 5)
+    assert g.find_shortest_path('a', 'd') == (['a', 'b', 'c', 'e', 'f', 'd'], 5)
 
 def test_short():
     g = Graph()
