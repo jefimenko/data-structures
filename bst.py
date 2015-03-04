@@ -15,10 +15,11 @@ class Bst(object):
         if current is None:
             self.tree[value] = {'depth': 1}
             self.top = value
+            self._size += 1
             return
         depth = 2
         while not current is None:
-            print current
+            # print current
             if current == value:
                 return
             else:

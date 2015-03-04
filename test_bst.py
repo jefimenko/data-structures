@@ -43,6 +43,21 @@ def test_size_emptree():
     assert t.size() == 0
 
 
+def test_size_tree(filled_tree):
+    t = filled_tree
+    assert t.size() == 15
+
+
+@pytest.fixture(scope='function')
+def filled_tree():
+    tree = bst.Bst()
+    for num in reversed(range(10)):
+        tree.insert(num)
+    for num in range(10, 15):
+        tree.insert(num)
+    return tree
+
+
 @pytest.fixture(scope='function')
 def empty_tree():
     tree = bst.Bst()
