@@ -18,6 +18,9 @@ class Bst(object):
             self._depth += 1
 
     def insert(self, value):
+        """Insert a node with value in order.
+
+        In value is already present, it is ignored."""
         current = self.top
         if current is None:
             self.tree[value] = {'depth': 1}
@@ -49,7 +52,13 @@ class Bst(object):
             depth += 1
 
     def balance(self):
-        """"""
+        """Returns the balance of the tree:
+
+        Returns a positive representing how much deeper the tree is on the
+        right site or negative if the left is longer.
+        Return 0 if the tree is balanced (same depth on both sides)
+
+        """
         balance = 0
         for i in self.tree:
             if self.top > i:
@@ -59,12 +68,15 @@ class Bst(object):
         return balance
 
     def contains(self, value):
+        """Returns true if value is in the tree."""
         return value in self.tree
 
     def size(self):
+        """Returns the number of nodes in the tree."""
         return self._size
 
     def depth(self):
+        """Returns the depth of the tree."""
         return self._depth
 
     def get_dot(self):
@@ -109,7 +121,6 @@ def main():
         tree.insert(num)
     dot_graph = tree.get_dot()
     t = subprocess.Popen(["dot", "-Tpng", 'test.png'], stdin=subprocess.PIPE)
-    import pdb; pdb.set_trace()
     t.communicate(dot_graph)
 
 if __name__ == '__main__':
