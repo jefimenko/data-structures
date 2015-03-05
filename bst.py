@@ -108,7 +108,7 @@ def main():
     for num in range(10, 15):
         tree.insert(num)
     dot_graph = tree.get_dot()
-    t = subprocess.Popen(["dot", "-Tpng", 'test.png'], stdin=subprocess.PIPE)
+    t = subprocess.Popen(["dot", "-Tpng"], stdin=subprocess.PIPE)
     import pdb; pdb.set_trace()
     t.communicate(dot_graph)
 
