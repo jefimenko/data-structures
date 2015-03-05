@@ -111,6 +111,16 @@ class Bst(object):
             yield "\tnull%s [shape=point];" % r
             yield "\t%s -> null%s;" % (current, r)
 
+    def in_order(self, current='dutch'):
+        if current == 'dutch':
+            current = self.top
+        if current:
+            for value in self.in_order(self.tree[current].get('left')):
+                yield value
+            yield current
+            for value in self.in_order(self.tree[current].get('right')):
+                yield value
+
 
 def main():
     """Best case and worst case are the same."""
@@ -119,9 +129,11 @@ def main():
         tree.insert(num)
     for num in range(10, 15):
         tree.insert(num)
+    for thing in tree.in_order():
+        print thing
     dot_graph = tree.get_dot()
     t = subprocess.Popen(["dot", "-Tpng"], stdin=subprocess.PIPE)
-    t.communicate(dot_graph)
+    # t.communicate(dot_graph)
 
 
 if __name__ == '__main__':
