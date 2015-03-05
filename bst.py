@@ -11,13 +11,16 @@ class Bst(object):
         self._size = 0
         self._depth = 0
 
-        if not value is None:
+        if value is not None:
             self.tree[value] = {'depth': 1}
             self.top = value
             self._size += 1
             self._depth += 1
 
     def insert(self, value):
+        """Insert a node with value in order.
+
+        In value is already present, it is ignored."""
         current = self.top
         if current is None:
             self.tree[value] = {'depth': 1}
@@ -25,46 +28,56 @@ class Bst(object):
             self._size += 1
             self._depth += 1
             return
-        depth = 2
-        while not current is None:
+        depth = 1  # starts trying to insert at depth 2
+        while current is not None:
+            depth += 1
             if current == value:
                 return
+            if current < value:
+                traverse = self.tree[current].get('right')
+                child = 'right'
             else:
-                if current < value:
-                    traverse = self.tree[current].get('right')
-                    child = 'right'
-                else:
-                    traverse = self.tree[current].get('left')
-                    child = 'left'
-                if traverse is None:
-                    #actual insert
-                    self.tree[value] = {'depth': depth}
-                    self.tree[current][child] = value
-                    self._size += 1
-                    if depth > self._depth:
-                        self._depth = depth
-                    return
-                else:
-                    current = traverse
-            depth += 1
+                traverse = self.tree[current].get('left')
+                child = 'left'
+            if traverse is None:
+                #actual insert
+                self.tree[value] = {'depth': depth}
+                self.tree[current][child] = value
+                self._size += 1
+                if depth > self._depth:
+                    self._depth = depth
+                return
+            current = traverse
 
     def balance(self):
-        """"""
-        balance = 0
-        for i in self.tree:
-            if self.top > i:
-                balance -= 1
-            elif self.top < i:
-                balance += 1
-        return balance
+        """Returns the balance of the tree:
+
+        Returns a positive representing how much deeper the tree is on the
+        right site or negative if the left is longer.
+        Return 0 if the tree is balanced (same depth on both sides)
+
+        """
+        left_deep = 0
+        right_deep = 0
+        for node, v in self.tree.items():
+            if self.top > node:
+                if left_deep < v['depth']:
+                    left_deep = v['depth']
+            elif self.top < node:
+                if right_deep < v['depth']:
+                    right_deep = v['depth']
+        return right_deep - left_deep
 
     def contains(self, value):
+        """Returns true if value is in the tree."""
         return value in self.tree
 
     def size(self):
+        """Returns the number of nodes in the tree."""
         return self._size
 
     def depth(self):
+        """Returns the depth of the tree."""
         return self._depth
 
     def get_dot(self):
@@ -76,7 +89,6 @@ class Bst(object):
                 "\n".join(self._get_dot(self.top))
             )
         ))
-
 
     def _get_dot(self, current):
         """recursively prepare a dot graph entry for this node."""
@@ -101,7 +113,7 @@ class Bst(object):
 
 
 def main():
-    """"""
+    """Best case and worst case are the same."""
     tree = Bst()
     for num in reversed(range(10)):
         tree.insert(num)
@@ -109,8 +121,8 @@ def main():
         tree.insert(num)
     dot_graph = tree.get_dot()
     t = subprocess.Popen(["dot", "-Tpng"], stdin=subprocess.PIPE)
-    import pdb; pdb.set_trace()
     t.communicate(dot_graph)
+
 
 if __name__ == '__main__':
     main()

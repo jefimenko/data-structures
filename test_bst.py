@@ -45,7 +45,7 @@ def test_size_emptree(empty_tree):
 
 def test_size_tree(filled_tree):
     t = filled_tree
-    assert t.size() == 15
+    assert t.size() == 14
 
 
 def test_depth_emptree(empty_tree):
@@ -63,13 +63,13 @@ def test_balance(empty_tree, filled_tree):
     t.insert(3)
     assert t.balance() == 0
     t = filled_tree
-    assert t.balance() == -4
+    assert t.balance() == -5
 
 def test_contains(filled_tree):
     t = filled_tree
     for num in reversed(range(10)):
         assert t.contains(num) is True
-    for num in range(10, 15):
+    for num in range(10, 14):
         assert t.contains(num) is True
     for num in range(20, 25):
         assert t.contains(num) is False
@@ -80,7 +80,7 @@ def filled_tree():
     tree = bst.Bst()
     for num in reversed(range(10)):
         tree.insert(num)
-    for num in range(10, 15):
+    for num in range(10, 14):
         tree.insert(num)
     return tree
 
