@@ -11,7 +11,7 @@ class Bst(object):
         self._size = 0
         self._depth = 0
 
-        if not value is None:
+        if value is not None:
             self.tree[value] = {'depth': 1}
             self.top = value
             self._size += 1
@@ -28,28 +28,27 @@ class Bst(object):
             self._size += 1
             self._depth += 1
             return
-        depth = 2
-        while not current is None:
+        depth = 1  # starts trying to insert at depth 2
+        while current is not None:
+            depth += 1
             if current == value:
                 return
+            if current < value:
+                traverse = self.tree[current].get('right')
+                child = 'right'
             else:
-                if current < value:
-                    traverse = self.tree[current].get('right')
-                    child = 'right'
-                else:
-                    traverse = self.tree[current].get('left')
-                    child = 'left'
-                if traverse is None:
-                    #actual insert
-                    self.tree[value] = {'depth': depth}
-                    self.tree[current][child] = value
-                    self._size += 1
-                    if depth > self._depth:
-                        self._depth = depth
-                    return
-                else:
-                    current = traverse
-            depth += 1
+                traverse = self.tree[current].get('left')
+                child = 'left'
+            if traverse is None:
+                #actual insert
+                self.tree[value] = {'depth': depth}
+                self.tree[current][child] = value
+                self._size += 1
+                if depth > self._depth:
+                    self._depth = depth
+                return
+            current = traverse
+
 
     def balance(self):
         """Returns the balance of the tree:
@@ -59,13 +58,16 @@ class Bst(object):
         Return 0 if the tree is balanced (same depth on both sides)
 
         """
-        balance = 0
-        for i in self.tree:
-            if self.top > i:
-                balance -= 1
-            elif self.top < i:
-                balance += 1
-        return balance
+        left_deep = 0
+        right_deep = 0
+        for node, v in self.tree.items():
+            if self.top > node:
+                if left_deep < v['depth']:
+                    left_deep = v['depth']
+            elif self.top < node:
+                if right_deep < v['depth']:
+                    right_deep = v['depth']
+        return right_deep - left_deep
 
     def contains(self, value):
         """Returns true if value is in the tree."""
@@ -113,15 +115,16 @@ class Bst(object):
 
 
 def main():
-    """"""
+    """Best case and worst case are the same."""
     tree = Bst()
     for num in reversed(range(10)):
         tree.insert(num)
     for num in range(10, 15):
         tree.insert(num)
     dot_graph = tree.get_dot()
-    t = subprocess.Popen(["dot", "-Tpng", 'test.png'], stdin=subprocess.PIPE)
+    t = subprocess.Popen(["dot", "-Tpng"], stdin=subprocess.PIPE)
     t.communicate(dot_graph)
+
 
 if __name__ == '__main__':
     main()
