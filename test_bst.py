@@ -57,6 +57,14 @@ def test_depth_tree(filled_tree):
     t = filled_tree
     assert t.depth() == 10
 
+def test_balance(empty_tree, filled_tree):
+    t = empty_tree
+    assert t.balance() == 0
+    t.insert(3)
+    assert t.balance() == 0
+    t = filled_tree
+    assert t.balance() == -4
+
 def test_contains(filled_tree):
     t = filled_tree
     for num in reversed(range(10)):

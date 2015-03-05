@@ -1,5 +1,10 @@
+#!/usr/bin/env python
+import random
+import subprocess
+
+
 class Bst(object):
-    """Binary Search Tree"""
+    """Binary Search Tree using a dictionary"""
     def __init__(self, value=None):
         self.tree = {}
         self.top = None
@@ -22,7 +27,6 @@ class Bst(object):
             return
         depth = 2
         while not current is None:
-            # print current
             if current == value:
                 return
             else:
@@ -44,6 +48,16 @@ class Bst(object):
                     current = traverse
             depth += 1
 
+    def balance(self):
+        """"""
+        balance = 0
+        for i in self.tree:
+            if self.top > i:
+                balance -= 1
+            elif self.top < i:
+                balance += 1
+        return balance
+
     def contains(self, value):
         return value in self.tree
 
@@ -52,3 +66,51 @@ class Bst(object):
 
     def depth(self):
         return self._depth
+
+    def get_dot(self):
+        """return the tree with root 'self' as a dot graph for visualization"""
+        return "digraph G{\n%s}" % ("" if not self.tree else (
+            "\n%s\n" % (
+            # "\t%s;\n%s\n" % (
+                # list(self.tree),
+                "\n".join(self._get_dot(self.top))
+            )
+        ))
+
+
+    def _get_dot(self, current):
+        """recursively prepare a dot graph entry for this node."""
+        left = self.tree[current].get('left')
+        right = self.tree[current].get('right')
+        if left is not None:
+            yield "\t%s -> %s;" % (current, left)
+            for i in self._get_dot(left):
+                yield i
+        elif right is not None:
+            r = random.randint(0, 1e9)
+            yield "\tnull%s [shape=point];" % r
+            yield "\t%s -> null%s;" % (current, r)
+        if right is not None:
+            yield "\t%s -> %s;" % (current, right)
+            for i in self._get_dot(right):
+                yield i
+        elif left is not None:
+            r = random.randint(0, 1e9)
+            yield "\tnull%s [shape=point];" % r
+            yield "\t%s -> null%s;" % (current, r)
+
+
+def main():
+    """"""
+    tree = Bst()
+    for num in reversed(range(10)):
+        tree.insert(num)
+    for num in range(10, 15):
+        tree.insert(num)
+    dot_graph = tree.get_dot()
+    t = subprocess.Popen(["dot", "-Tpng", 'test.png'], stdin=subprocess.PIPE)
+    import pdb; pdb.set_trace()
+    t.communicate(dot_graph)
+
+if __name__ == '__main__':
+    main()
