@@ -57,6 +57,7 @@ def test_depth_tree(filled_tree):
     t = filled_tree
     assert t.depth() == 10
 
+
 def test_balance(empty_tree, filled_tree):
     t = empty_tree
     assert t.balance() == 0
@@ -64,6 +65,7 @@ def test_balance(empty_tree, filled_tree):
     assert t.balance() == 0
     t = filled_tree
     assert t.balance() == -5
+
 
 def test_contains(filled_tree):
     t = filled_tree
@@ -73,6 +75,13 @@ def test_contains(filled_tree):
         assert t.contains(num) is True
     for num in range(20, 25):
         assert t.contains(num) is False
+
+
+def test_in_order(filled_tree):
+    tree = filled_tree
+    print tree
+    for place, item in enumerate(tree.in_order()):
+        assert place == item
 
 
 @pytest.fixture(scope='function')

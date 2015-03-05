@@ -114,7 +114,7 @@ class Bst(object):
     def in_order(self, current='dutch'):
         if current == 'dutch':
             current = self.top
-        if current:
+        if current is not None:
             for value in self.in_order(self.tree[current].get('left')):
                 yield value
             yield current
@@ -131,6 +131,7 @@ def main():
         tree.insert(num)
     for thing in tree.in_order():
         print thing
+    print tree.tree
     dot_graph = tree.get_dot()
     t = subprocess.Popen(["dot", "-Tpng"], stdin=subprocess.PIPE)
     # t.communicate(dot_graph)
