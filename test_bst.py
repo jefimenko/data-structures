@@ -79,10 +79,28 @@ def test_contains(filled_tree):
 
 def test_in_order(filled_tree):
     tree = filled_tree
-    print tree
     for place, item in enumerate(tree.in_order()):
         assert place == item
 
+
+def test_pre_order(filled_tree):
+    tree = filled_tree
+    expected_order = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 10, 11, 12, 13]
+    for place, item in enumerate(tree.pre_order()):
+        assert expected_order[place] == item
+
+
+def test_post_order(filled_tree):
+    tree = filled_tree
+    expected_order = [0, 1, 2, 3, 4, 5, 6, 7, 8, 13, 12, 11, 10, 9]
+    for place, item in enumerate(tree.post_order()):
+        assert expected_order[place] == item
+
+def test_breadth_first_order(filled_tree):
+    tree = filled_tree
+    expected_order = [9, 8, 10, 7, 11, 6, 12, 5, 13, 4, 3, 2, 1, 0]
+    for place, item in enumerate(tree.breadth_first()):
+        assert expected_order[place] == item
 
 @pytest.fixture(scope='function')
 def filled_tree():
