@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # test constructor
 from linked_list import List_Node
 from linked_list import Linked_List

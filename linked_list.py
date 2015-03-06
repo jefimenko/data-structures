@@ -35,6 +35,8 @@ class Linked_List(object):
         Set .data attribute to val and rearrange the list so the head is 
         the new node with a reference to the old head.
         """
+        # if isinstance(val, unicode):
+        #     val = val.encode('utf-8')
         self.head = List_Node(val, self.head)
         self._size += 1
 
@@ -104,7 +106,7 @@ class Linked_List(object):
         while temp:
             dummy = temp.data
             if isinstance(temp.data, str or unicode):
-                dummy = "'{}'".format(dummy.encode('utf-8'))
+                dummy = "'{}'".format(dummy)
 
             if temp is self.head:
                 output = "{}{}".format(output, dummy)
@@ -112,6 +114,5 @@ class Linked_List(object):
                 dummy = str(dummy)
                 output = "{}, {}".format(output, dummy)
             temp = temp.next
-
 
         return output + ")"
