@@ -112,12 +112,46 @@ class Bst(object):
             yield "\t%s -> null%s;" % (current, r)
 
     def in_order(self, current='start'):
+        """
+        Generator that traverses the binary tree.
+        """
         if current == 'start':
             current = self.top
         if current is not None:
             self.in_order(self.tree[current].get('left')).next()
             yield current
             self.in_order(self.tree[current].get('right')).next()
+
+    def pre_order(self, current='dutch'):
+        """Generator that traverses the binary tree."""
+        if current == 'dutch':
+            current = self.top
+        if current is not None:
+            yield current
+            self.in_order(self.tree[current].get('left')).next()
+            self.in_order(self.tree[current].get('right')).next()
+
+    def post_order(self, current='dutch'):
+        """Generator that traverses the binary tree."""
+        if current == 'dutch':
+            current = self.top
+        if current is not None:
+            self.in_order(self.tree[current].get('left')).next()
+            self.in_order(self.tree[current].get('right')).next()
+            yield current
+
+    def breadth_first(self):
+        """Generator that traverses the binary tree in breadth first order."""
+        node_list =[]
+        node_list.append(self.top)
+        current = self.top
+        while node_list:
+            current = node_list.pop(0)
+            if self.tree[current].get('left') is not None:
+                node_list.append(self.tree[current].get('left'))
+            if self.tree[current].get('right') is not None:
+                node_list.append(self.tree[current].get('right'))
+            yield current  
 
 
 def main():
@@ -127,9 +161,9 @@ def main():
         tree.insert(num)
     for num in range(10, 15):
         tree.insert(num)
-    for thing in tree.in_order():
-        print thing
     print tree.tree
+    for num in enumerate(tree.breadth_first()):
+        print num
     dot_graph = tree.get_dot()
     t = subprocess.Popen(["dot", "-Tpng"], stdin=subprocess.PIPE)
     # t.communicate(dot_graph)
