@@ -111,15 +111,13 @@ class Bst(object):
             yield "\tnull%s [shape=point];" % r
             yield "\t%s -> null%s;" % (current, r)
 
-    def in_order(self, current='dutch'):
-        if current == 'dutch':
+    def in_order(self, current='start'):
+        if current == 'start':
             current = self.top
         if current is not None:
-            for value in self.in_order(self.tree[current].get('left')):
-                yield value
+            self.in_order(self.tree[current].get('left')).next()
             yield current
-            for value in self.in_order(self.tree[current].get('right')):
-                yield value
+            self.in_order(self.tree[current].get('right')).next()
 
 
 def main():
