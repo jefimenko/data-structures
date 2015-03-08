@@ -118,9 +118,11 @@ class Bst(object):
         if current == 'start':
             current = self.top
         if current is not None:
-            self.in_order(self.tree[current].get('left')).next()
+            for node in self.in_order(self.tree[current].get('left')):
+                yield node
             yield current
-            self.in_order(self.tree[current].get('right')).next()
+            for node in self.in_order(self.tree[current].get('right')):
+                yield node
 
     def pre_order(self, current='dutch'):
         """Generator that traverses the binary tree."""
@@ -128,17 +130,21 @@ class Bst(object):
             current = self.top
         if current is not None:
             yield current
-            self.in_order(self.tree[current].get('left')).next()
-            self.in_order(self.tree[current].get('right')).next()
+            for node in self.in_order(self.tree[current].get('left')):
+                yield node
+            for node in self.in_order(self.tree[current].get('right')):
+                yield node
 
     def post_order(self, current='dutch'):
         """Generator that traverses the binary tree."""
         if current == 'dutch':
             current = self.top
         if current is not None:
-            self.in_order(self.tree[current].get('left')).next()
+            for node in self.in_order(self.tree[current].get('left')):
+                yield node
             self.in_order(self.tree[current].get('right')).next()
-            yield current
+            for node in self.in_order(self.tree[current].get('right')):
+                yield node
 
     def breadth_first(self):
         """Generator that traverses the binary tree in breadth first order."""
