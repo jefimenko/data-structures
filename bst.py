@@ -21,10 +21,11 @@ class Bst(object):
     def left(self, current):
         return self.tree[current].get('left')
 
-
     def right(self, current):
         return self.tree[current].get('right')
 
+    def parent(self, current):
+        return self.tree[current].get('parent')
 
     def insert(self, value):
         """Insert a node with value in order.
@@ -49,7 +50,7 @@ class Bst(object):
                 traverse = self.left(current)
                 child = 'left'
             if traverse is None:
-                #actual insert
+                # actual insert
                 self.tree[value] = {'depth': depth}
                 self.tree[current][child] = value
                 self.tree[value]['parent'] = current
