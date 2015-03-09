@@ -17,6 +17,14 @@ class Bst(object):
             self._size += 1
             self._depth += 1
 
+    def left(self, current):
+        return self.tree[current].get('left')
+
+
+    def right(self, current):
+        return self.tree[current].get('right')
+
+
     def insert(self, value):
         """Insert a node with value in order.
 
@@ -34,10 +42,10 @@ class Bst(object):
             if current == value:
                 return
             if current < value:
-                traverse = self.tree[current].get('right')
+                traverse = self.right(current)
                 child = 'right'
             else:
-                traverse = self.tree[current].get('left')
+                traverse = self.left(current)
                 child = 'left'
             if traverse is None:
                 #actual insert
@@ -118,9 +126,9 @@ class Bst(object):
         if current == 'start':
             current = self.top
         if current is not None:
-            self.in_order(self.tree[current].get('left')).next()
+            self.in_order(self.left(current)).next()
             yield current
-            self.in_order(self.tree[current].get('right')).next()
+            self.in_order(self.right(current)).next()
 
     def pre_order(self, current='dutch'):
         """Generator that traverses the binary tree."""
@@ -128,16 +136,16 @@ class Bst(object):
             current = self.top
         if current is not None:
             yield current
-            self.in_order(self.tree[current].get('left')).next()
-            self.in_order(self.tree[current].get('right')).next()
+            self.in_order(self.left(current)).next()
+            self.in_order(self.right(current)).next()
 
     def post_order(self, current='dutch'):
         """Generator that traverses the binary tree."""
         if current == 'dutch':
             current = self.top
         if current is not None:
-            self.in_order(self.tree[current].get('left')).next()
-            self.in_order(self.tree[current].get('right')).next()
+            self.in_order(self.left(current)).next()
+            self.in_order(self.right(current)).next()
             yield current
 
     def breadth_first(self):
@@ -147,10 +155,10 @@ class Bst(object):
         current = self.top
         while node_list:
             current = node_list.pop(0)
-            if self.tree[current].get('left') is not None:
-                node_list.append(self.tree[current].get('left'))
-            if self.tree[current].get('right') is not None:
-                node_list.append(self.tree[current].get('right'))
+            if self.left(current) is not None:
+                node_list.append(self.left(current))
+            if self.right(current) is not None:
+                node_list.append(self.right(current))
             yield current  
 
 
