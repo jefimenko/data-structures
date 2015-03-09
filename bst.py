@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import random
 import subprocess
+from collections import deque
 
 
 class Bst(object):
@@ -16,6 +17,14 @@ class Bst(object):
             self.top = value
             self._size += 1
             self._depth += 1
+
+    def left(self, current):
+        return self.tree[current].get('left')
+
+
+    def right(self, current):
+        return self.tree[current].get('right')
+
 
     def insert(self, value):
         """Insert a node with value in order.
@@ -34,18 +43,15 @@ class Bst(object):
             if current == value:
                 return
             if current < value:
-                traverse = self.tree[current].get('right')
+                traverse = self.right(current)
                 child = 'right'
             else:
-                traverse = self.tree[current].get('left')
+                traverse = self.left(current)
                 child = 'left'
             if traverse is None:
-                # actual insert
+                #actual insert
                 self.tree[value] = {'depth': depth}
                 self.tree[current][child] = value
-                # Add reference to parent in new child node information
-                self.tree[value]['parent'] = current
-
                 self._size += 1
                 if depth > self._depth:
                     self._depth = depth
@@ -116,66 +122,66 @@ class Bst(object):
 
     def in_order(self, current='start'):
         """
-        Generator that traverses the binary tree.
+        Generator that traverses the binary tree in order.
         """
         if current == 'start':
             current = self.top
         if current is not None:
-            for node in self.in_order(self.tree[current].get('left')):
+            for node in self.in_order(self.left(current)):
                 yield node
             yield current
-            for node in self.in_order(self.tree[current].get('right')):
+            for node in self.in_order(self.right(current)):
                 yield node
 
+
     def pre_order(self, current='dutch'):
-        """Generator that traverses the binary tree."""
+        """Generator that traverses the binary tree pre order."""
         if current == 'dutch':
             current = self.top
         if current is not None:
             yield current
-            for node in self.in_order(self.tree[current].get('left')):
+            for node in self.pre_order(self.left(current)):
                 yield node
-            for node in self.in_order(self.tree[current].get('right')):
+            for node in self.pre_order(self.right(current)):
                 yield node
 
     def post_order(self, current='dutch'):
-        """Generator that traverses the binary tree."""
+        """Generator that traverses the binary tree post order."""
         if current == 'dutch':
             current = self.top
         if current is not None:
-            for node in self.in_order(self.tree[current].get('left')):
+            for node in self.post_order(self.left(current)):
                 yield node
-            self.in_order(self.tree[current].get('right')).next()
-            for node in self.in_order(self.tree[current].get('right')):
-                yield node 
+            for node in self.post_order(self.right(current)):
+                yield node
+            yield current
 
     def breadth_first(self):
         """Generator that traverses the binary tree in breadth first order."""
-        node_list =[]
-        node_list.append(self.top)
+        q1 = deque()
+        q1.appendleft(self.top)
         current = self.top
-        while node_list:
-            current = node_list.pop(0)
-            if self.tree[current].get('left') is not None:
-                node_list.append(self.tree[current].get('left'))
-            if self.tree[current].get('right') is not None:
-                node_list.append(self.tree[current].get('right'))
-            yield current  
+        while q1:
+            current = q1.pop()
+            if self.left(current) is not None:
+                q1.appendleft(self.left(current))
+            if self.right(current) is not None:
+                q1.appendleft(self.right(current))
+            yield current
 
 
 def main():
     """Best case and worst case are the same."""
     tree = Bst()
-    for num in reversed(range(10)):
-        tree.insert(num)
-    for num in range(10, 15):
-        tree.insert(num)
+    inserts = [7, 4, 11, 2, 9, 6, 12, 5, 13, 0, 10, 8, 3, 1]
+    for i in inserts:
+        tree.insert(i)
     print tree.tree
-    for num in enumerate(tree.breadth_first()):
-        print num
+    # for num in enumerate(tree.pre_order()):
+    #     print num
     dot_graph = tree.get_dot()
     t = subprocess.Popen(["dot", "-Tpng"], stdin=subprocess.PIPE)
-    # t.communicate(dot_graph)
+    t.communicate(dot_graph)
 
 
 if __name__ == '__main__':
