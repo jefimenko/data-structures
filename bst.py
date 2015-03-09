@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import random
 import subprocess
+from collections import deque
 
 
 class Bst(object):
@@ -157,31 +158,30 @@ class Bst(object):
 
     def breadth_first(self):
         """Generator that traverses the binary tree in breadth first order."""
-        node_list = []
-        node_list.append(self.top)
+        q1 = deque()
+        q1.appendleft(self.top)
         current = self.top
-        while node_list:
-            current = node_list.pop(0)
+        while q1:
+            current = q1.pop()
             if self.left(current) is not None:
-                node_list.append(self.left(current))
+                q1.appendleft(self.left(current))
             if self.right(current) is not None:
-                node_list.append(self.right(current))
+                q1.appendleft(self.right(current))
             yield current
 
 
 def main():
     """Best case and worst case are the same."""
     tree = Bst()
-    for num in reversed(range(10)):
-        tree.insert(num)
-    for num in range(10, 15):
-        tree.insert(num)
+    inserts = [7, 4, 11, 2, 9, 6, 12, 5, 13, 0, 10, 8, 3, 1]
+    for i in inserts:
+        tree.insert(i)
     print tree.tree
-    for num in enumerate(tree.pre_order()):
-        print num
+    # for num in enumerate(tree.pre_order()):
+    #     print num
     dot_graph = tree.get_dot()
     t = subprocess.Popen(["dot", "-Tpng"], stdin=subprocess.PIPE)
-    # t.communicate(dot_graph)
+    t.communicate(dot_graph)
 
 
 if __name__ == '__main__':

@@ -80,11 +80,13 @@ def test_contains(filled_tree):
 def test_in_order(filled_tree):
     tree = filled_tree
     gen = tree.in_order()
-    expected_order = range(0, 15)
+    expected_order = range(0, 14)
     for i in expected_order:
         j = gen.next()
         print str(i) + '=' + str(j)
         assert i == j
+    with pytest.raises(StopIteration):
+        gen.next()
 
 
 def test_pre_order(filled_tree):
@@ -95,16 +97,19 @@ def test_pre_order(filled_tree):
         j = gen.next()
         print str(i) + '=' + str(j)
         assert i == j
-
+    with pytest.raises(StopIteration):
+        gen.next()
 
 def test_post_order(filled_tree):
     tree = filled_tree
-    gen = tree.pre_order()
+    gen = tree.post_order()
     expected_order = [0, 1, 2, 3, 4, 5, 6, 7, 8, 13, 12, 11, 10, 9]
     for i in expected_order:
         j = gen.next()
         print str(i) + '=' + str(j)
         assert i == j
+    with pytest.raises(StopIteration):
+        gen.next()
 
 
 def test_breadth_first_order(filled_tree):
@@ -113,13 +118,25 @@ def test_breadth_first_order(filled_tree):
     for place, item in enumerate(tree.breadth_first()):
         assert expected_order[place] == item
 
+
 @pytest.fixture(scope='function')
 def filled_tree():
+    """Upside down V Shaped Tree"""
     tree = bst.Bst()
     for num in reversed(range(10)):
         tree.insert(num)
     for num in range(10, 14):
         tree.insert(num)
+    return tree
+
+
+@pytest.fixture(scope='function')
+def filled_tree_2():
+    """Tree with lots of branches"""
+    inserts = [7, 4, 11, 2, 9, 6, 12, 5, 13, 0, 10, 8, 3, 1]
+    tree = bst.Bst()
+    for val in inserts:
+        tree.insert(val)
     return tree
 
 
