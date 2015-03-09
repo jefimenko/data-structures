@@ -18,23 +18,29 @@ def test_insert(empty_tree):
     tree.insert(30)
     expect = {20: {'depth': 1,
                    'right': 30},
-              30: {'depth': 2}}
+              30: {'depth': 2,
+                   'parent': 20}}
     assert tree.tree == expect
     tree.insert(40) 
     expect = {20: {'depth': 1,
                    'right': 30},
               30: {'depth': 2,
-                   'right': 40},
-              40: {'depth': 3}}
+                   'right': 40,
+                   'parent': 20},
+              40: {'depth': 3,
+                   'parent': 30}}
     assert tree.tree == expect
     tree.insert(10)
     expect = {20: {'depth': 1,
                    'left': 10,
                    'right': 30},
               30: {'depth': 2,
-                   'right': 40},
-              40: {'depth': 3},
-              10: {'depth': 2}}
+                   'right': 40,
+                   'parent': 20},
+              40: {'depth': 3,
+                   'parent': 30},
+              10: {'depth': 2,
+                   'parent': 20}}
     assert tree.tree == expect
 
 
@@ -117,6 +123,13 @@ def test_breadth_first_order(filled_tree):
     expected_order = [9, 8, 10, 7, 11, 6, 12, 5, 13, 4, 3, 2, 1, 0]
     for place, item in enumerate(tree.breadth_first()):
         assert expected_order[place] == item
+
+
+def test_deletion_easy_case(filled_tree_2):
+    tree = filled_tree_2
+    assert tree.left(6) == 5
+    tree.delete(5)
+    assert tree.left(6) is None
 
 
 @pytest.fixture(scope='function')

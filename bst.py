@@ -61,7 +61,7 @@ class Bst(object):
             current = traverse
 
     def delete(self, val):
-        pass
+        self._delete(val, val)
 
     def _delete(self, val, current):
         left_of_parent = self.left(self.parent(current))
