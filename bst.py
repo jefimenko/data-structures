@@ -60,6 +60,19 @@ class Bst(object):
                 return
             current = traverse
 
+    def delete(self, val):
+        pass
+
+    def _delete(self, val, current):
+        left_of_parent = self.left(self.parent(current))
+        right_of_parent = self.right(self.parent(current))
+
+        if current == val:
+            if current == left_of_parent:
+                del self.tree[self.parent(current)]['left']
+            else:
+                del self.tree[self.parent(current)]['right']
+
     def balance(self):
         """Returns the balance of the tree:
 
