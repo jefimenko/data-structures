@@ -121,36 +121,43 @@ class Bst(object):
 
     def in_order(self, current='start'):
         """
-        Generator that traverses the binary tree.
+        Generator that traverses the binary tree in order.
         """
         if current == 'start':
             current = self.top
         if current is not None:
-            self.in_order(self.left(current)).next()
+            for node in self.in_order(self.left(current)):
+                yield node
             yield current
-            self.in_order(self.right(current)).next()
+            for node in self.in_order(self.right(current)):
+                yield node
+
 
     def pre_order(self, current='dutch'):
-        """Generator that traverses the binary tree."""
+        """Generator that traverses the binary tree pre order."""
         if current == 'dutch':
             current = self.top
         if current is not None:
             yield current
-            self.in_order(self.left(current)).next()
-            self.in_order(self.right(current)).next()
+            for node in self.pre_order(self.left(current)):
+                yield node
+            for node in self.pre_order(self.right(current)):
+                yield node
 
     def post_order(self, current='dutch'):
-        """Generator that traverses the binary tree."""
+        """Generator that traverses the binary tree post order."""
         if current == 'dutch':
             current = self.top
         if current is not None:
-            self.in_order(self.left(current)).next()
-            self.in_order(self.right(current)).next()
+            for node in self.post_order(self.left(current)):
+                yield node
+            for node in self.post_order(self.right(current)):
+                yield node
             yield current
 
     def breadth_first(self):
         """Generator that traverses the binary tree in breadth first order."""
-        node_list =[]
+        node_list = []
         node_list.append(self.top)
         current = self.top
         while node_list:
@@ -159,7 +166,7 @@ class Bst(object):
                 node_list.append(self.left(current))
             if self.right(current) is not None:
                 node_list.append(self.right(current))
-            yield current  
+            yield current
 
 
 def main():
@@ -170,7 +177,7 @@ def main():
     for num in range(10, 15):
         tree.insert(num)
     print tree.tree
-    for num in enumerate(tree.breadth_first()):
+    for num in enumerate(tree.pre_order()):
         print num
     dot_graph = tree.get_dot()
     t = subprocess.Popen(["dot", "-Tpng"], stdin=subprocess.PIPE)
