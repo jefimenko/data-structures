@@ -52,6 +52,7 @@ class Bst(object):
                 #actual insert
                 self.tree[value] = {'depth': depth}
                 self.tree[current][child] = value
+                self.tree[value]['parent'] = current
                 self._size += 1
                 if depth > self._depth:
                     self._depth = depth
