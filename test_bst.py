@@ -132,6 +132,38 @@ def test_deletion_easy_case(filled_tree_2):
     assert tree.left(6) is None
 
 
+def test_deletion_one_left_child_lesser(filled_tree_2):
+    tree = filled_tree_2
+    assert tree.parent(6) == 4
+    assert tree.left(6) == 5
+    assert tree.right(6) is None
+    tree.delete(6)
+    assert tree.left(4) == 2
+    assert tree.right(4) == 5
+
+    assert tree.parent(5) == 4
+    assert tree.left(5) is None
+    assert tree.right(5) is None
+
+    assert tree.contains(6) is False
+
+
+def test_deletion_one_right_child_lesser(filled_tree_2):
+    tree = filled_tree_2
+    assert tree.parent(0) == 2
+    assert tree.left(0) is None
+    assert tree.right(0) == 1
+    tree.delete(0)
+    assert tree.left(2) == 1
+    assert tree.right(2) == 3
+
+    assert tree.parent(1) == 2
+    assert tree.left(1) is None
+    assert tree.right(1) is None
+
+    assert tree.contains(0) is False
+
+
 @pytest.fixture(scope='function')
 def filled_tree():
     """Upside down V Shaped Tree"""
