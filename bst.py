@@ -83,7 +83,7 @@ class Bst(object):
         children = []
 
         children.append(self.left(current))
-        children.append(self.right(current))
+        children.append(self.right(current))x`
         children.append(self.left(target))
         children.append(self.right(target))
 
@@ -185,6 +185,10 @@ class Bst(object):
         """recursively prepare a dot graph entry for this node."""
         left = self.tree[current].get('left')
         right = self.tree[current].get('right')
+        parent = self.tree[current].get('parent')
+        if parent is not None:
+            yield "\t%s -> %s;" % (current, parent)
+
         if left is not None:
             yield "\t%s -> %s;" % (current, left)
             for i in self._get_dot(left):
@@ -201,6 +205,7 @@ class Bst(object):
             r = random.randint(0, 1e9)
             yield "\tnull%s [shape=point];" % r
             yield "\t%s -> null%s;" % (current, r)
+
 
     def in_order(self, current='start'):
         """
