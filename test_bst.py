@@ -172,6 +172,7 @@ def test_deletion_one_right_child_lesser(filled_tree_2):
     assert tree.left(0) is None
     assert tree.right(0) == 1
     tree.delete(0)
+
     assert tree.left(2) == 1
     assert tree.right(2) == 3
 
