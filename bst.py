@@ -62,17 +62,31 @@ class Bst(object):
             current = traverse
 
     def delete(self, val):
-        self._delete(val, val)
+        if self.contains(val):
+            self._delete(val, val)
+
 
     def _delete(self, val, current):
-        left_of_parent = self.left(self.parent(current))
-        right_of_parent = self.right(self.parent(current))
+        pass
 
-        if current == val:
-            if current == left_of_parent:
-                del self.tree[self.parent(current)]['left']
-            else:
-                del self.tree[self.parent(current)]['right']
+
+    def _rightmost(self, start):
+        """Returns None if start is empty tree"""
+        while start is not None:
+            if self.right(start) is None:
+                return start
+            start = self.right(start)
+
+
+
+        # left_of_parent = self.left(self.parent(current))
+        # right_of_parent = self.right(self.parent(current))
+
+        # if current == val:
+        #     if current == left_of_parent:
+        #         del self.tree[self.parent(current)]['left']
+        #     else:
+        #         del self.tree[self.parent(current)]['right']
 
     def balance(self):
         """Returns the balance of the tree:

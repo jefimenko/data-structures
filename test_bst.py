@@ -161,7 +161,11 @@ def test_node_depth(filled_tree_2):
     assert filled_tree_2.node_depth(1) == 5
     assert filled_tree_2.node_depth(13) == 4
 
-
+def test_rightmost(filled_tree_2):
+    assert filled_tree_2._rightmost(0) == 1
+    assert filled_tree_2._rightmost(4) == 6
+    assert filled_tree_2._rightmost(7) == 13
+    assert filled_tree_2._rightmost(6) == 6
 
 
 @pytest.fixture(scope='function')
