@@ -77,6 +77,9 @@ class Bst(object):
         Additionally, update all information on related nodes, as in, children
         and parent nodes.
         """
+        cur_parent = self.parent(current)
+        targ_parent = self.parent(target)
+
         children = []
 
         children.append(self.left(current))
@@ -94,15 +97,15 @@ class Bst(object):
 
         # Swapping information in the parent nodes relative to the nodes being 'swapped'
         if current != self.top:
-            if current == self.tree.get(self.parent(current)).get('left'):
-                self.tree[self.parent(current)]['left'] = target
+            if current == self.tree.get(cur_parent).get('left'):
+                self.tree[cur_parent]['left'] = target
             else:
-                self.tree[self.parent(current)]['right'] = target
+                self.tree[cur_parent]['right'] = target
 
-        if target == self.tree.get(self.parent(target)).get('left'):
-            self.tree[self.parent(target)]['left'] = current
+        if target == self.tree.get(targ_parent).get('left'):
+            self.tree[targ_parent]['left'] = current
         else:
-            self.tree[self.parent(target)]['right'] = current
+            self.tree[targ_parent]['right'] = current
 
         # Swap current and target's left, right, and parent information
         self.tree[current], self.tree[target] = self.tree[target], self.tree[current]
@@ -255,8 +258,9 @@ def main():
     inserts = [7, 4, 11, 2, 9, 6, 12, 5, 13, 0, 10, 8, 3, 1]
     for i in inserts:
         tree.insert(i)
+
+    tree._swap_nodes(6, 4)
     print tree.tree
-    tree._swap_nodes(7, 5)
     # for num in enumerate(tree.pre_order()):
     #     print num
     dot_graph = tree.get_dot()
