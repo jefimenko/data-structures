@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import random
 import subprocess
+from collections import deque
 
 
 class Bst(object):
@@ -20,10 +21,11 @@ class Bst(object):
     def left(self, current):
         return self.tree[current].get('left')
 
-
     def right(self, current):
         return self.tree[current].get('right')
 
+    def parent(self, current):
+        return self.tree[current].get('parent')
 
     def insert(self, value):
         """Insert a node with value in order.
@@ -50,12 +52,27 @@ class Bst(object):
             if traverse is None:
                 #actual insert
                 self.tree[value] = {}
+
                 self.tree[current][child] = value
+                self.tree[value]['parent'] = current
                 self._size += 1
                 if depth > self._depth:
                     self._depth = depth
                 return
             current = traverse
+
+    def delete(self, val):
+        self._delete(val, val)
+
+    def _delete(self, val, current):
+        left_of_parent = self.left(self.parent(current))
+        right_of_parent = self.right(self.parent(current))
+
+        if current == val:
+            if current == left_of_parent:
+                del self.tree[self.parent(current)]['left']
+            else:
+                del self.tree[self.parent(current)]['right']
 
     def balance(self):
         """Returns the balance of the tree:
@@ -165,31 +182,30 @@ class Bst(object):
 
     def breadth_first(self):
         """Generator that traverses the binary tree in breadth first order."""
-        node_list = []
-        node_list.append(self.top)
+        q1 = deque()
+        q1.appendleft(self.top)
         current = self.top
-        while node_list:
-            current = node_list.pop(0)
+        while q1:
+            current = q1.pop()
             if self.left(current) is not None:
-                node_list.append(self.left(current))
+                q1.appendleft(self.left(current))
             if self.right(current) is not None:
-                node_list.append(self.right(current))
+                q1.appendleft(self.right(current))
             yield current
 
 
 def main():
     """Best case and worst case are the same."""
     tree = Bst()
-    for num in reversed(range(10)):
-        tree.insert(num)
-    for num in range(10, 15):
-        tree.insert(num)
+    inserts = [7, 4, 11, 2, 9, 6, 12, 5, 13, 0, 10, 8, 3, 1]
+    for i in inserts:
+        tree.insert(i)
     print tree.tree
-    for num in enumerate(tree.pre_order()):
-        print num
+    # for num in enumerate(tree.pre_order()):
+    #     print num
     dot_graph = tree.get_dot()
     t = subprocess.Popen(["dot", "-Tpng"], stdin=subprocess.PIPE)
-    # t.communicate(dot_graph)
+    t.communicate(dot_graph)
 
 
 if __name__ == '__main__':
