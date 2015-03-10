@@ -108,8 +108,8 @@ class Bst(object):
     def node_depth(self, current):
         """Returns the depth of a node in the tree."""
         depth = 0
-        while current:
-            current = current.parent(current)
+        while current is not None:
+            current = self.parent(current)
             depth +=1
         return depth
 
