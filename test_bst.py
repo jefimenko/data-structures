@@ -129,6 +129,18 @@ def test_swap(filled_tree_2):
     assert tree.left(7) is None
     assert tree.right(7) is None
 
+def test_swap_parentchild(filled_tree_2):
+    tree = filled_tree_2
+    tree._swap_nodes(7, 4)
+    assert tree.top == 4
+
+    assert tree.parent(4) is None
+    assert tree.left(4) == 7
+    assert tree.right(4) == 11
+
+    assert tree.parent(7) == 4
+    assert tree.left(7) is 2
+    assert tree.right(7) is 6
 
 def test_deletion_easy_case(filled_tree_2):
     tree = filled_tree_2
