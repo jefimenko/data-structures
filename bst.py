@@ -70,6 +70,47 @@ class Bst(object):
         pass
 
 
+    def _swap_nodes(self, current, target):
+        """
+        Swap two nodes.
+
+        Additionally, update all information on related nodes, as in, children
+        and parent nodes.
+        """
+        children = []
+
+        children.append(self.left(current))
+        children.append(self.right(current))
+        children.append(self.left(target))
+        children.append(self.right(target))
+
+        for child in children:
+            # If a node children, update it's childrens' information
+            # for 'swapping'
+            if child and self.parent(child) == current:
+                self.tree[child]['parent'] = target
+            elif child:
+                self.tree[child]['parent'] = current
+
+        # Swapping information in the parent nodes relative to the nodes being 'swapped'
+        if current != self.top:
+            if current == self.tree.get(self.parent(current)).get('left'):
+                self.tree[self.parent(current)]['left'] = target
+            else:
+                self.tree[self.parent(current)]['right'] = target
+
+        if target == self.tree.get(self.parent(target)).get('left'):
+            self.tree[self.parent(target)]['left'] = current
+        else:
+            self.tree[self.parent(target)]['right'] = current
+
+        # Swap current and target's left, right, and parent information
+        self.tree[current], self.tree[target] = self.tree[target], self.tree[current]
+
+        if current == self.top:
+            self.top = target
+
+
     def _rightmost(self, start):
         """Returns None if start is empty tree"""
         while start is not None:
@@ -215,6 +256,7 @@ def main():
     for i in inserts:
         tree.insert(i)
     print tree.tree
+    tree._swap_nodes(7, 5)
     # for num in enumerate(tree.pre_order()):
     #     print num
     dot_graph = tree.get_dot()

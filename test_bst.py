@@ -116,6 +116,20 @@ def test_breadth_first_order(filled_tree):
         assert expected_order[place] == item
 
 
+def test_swap(filled_tree_2):
+    tree = filled_tree_2
+    tree._swap_nodes(7, 5)
+    assert tree.top == 5
+
+    assert tree.parent(5) is None
+    assert tree.left(5) == 4
+    assert tree.right(5) == 11
+
+    assert tree.parent(7) == 6
+    assert tree.left(7) is None
+    assert tree.right(7) is None
+
+
 def test_deletion_easy_case(filled_tree_2):
     tree = filled_tree_2
     assert tree.left(6) == 5
