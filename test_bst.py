@@ -16,46 +16,22 @@ def test_insert(empty_tree):
     tree.insert(20)
     assert tree.tree == {20: {}}
     tree.insert(30)
-<<<<<<< HEAD
     expect = {20: {'right': 30},
-              30: {}}
+              30: {'parent': 20}}
     assert tree.tree == expect
-    tree.insert(40) 
+    tree.insert(40)
     expect = {20: {'right': 30},
-              30: {'right': 40},
-              40: {}}
-=======
-    expect = {20: {'depth': 1,
-                   'right': 30},
-              30: {'depth': 2,
-                   'parent': 20}}
-    assert tree.tree == expect
-    tree.insert(40) 
-    expect = {20: {'depth': 1,
-                   'right': 30},
-              30: {'depth': 2,
-                   'right': 40,
+              30: {'right': 40,
                    'parent': 20},
-              40: {'depth': 3,
-                   'parent': 30}}
->>>>>>> 4f1b3ee3e071a390364a6d79cbeae9e61cf119e7
+              40: {'parent': 30}}
     assert tree.tree == expect
     tree.insert(10)
     expect = {20: {'left': 10,
                    'right': 30},
-<<<<<<< HEAD
-              30: {'right': 40},
-              40: {},
-              10: {}}
-=======
-              30: {'depth': 2,
-                   'right': 40,
+              30: {'right': 40,
                    'parent': 20},
-              40: {'depth': 3,
-                   'parent': 30},
-              10: {'depth': 2,
-                   'parent': 20}}
->>>>>>> 4f1b3ee3e071a390364a6d79cbeae9e61cf119e7
+              40: {'parent': 30},
+              10: {'parent': 20}}
     assert tree.tree == expect
 
 
@@ -177,6 +153,15 @@ def test_deletion_one_right_child_lesser(filled_tree_2):
     assert tree.right(1) is None
 
     assert tree.contains(0) is False
+
+
+def test_node_depth(filled_tree_2):
+    assert filled_tree_2.node_depth(7) == 1
+    assert filled_tree_2.node_depth(4) == 2
+    assert filled_tree_2.node_depth(1) == 5
+    assert filled_tree_2.node_depth(13) == 4
+
+
 
 
 @pytest.fixture(scope='function')
