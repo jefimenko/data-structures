@@ -12,7 +12,7 @@ class Bst(object):
         self._depth = 0
 
         if value is not None:
-            self.tree[value] = {'depth': 1}
+            self.tree[value] = {}
             self.top = value
             self._size += 1
             self._depth += 1
@@ -31,7 +31,7 @@ class Bst(object):
         In value is already present, it is ignored."""
         current = self.top
         if current is None:
-            self.tree[value] = {'depth': 1}
+            self.tree[value] = {}
             self.top = value
             self._size += 1
             self._depth += 1
@@ -49,7 +49,7 @@ class Bst(object):
                 child = 'left'
             if traverse is None:
                 #actual insert
-                self.tree[value] = {'depth': depth}
+                self.tree[value] = {}
                 self.tree[current][child] = value
                 self._size += 1
                 if depth > self._depth:
@@ -69,11 +69,11 @@ class Bst(object):
         right_deep = 0
         for node, v in self.tree.items():
             if self.top > node:
-                if left_deep < v['depth']:
-                    left_deep = v['depth']
+                if left_deep < self.node_depth(node):
+                    left_deep = self.node_depth(node)
             elif self.top < node:
-                if right_deep < v['depth']:
-                    right_deep = v['depth']
+                if right_deep < self.node_depth(node):
+                    right_deep = self.node_depth(node)
         return right_deep - left_deep
 
     def contains(self, value):
@@ -87,6 +87,14 @@ class Bst(object):
     def depth(self):
         """Returns the depth of the tree."""
         return self._depth
+
+    def node_depth(self, current):
+        """Returns the depth of a node in the tree."""
+        depth = 0
+        while current:
+            current = current.parent(current)
+            depth +=1
+        return depth
 
     def get_dot(self):
         """return the tree with root 'self' as a dot graph for visualization"""
