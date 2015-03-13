@@ -1,21 +1,19 @@
-
-
-class Heap(object):
-    def __init__(self, bins):
+class Hash(object):
+    def __init__(self, buckets):
         self.heap = []
-        for i in range(0, bins):
+        for i in range(0, buckets):
             self.heap.append([])
 
     def set(self, key, val):
         """store the given val using the given key"""
         tup = (key, val)
-        self.heap[self.hash(key)].apppend(tup)
+        self.heap[self.hash(key)].append(tup)
 
     def hash(self, key):
-        sum = 0
+        total = 0
         for letter in key:
-            sum += ord(letter)
-        return sum % len(self.heap)
+            total += ord(letter)
+        return total % len(self.heap)
 
     def get(self, key):
         """return the value stored with the given key"""
