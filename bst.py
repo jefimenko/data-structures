@@ -83,7 +83,7 @@ class Bst(object):
         children = []
 
         children.append(self.left(current))
-        children.append(self.right(current))x`
+        children.append(self.right(current))
         children.append(self.left(target))
         children.append(self.right(target))
 
