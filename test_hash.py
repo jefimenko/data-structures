@@ -1,6 +1,6 @@
 from hash import Hash
 import pytest
-
+from io import open
 
 def test_create():
     something = Hash(10)
@@ -33,3 +33,16 @@ def test_get():
     something = Hash(10)
     something.set('asdf', 10)
     assert something.get('asdf') == 10
+
+def test_on_word():
+    """testing on word dictionary built into UNIX"""
+    infile = open('/usr/share/dict/words', 'r')
+    full_text = []
+    for line in infile:
+        full_text.append(line.strip())
+    allbins = Hash(10000)
+    for word in full_text:
+        allbins.set(word, word)
+    for word in full_text:
+        assert allbins.get(word) == word
+
