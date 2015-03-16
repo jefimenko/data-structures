@@ -257,6 +257,50 @@ class Bst(object):
         self.tree[lower]['left'] = upper
         self.tree[upper]['parent'] = lower
 
+    def balancer(self, current):
+        """
+        Check and maintain balance on a tree instance.
+
+        Iteratively walks up from an inserted/deleted note and
+        checks/maintains balance.
+        """
+        while current is not None:
+            # Nodes are on the right side
+            if self.balance(current) == 2:
+                self._rrl_rotate(current)
+            # Nodes are on the left side
+            elif self.balance(current) == -2:
+                self._llr_rotate(current)
+            current = self.parent(current)
+
+    def _rrl_rotate(self, node):
+        """
+        Handles left-right and left-left cases.
+        """
+        left = self.left(node)
+        # Left-Right case:
+        # Rotate grand-child from right to left
+        # of the left child to achieve Left-Left case
+        if self.balance(left) == 1:
+            self._l_rotate(left)
+        # Rotate child from left to right
+        # of the selected node
+        self._r_rotate(node)
+
+    def _llr_rotate(self, node):
+        """
+        Handles right-left and right-right cases.
+        """
+        right = self.right(node)
+        # Right-Left case:
+        # Rotate grand-child from right to left
+        # of the left child to achieve Right-Right case
+        if self.balance(right) == -1:
+            self._r_rotate(right)
+        # Rotate child from right to left
+        # of the selected node
+        self._l_rotate(node)
+
 
     def contains(self, value):
         """Returns true if value is in the tree."""
