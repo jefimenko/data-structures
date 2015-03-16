@@ -312,10 +312,10 @@ def test_l_rotate_on_rr_tree():
     assert tree.top == 2
 
 
-def test_binsert_rr(filled_tree_2):
+def test_b_insert_rr(filled_tree_2):
     """tests inserting into at a rr place"""
     tree = filled_tree_2
-    tree.binsert(1.5)
+    tree.b_insert(1.5)
 
     # make sure 0, 1, 1.5 pointers are ok.
     assert tree.parent(1.5) == 1
@@ -331,10 +331,10 @@ def test_binsert_rr(filled_tree_2):
     assert tree.left(0) is None
 
 
-def test_binsert_rl(filled_tree_2):
+def test_b_insert_rl(filled_tree_2):
     """tests inserting into at a rl place"""
     tree = filled_tree_2
-    tree.binsert(12.5)
+    tree.b_insert(12.5)
 
     # make sure 12, 12.5, 13 pointers are ok.
     assert tree.parent(12.5) == 11
@@ -350,10 +350,10 @@ def test_binsert_rl(filled_tree_2):
     assert tree.left(13) is None
 
 
-def test_binsert_ll(filled_tree_2):
+def test_b_insert_ll(filled_tree_2):
     """tests inserting into at a ll place"""
     tree = filled_tree_2
-    tree.binsert(4.5)
+    tree.b_insert(4.5)
 
     # make sure 4.5, 5, 6 pointers are ok.
     assert tree.parent(5) == 4
@@ -369,10 +369,10 @@ def test_binsert_ll(filled_tree_2):
     assert tree.left(6) is None
 
 
-def test_binsert_lr(filled_tree_2):
+def test_b_insert_lr(filled_tree_2):
     """tests inserting into at a lr place"""
     tree = filled_tree_2
-    tree.binsert(5.5)
+    tree.b_insert(5.5)
 
     # make sure 5, 5.5, 6 pointers are ok.
     assert tree.parent(5.5) == 4
