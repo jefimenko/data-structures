@@ -314,7 +314,7 @@ def test_l_rotate_on_rr_tree():
 
 def test_binsert_rr(filled_tree_2):
     """tests inserting into at a rr place"""
-    tree = filled_tree_2()
+    tree = filled_tree_2
     tree.binsert(1.5)
 
     # make sure 0, 1, 1.5 pointers are ok.
@@ -333,7 +333,7 @@ def test_binsert_rr(filled_tree_2):
 
 def test_binsert_rl(filled_tree_2):
     """tests inserting into at a rl place"""
-    tree = filled_tree_2()
+    tree = filled_tree_2
     tree.binsert(12.5)
 
     # make sure 12, 12.5, 13 pointers are ok.
@@ -352,7 +352,7 @@ def test_binsert_rl(filled_tree_2):
 
 def test_binsert_ll(filled_tree_2):
     """tests inserting into at a ll place"""
-    tree = filled_tree_2()
+    tree = filled_tree_2
     tree.binsert(4.5)
 
     # make sure 4.5, 5, 6 pointers are ok.
@@ -371,7 +371,7 @@ def test_binsert_ll(filled_tree_2):
 
 def test_binsert_lr(filled_tree_2):
     """tests inserting into at a lr place"""
-    tree = filled_tree_2()
+    tree = filled_tree_2
     tree.binsert(5.5)
 
     # make sure 5, 5.5, 6 pointers are ok.
@@ -388,8 +388,8 @@ def test_binsert_lr(filled_tree_2):
     assert tree.left(6) is None
 
 
-def test_detete_lr(filled_tree_2):
-    tree = filled_tree_2()
+def test_delete_lr(filled_tree_2):
+    tree = filled_tree_2
     tree.delete(3)
 
     # make sure 5, 5.5, 6 pointers are ok.
@@ -406,8 +406,8 @@ def test_detete_lr(filled_tree_2):
     assert tree.left(2) is None  
 
 
-def test_detete_ll(filled_tree_2):
-    tree = filled_tree_2()
+def test_delete_ll(filled_tree_2):
+    tree = filled_tree_2
     tree.insert(-1)
     tree.delete(1)
 
