@@ -63,11 +63,35 @@ class Bst(object):
 
     def delete(self, val):
         if self.contains(val):
-            self._delete(val, val)
-
-
-    def _delete(self, val, current):
-        pass
+            left_child = self.left(val)
+            right_child = self.right(val)
+            parent = self.parent(val)
+            if left_child is None and right_child is None:
+            # Delete a node with not children
+                if parent is not None:
+                # For a node with a parent...
+                    if self.left(parent) == val:
+                        del self.tree[parent]['left']
+                    else:
+                        del self.tree[parent]['right']
+                else:
+                    # For deleting a node that is the root with no children
+                    self.top = None
+                del self.tree[val]
+            elif left_child is not None:
+                biggest_child = self._rightmost(left_child)
+                self._swap_nodes(val, biggest_child)
+                self.delete(val)
+            else:
+                if parent is not None:
+                    if self.left(parent) == val:
+                        self.tree[parent]['left'] = right_child
+                    else:
+                        self.tree[parent]['right'] = right_child
+                    self.tree[right_child]['parent'] = parent
+                else:
+                    self.top = right_child
+                del self.tree[val]
 
 
     def _swap_nodes(self, current, target):
