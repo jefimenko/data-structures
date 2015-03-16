@@ -205,6 +205,44 @@ def test_rightmost(filled_tree_2):
     assert filled_tree_2._rightmost(6) == 6
 
 
+def test_r_rotate():
+    tree = bst.Bst()
+    tree.insert(2)
+    tree.insert(1)
+    assert tree.top == 2
+    tree._r_rotate(2, 1)
+
+    # Verify correct rotation
+    assert tree.right(1) == 2
+    assert tree.left(1) is None
+    assert tree.parent(1) is None
+
+    assert tree.right(2) is None
+    assert tree.left(2) is None
+    assert tree.parent(2) == 1
+
+    assert tree.top == 1
+
+
+def test_l_rotate():
+    tree = bst.Bst()
+    tree.insert(1)
+    tree.insert(2)
+    assert tree.top == 1
+    tree._l_rotate(1, 2)
+
+    # Verify correct rotation
+    assert tree.right(1) is None
+    assert tree.left(1) is None
+    assert tree.parent(1) == 2
+
+    assert tree.right(2) is None
+    assert tree.left(2) == 1
+    assert tree.parent(2) is None
+
+    assert tree.top == 2
+
+
 @pytest.fixture(scope='function')
 def filled_tree():
     """Upside down V Shaped Tree"""
