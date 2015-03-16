@@ -150,24 +150,12 @@ class Bst(object):
         if current == self.top:
             self.top = target
 
-
     def _rightmost(self, start):
         """Returns None if start is empty tree"""
         while start is not None:
             if self.right(start) is None:
                 return start
             start = self.right(start)
-
-
-
-        # left_of_parent = self.left(self.parent(current))
-        # right_of_parent = self.right(self.parent(current))
-
-        # if current == val:
-        #     if current == left_of_parent:
-        #         del self.tree[self.parent(current)]['left']
-        #     else:
-        #         del self.tree[self.parent(current)]['right']
 
     def balance(self, top_subtree_node='top of tree'):
         """Returns the balance of the subtree starting at node:
@@ -280,10 +268,10 @@ class Bst(object):
         while current is not None:
             # Nodes are on the right side
             if self.balance(current) == 2:
-                self._rrl_rotate(current)
+                self._llr_rotate(current)
             # Nodes are on the left side
             elif self.balance(current) == -2:
-                self._llr_rotate(current)
+                self._rrl_rotate(current)
             current = self.parent(current)
 
     def _rrl_rotate(self, node):
@@ -313,7 +301,6 @@ class Bst(object):
         # Rotate child from right to left
         # of the selected node
         self._l_rotate(node)
-
 
     def contains(self, value):
         """Returns true if value is in the tree."""
@@ -370,7 +357,6 @@ class Bst(object):
             yield "\tnull%s [shape=point];" % r
             yield "\t%s -> null%s;" % (current, r)
 
-
     def in_order(self, current='start'):
         """
         Generator that traverses the binary tree in order.
@@ -383,7 +369,6 @@ class Bst(object):
             yield current
             for node in self.in_order(self.right(current)):
                 yield node
-
 
     def pre_order(self, current='dutch'):
         """Generator that traverses the binary tree pre order."""

@@ -74,7 +74,6 @@ def test_balance_subtree(empty_tree, filled_tree_2):
         assert t.balance(i) == j
 
 
-
 def test_contains(filled_tree):
     t = filled_tree
     for num in reversed(range(10)):
@@ -108,6 +107,7 @@ def test_pre_order(filled_tree):
     with pytest.raises(StopIteration):
         gen.next()
 
+
 def test_post_order(filled_tree):
     tree = filled_tree
     gen = tree.post_order()
@@ -140,6 +140,7 @@ def test_swap(filled_tree_2):
     assert tree.left(7) is None
     assert tree.right(7) is None
 
+
 def test_swap_parentchild(filled_tree_2):
     tree = filled_tree_2
     tree._swap_nodes(7, 4)
@@ -153,29 +154,31 @@ def test_swap_parentchild(filled_tree_2):
     assert tree.left(7) is 2
     assert tree.right(7) is 6
 
+
 def test_deletion_easy_case(filled_tree_2):
     """Delete retainging balance"""
     tree = filled_tree_2
-    assert tree.left(6) == 5
-    tree.delete(5)
-    assert tree.left(6) is None
-    assert tree.contains(5) is False
+    assert tree.right(0) == 1
+    tree.delete(1)
+    assert tree.right(0) is None
+    assert tree.contains(1) is False
 
 
-def test_deletion_one_left_child_lesser(filled_tree_2):
+def test_deletion_two_childrens(filled_tree_2):
     tree = filled_tree_2
-    assert tree.parent(6) == 4
-    assert tree.left(6) == 5
-    assert tree.right(6) is None
-    tree.delete(6)
-    assert tree.left(4) == 2
-    assert tree.right(4) == 5
+    assert tree.parent(9) == 11
+    assert tree.left(9) == 8
+    assert tree.right(9) == 10
+    tree.delete(9)
+    assert tree.left(11) == 8
+    assert tree.right(11) == 12
 
-    assert tree.parent(5) == 4
-    assert tree.left(5) is None
-    assert tree.right(5) is None
+    assert tree.parent(8) == 11
+    assert tree.left(8) is None
+    assert tree.right(8) == 10
+    assert tree.parent(10) == 8
 
-    assert tree.contains(6) is False
+    assert tree.contains(9) is False
 
 
 def test_deletion_one_right_child_lesser(filled_tree_2):
@@ -199,6 +202,7 @@ def test_node_depth(filled_tree_2):
     expected = [(1, 5), (4, 2), (7, 1), (13, 4)]
     for i, j in expected:
         assert filled_tree_2.node_depth(i) == j
+
 
 
 def test_rightmost(filled_tree_2):
@@ -434,6 +438,38 @@ def l_tree():
     for i in [4, 5, 2, 1, 3]:
         tree.insert(i)
     return tree
+
+
+def test_llr_rightright_top():
+    tree = bst.Bst()
+
+
+def test_llr_rightright():
+    tree = bst.Bst()
+
+
+def test_llr_rightleft_top():
+    tree = bst.Bst()
+
+
+def test_llr_rightleft():
+    tree = bst.Bst()
+
+
+def test_rrl_leftleft_top():
+    tree = bst.Bst()
+
+
+def test_rrl_leftleft():
+    tree = bst.Bst()
+
+
+def test_rrl_leftright_top():
+    tree = bst.Bst()
+
+
+def test_rrl_leftright():
+    tree = bst.Bst()
 
 
 @pytest.fixture(scope='function')
