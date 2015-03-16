@@ -195,16 +195,15 @@ def test_deletion_one_right_child_lesser(filled_tree_2):
 
 
 def test_node_depth(filled_tree_2):
-    assert filled_tree_2.node_depth(7) == 1
-    assert filled_tree_2.node_depth(4) == 2
-    assert filled_tree_2.node_depth(1) == 5
-    assert filled_tree_2.node_depth(13) == 4
+    expected = [(1, 5), (4, 2), (7, 1), (13, 4)]
+    for i, j in expected:
+        assert filled_tree_2.node_depth(i) == j
+
 
 def test_rightmost(filled_tree_2):
-    assert filled_tree_2._rightmost(0) == 1
-    assert filled_tree_2._rightmost(4) == 6
-    assert filled_tree_2._rightmost(7) == 13
-    assert filled_tree_2._rightmost(6) == 6
+    expected = [(0, 1), (4, 6), (6, 6), (7, 13)]
+    for i, j in expected:
+        assert filled_tree_2._rightmost(i) == j
 
 
 def test_r_rotate():
@@ -226,6 +225,30 @@ def test_r_rotate():
     assert tree.top == 1
 
 
+def test_r_rotate_on_ll_tree():
+    tree = bst.Bst()
+    tree.insert(3)
+    tree.insert(2)
+    tree.insert(1)
+    assert tree.top == 3
+    tree._r_rotate(3, 2)
+
+    # Verify correct rotation
+    assert tree.right(1) is None
+    assert tree.left(1) is None
+    assert tree.parent(1) == 2
+
+    assert tree.right(2) == 3
+    assert tree.left(2) == 1
+    assert tree.parent(2) is None
+
+    assert tree.right(3) is None
+    assert tree.left(3) is None
+    assert tree.parent(3) == 2
+
+    assert tree.top == 2
+
+
 def test_l_rotate():
     tree = bst.Bst()
     tree.insert(1)
@@ -243,6 +266,37 @@ def test_l_rotate():
     assert tree.parent(2) is None
 
     assert tree.top == 2
+
+def test_l_rotate_on_rr_tree():
+    tree = bst.Bst()
+    tree.insert(1)
+    tree.insert(2)
+    tree.insert(3)
+    assert tree.top == 1
+    tree._l_rotate(1, 2)
+
+    # Verify correct rotation
+    assert tree.right(1) is None
+    assert tree.left(1) is None
+    assert tree.parent(1) == 2
+
+    assert tree.right(2) == 3
+    assert tree.left(2) == 1
+    assert tree.parent(2) is None
+
+    assert tree.right(3) is None
+    assert tree.left(3) is None
+    assert tree.parent(3) is 2
+
+    assert tree.top == 2
+
+
+@pytest.fixture(scope='function')
+def ll_tree():
+    """ Left left tree"""
+    tree = bst.Bst()
+
+    return tree
 
 
 @pytest.fixture(scope='function')
