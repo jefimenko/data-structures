@@ -132,24 +132,42 @@ class Bst(object):
         #     else:
         #         del self.tree[self.parent(current)]['right']
 
-    def balance(self):
-        """Returns the balance of the tree:
+    def balance(self, top_subtree_node='top of tree'):
+        """Returns the balance of the subtree starting at node:
 
         Returns a positive representing how much deeper the tree is on the
         right site or negative if the left is longer.
         Return 0 if the tree is balanced (same depth on both sides)
 
         """
-        left_deep = 0
-        right_deep = 0
-        for node, v in self.tree.items():
-            if self.top > node:
-                if left_deep < self.node_depth(node):
-                    left_deep = self.node_depth(node)
-            elif self.top < node:
-                if right_deep < self.node_depth(node):
-                    right_deep = self.node_depth(node)
-        return right_deep - left_deep
+        # generate a list of all nodes we want to evaluate
+        node_list = []
+        if top_subtree_node == 'top of tree':
+            top_subtree_node = self.top
+            node_list = self.tree.items()
+        else:
+            gen = self.in_order(top_subtree_node)
+            try:
+                for i in gen:
+                    node_list.append(i)
+            except(StopIteration):
+                pass
+        print node_list
+        print top_subtree_node
+        # look at each node in the subtree and if it is deeper than
+        # the node at top of subtree, put it in left_deep or right_deep
+        if node_list:
+            left_deep = self.node_depth(top_subtree_node)
+            right_deep = self.node_depth(top_subtree_node)
+            for node, v in node_list:
+                if top_subtree_node > node:
+                    if left_deep < self.node_depth(node):
+                        left_deep = self.node_depth(node)
+                elif top_subtree_node < node:
+                    if right_deep < self.node_depth(node):
+                        right_deep = self.node_depth(node)
+            return right_deep - left_deep
+        return 0
 
     def contains(self, value):
         """Returns true if value is in the tree."""
