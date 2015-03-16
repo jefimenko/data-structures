@@ -230,7 +230,7 @@ def test_r_rotate():
     tree.insert(2)
     tree.insert(1)
     assert tree.top == 2
-    tree._r_rotate(2, 1)
+    tree._r_rotate(2)
 
     # Verify correct rotation
     assert tree.right(1) == 2
@@ -273,7 +273,7 @@ def test_l_rotate():
     tree.insert(1)
     tree.insert(2)
     assert tree.top == 1
-    tree._l_rotate(1, 2)
+    tree._l_rotate(1)
 
     # Verify correct rotation
     assert tree.right(1) is None

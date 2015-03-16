@@ -189,10 +189,11 @@ class Bst(object):
                     right_deep = self.node_depth(node)
         return right_deep - left_deep
 
-    def _r_rotate(self, upper, lower):
+    def _r_rotate(self, upper):
         """
         'Rotate' nodes from left to right.
         """
+        lower = self.left(upper)
         parent = self.parent(upper)
         if parent is not None:
             # Change parent/child references for the lower node
@@ -222,10 +223,11 @@ class Bst(object):
         self.tree[lower]['right'] = upper
         self.tree[upper]['parent'] = lower
 
-    def _l_rotate(self, upper, lower):
+    def _l_rotate(self, upper):
         """
         'Rotate' nodes from right to left.
         """
+        lower = self.right(upper)
         parent = self.parent(upper)
         if parent is not None:
             # Change parent/child references for the lower node
