@@ -268,10 +268,10 @@ class Bst(object):
         while current is not None:
             # Nodes are on the right side
             if self.balance(current) == 2:
-                self._rrl_rotate(current)
+                self._llr_rotate(current)
             # Nodes are on the left side
             elif self.balance(current) == -2:
-                self._llr_rotate(current)
+                self._rrl_rotate(current)
             current = self.parent(current)
 
     def _rrl_rotate(self, node):
