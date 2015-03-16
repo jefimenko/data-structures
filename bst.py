@@ -61,6 +61,15 @@ class Bst(object):
                 return
             current = traverse
 
+    def b_insert(self, value):
+        """
+        Self balancing insert.
+
+        Thinly wraps the insert function while additionally
+        maintaining the balance of the tree, factored out to
+        preserve other tests.
+        """
+        self.insert(value)
         # Start balancing from two 'levels' up from the inserted leaf
         self._balancer(self.parent(self.parent(value)))
 
@@ -70,9 +79,9 @@ class Bst(object):
             right_child = self.right(val)
             parent = self.parent(val)
             if left_child is None and right_child is None:
-            # Delete a node with not children
+                # Delete a node with not children
                 if parent is not None:
-                # For a node with a parent...
+                    # For a node with a parent...
                     if self.left(parent) == val:
                         del self.tree[parent]['left']
                     else:
