@@ -164,34 +164,30 @@ class Bst(object):
         Return 0 if the tree is balanced (same depth on both sides)
 
         """
-        # generate a list of all nodes we want to evaluate
-        node_list = []
+        # generate a list of all nodes in subtree
         if top_subtree_node == 'top of tree':
             top_subtree_node = self.top
             node_list = self.tree.items()
         else:
+            node_list = []
             gen = self.in_order(top_subtree_node)
             try:
                 for i in gen:
-                    node_list.append(i)
+                    node_list.append((i, self.tree[i]))
             except(StopIteration):
                 pass
-        print "subtree top: " + str(top_subtree_node)
-        print "nodelist: " + str(node_list)
         # look at each node in the subtree and if it is deeper than
         # the node at top of subtree, put it in left_deep or right_deep
-        if node_list:
-            left_deep = self.node_depth(top_subtree_node)
-            right_deep = self.node_depth(top_subtree_node)
-            for node, v in node_list:
-                if top_subtree_node > node:
-                    if left_deep < self.node_depth(node):
-                        left_deep = self.node_depth(node)
-                elif top_subtree_node < node:
-                    if right_deep < self.node_depth(node):
-                        right_deep = self.node_depth(node)
-            return right_deep - left_deep
-        return 0
+        left_deep = self.node_depth(top_subtree_node)
+        right_deep = self.node_depth(top_subtree_node)
+        for node, v in node_list:
+            if top_subtree_node > node:
+                if left_deep < self.node_depth(node):
+                    left_deep = self.node_depth(node)
+            elif top_subtree_node < node:
+                if right_deep < self.node_depth(node):
+                    right_deep = self.node_depth(node)
+        return right_deep - left_deep
 
     def _r_rotate(self, upper, lower):
         """
