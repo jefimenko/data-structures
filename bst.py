@@ -61,6 +61,9 @@ class Bst(object):
                 return
             current = traverse
 
+        # Start balancing from two 'levels' up from the inserted leaf
+        self._balancer(self.parent(self.parent(value)))
+
     def delete(self, val):
         if self.contains(val):
             left_child = self.left(val)
@@ -92,7 +95,8 @@ class Bst(object):
                 else:
                     self.top = right_child
                 del self.tree[val]
-
+            # Balance after deletion from the node 'above' deleted node
+            self._balancer(parent)
 
     def _swap_nodes(self, current, target):
         """
@@ -257,7 +261,7 @@ class Bst(object):
         self.tree[lower]['left'] = upper
         self.tree[upper]['parent'] = lower
 
-    def balancer(self, current):
+    def _balancer(self, current):
         """
         Check and maintain balance on a tree instance.
 
