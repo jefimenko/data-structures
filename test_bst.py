@@ -67,7 +67,9 @@ def test_balance(empty_tree, filled_tree):
 def test_balance_subtree(empty_tree, filled_tree_2):
     t = filled_tree_2
     # list of subtrees and expected balances
-    expected = [(7, -1), (4, -1)]
+    expected = [(1, 0), (2, -1), (3, 0), (4, -1), (5, 0), (6, -1),
+                (7, -1), (8, 0), (9, 0), (10, 0), (11, 0), (12, 1),
+                (13, 0)]
     for i, j in expected:
         assert t.balance(i) == j
 
