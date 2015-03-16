@@ -153,12 +153,13 @@ def test_swap_parentchild(filled_tree_2):
     assert tree.left(7) is 2
     assert tree.right(7) is 6
 
+
 def test_deletion_easy_case(filled_tree_2):
     tree = filled_tree_2
-    assert tree.left(6) == 5
-    tree.delete(5)
-    assert tree.left(6) is None
-    assert tree.contains(5) is False
+    assert tree.right(0) == 1
+    tree.delete(1)
+    assert tree.right(0) is None
+    assert tree.contains(1) is False
 
 
 def test_deletion_one_left_child_lesser(filled_tree_2):
