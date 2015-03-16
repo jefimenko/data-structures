@@ -366,18 +366,13 @@ class Bst(object):
 
 def main():
     """Best case and worst case are the same."""
-    # tree = Bst()
-    # inserts = [7, 4, 11, 2, 9, 6, 12, 5, 13, 0, 10, 8, 3, 1]
-    # for i in inserts:
-    #     tree.insert(i)
-
-    # tree._swap_nodes(6, 4)
-    # print tree.tree
-
     tree = Bst()
-    for i in [4, 5, 2, 1, 3]:
+    inserts = [7, 4, 11, 2, 9, 6, 12, 5, 13, 0, 10, 8, 3, 1]
+    for i in inserts:
         tree.insert(i)
-    tree._r_rotate(4, 2)
+
+    tree.insert(1.5)
+    print tree.tree
 
 
     # for num in enumerate(tree.pre_order()):
