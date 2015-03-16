@@ -61,15 +61,27 @@ class Bst(object):
                 return
             current = traverse
 
+    def b_insert(self, value):
+        """
+        Self balancing insert.
+
+        Thinly wraps the insert function while additionally
+        maintaining the balance of the tree, factored out to
+        preserve other tests.
+        """
+        self.insert(value)
+        # Start balancing from two 'levels' up from the inserted leaf
+        self._balancer(self.parent(self.parent(value)))
+
     def delete(self, val):
         if self.contains(val):
             left_child = self.left(val)
             right_child = self.right(val)
             parent = self.parent(val)
             if left_child is None and right_child is None:
-            # Delete a node with not children
+                # Delete a node with not children
                 if parent is not None:
-                # For a node with a parent...
+                    # For a node with a parent...
                     if self.left(parent) == val:
                         del self.tree[parent]['left']
                     else:
@@ -92,7 +104,8 @@ class Bst(object):
                 else:
                     self.top = right_child
                 del self.tree[val]
-
+            # Balance after deletion from the node 'above' deleted node
+            self._balancer(parent)
 
     def _swap_nodes(self, current, target):
         """
@@ -256,6 +269,50 @@ class Bst(object):
         # lower nodes
         self.tree[lower]['left'] = upper
         self.tree[upper]['parent'] = lower
+
+    def _balancer(self, current):
+        """
+        Check and maintain balance on a tree instance.
+
+        Iteratively walks up from an inserted/deleted note and
+        checks/maintains balance.
+        """
+        while current is not None:
+            # Nodes are on the right side
+            if self.balance(current) == 2:
+                self._rrl_rotate(current)
+            # Nodes are on the left side
+            elif self.balance(current) == -2:
+                self._llr_rotate(current)
+            current = self.parent(current)
+
+    def _rrl_rotate(self, node):
+        """
+        Handles left-right and left-left cases.
+        """
+        left = self.left(node)
+        # Left-Right case:
+        # Rotate grand-child from right to left
+        # of the left child to achieve Left-Left case
+        if self.balance(left) == 1:
+            self._l_rotate(left)
+        # Rotate child from left to right
+        # of the selected node
+        self._r_rotate(node)
+
+    def _llr_rotate(self, node):
+        """
+        Handles right-left and right-right cases.
+        """
+        right = self.right(node)
+        # Right-Left case:
+        # Rotate grand-child from right to left
+        # of the left child to achieve Right-Right case
+        if self.balance(right) == -1:
+            self._r_rotate(right)
+        # Rotate child from right to left
+        # of the selected node
+        self._l_rotate(node)
 
 
     def contains(self, value):
