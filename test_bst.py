@@ -74,7 +74,6 @@ def test_balance_subtree(empty_tree, filled_tree_2):
         assert t.balance(i) == j
 
 
-
 def test_contains(filled_tree):
     t = filled_tree
     for num in reversed(range(10)):
@@ -108,6 +107,7 @@ def test_pre_order(filled_tree):
     with pytest.raises(StopIteration):
         gen.next()
 
+
 def test_post_order(filled_tree):
     tree = filled_tree
     gen = tree.post_order()
@@ -139,6 +139,7 @@ def test_swap(filled_tree_2):
     assert tree.parent(7) == 6
     assert tree.left(7) is None
     assert tree.right(7) is None
+
 
 def test_swap_parentchild(filled_tree_2):
     tree = filled_tree_2
@@ -202,6 +203,7 @@ def test_node_depth(filled_tree_2):
     assert filled_tree_2.node_depth(1) == 5
     assert filled_tree_2.node_depth(13) == 4
 
+
 def test_rightmost(filled_tree_2):
     assert filled_tree_2._rightmost(0) == 1
     assert filled_tree_2._rightmost(4) == 6
@@ -245,6 +247,38 @@ def test_l_rotate():
     assert tree.parent(2) is None
 
     assert tree.top == 2
+
+
+def test_llr_rightright_top():
+    tree = bst.Bst()
+
+
+def test_llr_rightright():
+    tree = bst.Bst()
+
+
+def test_llr_rightleft_top():
+    tree = bst.Bst()
+
+
+def test_llr_rightleft():
+    tree = bst.Bst()
+
+
+def test_rrl_leftleft_top():
+    tree = bst.Bst()
+
+
+def test_rrl_leftleft():
+    tree = bst.Bst()
+
+
+def test_rrl_leftright_top():
+    tree = bst.Bst()
+
+
+def test_rrl_leftright():
+    tree = bst.Bst()
 
 
 @pytest.fixture(scope='function')
