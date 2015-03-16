@@ -162,20 +162,21 @@ def test_deletion_easy_case(filled_tree_2):
     assert tree.contains(1) is False
 
 
-def test_deletion_one_left_child_lesser(filled_tree_2):
+def test_deletion_two_childrens(filled_tree_2):
     tree = filled_tree_2
-    assert tree.parent(6) == 4
-    assert tree.left(6) == 5
-    assert tree.right(6) is None
-    tree.delete(6)
-    assert tree.left(4) == 2
-    assert tree.right(4) == 5
+    assert tree.parent(9) == 11
+    assert tree.left(9) == 8
+    assert tree.right(9) == 10
+    tree.delete(9)
+    assert tree.left(11) == 8
+    assert tree.right(11) == 12
 
-    assert tree.parent(5) == 4
-    assert tree.left(5) is None
-    assert tree.right(5) is None
+    assert tree.parent(8) == 11
+    assert tree.left(8) is None
+    assert tree.right(8) == 10
+    assert tree.parent(10) == 8
 
-    assert tree.contains(6) is False
+    assert tree.contains(9) is False
 
 
 def test_deletion_one_right_child_lesser(filled_tree_2):
