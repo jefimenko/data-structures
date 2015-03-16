@@ -64,6 +64,15 @@ def test_balance(empty_tree, filled_tree):
     assert t.balance() == -5
 
 
+def test_balance_subtree(empty_tree, filled_tree_2):
+    t = filled_tree_2
+    # list of subtrees and expected balances
+    expected = [(7, -1), (4, -1)]
+    for i, j in expected:
+        assert t.balance(i) == j
+
+
+
 def test_contains(filled_tree):
     t = filled_tree
     for num in reversed(range(10)):

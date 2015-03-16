@@ -176,8 +176,8 @@ class Bst(object):
                     node_list.append(i)
             except(StopIteration):
                 pass
-        print node_list
-        print top_subtree_node
+        print "subtree top: " + str(top_subtree_node)
+        print "nodelist: " + str(node_list)
         # look at each node in the subtree and if it is deeper than
         # the node at top of subtree, put it in left_deep or right_deep
         if node_list:
