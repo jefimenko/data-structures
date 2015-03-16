@@ -193,6 +193,67 @@ class Bst(object):
             return right_deep - left_deep
         return 0
 
+    def l_rotate(self, upper, lower):
+        """
+        'Rotate' nodes from left to right.
+        """
+        parent = self.parent(upper)
+        if parent is not None:
+            # Change parent/child references for the lower node
+            self.tree[lower]['parent'] = parent
+            was_left_child = self.tree[parent].get('left')
+            if was_left_child is not None:
+                self.tree[parent]['left'] = lower
+            else:
+                self.tree[parent]['right'] = lower
+
+        try:
+            # Change parent/child references right child of the lower
+            # node, if it exists...
+            child = self.tree[lower]['right']
+            self.tree[upper]['left'] = child
+            self.tree[child]['parent'] = upper
+        except KeyError:
+            # ...otherwise delete upper node's left child referece
+            # when the lower node has no right child
+            del self.tree[upper]['left']
+
+        # Change parent/child references for relation between upper and
+        # lower nodes
+        self.tree[lower]['right'] = upper
+        self.tree[upper]['parent'] = lower
+
+    def r_rotate(self, upper, lower):
+        """
+        'Rotate' nodes from right to left.
+        """
+        parent = self.parent(upper)
+        if parent is not None:
+            # Change parent/child references for the lower node
+            self.tree[lower]['parent'] = parent
+            was_left_child = self.tree[parent].get('left')
+            if was_left_child is not None:
+                self.tree[parent]['left'] = lower
+            else:
+                self.tree[parent]['right'] = lower
+
+        try:
+            # Change parent/child references left child of the lower
+            # node, if it exists...
+            child = self.tree[lower]['left']
+            self.tree[upper]['right'] = child
+            self.tree[child]['parent'] = upper
+        except KeyError:
+            # ...otherwise delete upper node's right child referece
+            # when the lower node has no left child
+            del self.tree[upper]['right']
+
+        # Change parent/child references for relation between upper and
+        # lower nodes
+        self.tree[lower]['left'] = upper
+        self.tree[upper]['parent'] = lower
+
+
     def contains(self, value):
         """Returns true if value is in the tree."""
         return value in self.tree
