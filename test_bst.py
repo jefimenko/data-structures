@@ -206,6 +206,25 @@ def test_rightmost(filled_tree_2):
         assert filled_tree_2._rightmost(i) == j
 
 
+def test_r_rotate_on_l_tree(l_tree):
+    """Test r rotation on a tree with 3 nodes on l and 1 on right"""
+    tree = l_tree
+    tree._r_rotate(4, 5)
+
+    # generate inorder list from tree.
+    gen = tree.in_order()
+    node_list = []
+    try:
+        for i in gen:
+            node_list.append(i)
+    except(StopIteration):
+        pass
+    # see if it's in the right order
+    expected = [1, 2, 3, 4, 5]
+    for i, j in enumerate(expected):
+        assert j == node_list[i]
+
+
 def test_r_rotate():
     tree = bst.Bst()
     tree.insert(2)
@@ -292,10 +311,11 @@ def test_l_rotate_on_rr_tree():
 
 
 @pytest.fixture(scope='function')
-def ll_tree():
-    """ Left left tree"""
+def l_tree():
+    """ Tree with 3 nodes (same depth) on the left and one on the right"""
     tree = bst.Bst()
-
+    for i in [4, 5, 2, 1, 3]:
+        tree.insert(i)
     return tree
 
 
