@@ -171,6 +171,7 @@ class Bst(object):
             node_list = self.tree.items()
         else:
             node_list = []
+            print self.tree
             gen = self.in_order(top_subtree_node)
             try:
                 for i in gen:
@@ -413,8 +414,10 @@ def main():
     for i in inserts:
         tree.insert(i)
 
-    tree._swap_nodes(6, 4)
+    tree.insert(1.5)
     print tree.tree
+
+
     # for num in enumerate(tree.pre_order()):
     #     print num
     dot_graph = tree.get_dot()

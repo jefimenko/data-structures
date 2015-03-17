@@ -156,6 +156,7 @@ def test_swap_parentchild(filled_tree_2):
 
 
 def test_deletion_easy_case(filled_tree_2):
+    """Delete retainging balance"""
     tree = filled_tree_2
     assert tree.right(0) == 1
     tree.delete(1)
@@ -198,17 +199,36 @@ def test_deletion_one_right_child_lesser(filled_tree_2):
 
 
 def test_node_depth(filled_tree_2):
-    assert filled_tree_2.node_depth(7) == 1
-    assert filled_tree_2.node_depth(4) == 2
-    assert filled_tree_2.node_depth(1) == 5
-    assert filled_tree_2.node_depth(13) == 4
+    expected = [(1, 5), (4, 2), (7, 1), (13, 4)]
+    for i, j in expected:
+        assert filled_tree_2.node_depth(i) == j
+
 
 
 def test_rightmost(filled_tree_2):
-    assert filled_tree_2._rightmost(0) == 1
-    assert filled_tree_2._rightmost(4) == 6
-    assert filled_tree_2._rightmost(7) == 13
-    assert filled_tree_2._rightmost(6) == 6
+    expected = [(0, 1), (4, 6), (6, 6), (7, 13)]
+    for i, j in expected:
+        assert filled_tree_2._rightmost(i) == j
+
+
+def test_r_rotate_moves_right_child_of_left_to_left_child_of_right(l_tree):
+    """Test r rotation on a tree with 3 nodes on l and 1 on right"""
+    tree = l_tree
+    tree._r_rotate(4)
+
+    # generate inorder list from tree.
+    gen = tree.in_order()
+    node_list = []
+    try:
+        for i in gen:
+            node_list.append(i)
+    except(StopIteration):
+        pass
+    # see if it's in the right order
+    expected = [1, 2, 3, 4, 5]
+    for i, j in enumerate(expected):
+        assert j == node_list[i]
+    assert tree.top == 2
 
 
 def test_r_rotate():
@@ -230,6 +250,30 @@ def test_r_rotate():
     assert tree.top == 1
 
 
+def test_r_rotate_on_ll_tree():
+    tree = bst.Bst()
+    tree.insert(3)
+    tree.insert(2)
+    tree.insert(1)
+    assert tree.top == 3
+    tree._r_rotate(3)
+
+    # Verify correct rotation
+    assert tree.right(1) is None
+    assert tree.left(1) is None
+    assert tree.parent(1) == 2
+
+    assert tree.right(2) == 3
+    assert tree.left(2) == 1
+    assert tree.parent(2) is None
+
+    assert tree.right(3) is None
+    assert tree.left(3) is None
+    assert tree.parent(3) == 2
+
+    assert tree.top == 2
+
+
 def test_l_rotate():
     tree = bst.Bst()
     tree.insert(1)
@@ -247,6 +291,229 @@ def test_l_rotate():
     assert tree.parent(2) is None
 
     assert tree.top == 2
+
+def test_l_rotate_on_rr_tree():
+    tree = bst.Bst()
+    tree.insert(1)
+    tree.insert(2)
+    tree.insert(3)
+    assert tree.top == 1
+    tree._l_rotate(1)
+
+    # Verify correct rotation
+    assert tree.right(1) is None
+    assert tree.left(1) is None
+    assert tree.parent(1) == 2
+
+    assert tree.right(2) == 3
+    assert tree.left(2) == 1
+    assert tree.parent(2) is None
+
+    assert tree.right(3) is None
+    assert tree.left(3) is None
+    assert tree.parent(3) is 2
+
+    assert tree.top == 2
+
+
+def test_2_rotate_on_2nd_node_of_lr_tree():
+    tree = bst.Bst()
+    tree.insert(4)
+    tree.insert(2)
+    tree.insert(3)
+    assert tree.top == 4
+    tree._l_rotate(2)
+
+    # Verify correct rotation
+    assert tree.right(4) is None
+    assert tree.left(4) is 3
+    assert tree.parent(4) is None
+
+    assert tree.right(3) is None
+    assert tree.left(3) == 2
+    assert tree.parent(3) is 4
+
+    assert tree.right(2) is None
+    assert tree.left(2) is None
+    assert tree.parent(2) == 3
+
+    assert tree.top == 4
+
+def test_2_rotate_on_2nd_node_of_rl_tree():
+    tree = bst.Bst()
+    tree.insert(2)
+    tree.insert(4)
+    tree.insert(3)
+    assert tree.top == 2
+    tree._r_rotate(4)
+
+    # Verify correct rotation
+    assert tree.right(2) == 3
+    assert tree.left(2) is None
+    assert tree.parent(2) is None
+
+    assert tree.right(3) == 4
+    assert tree.left(3) is None
+    assert tree.parent(3) == 2
+
+    assert tree.right(4) is None
+    assert tree.left(4) is None
+    assert tree.parent(4) is 3
+
+    assert tree.top == 2
+
+def test_r_rotate_on_deeper_tree():
+    tree = bst.Bst()
+    for i in [2, 1, 3, 5, 4]:
+        tree.insert(i)
+    assert tree.top == 2
+    tree._r_rotate(5)
+
+    # Verify correct rotation
+    assert tree.right(2) == 3
+    assert tree.left(2) == 1
+    assert tree.parent(2) is None
+
+    assert tree.right(3) == 4
+    assert tree.left(3) is None
+    assert tree.parent(3) == 2
+
+    assert tree.right(4) == 5
+    assert tree.left(4) is None
+    assert tree.parent(4) == 3
+
+    assert tree.right(5) is None
+    assert tree.left(5) is None
+    assert tree.parent(5) is 4
+
+    assert tree.right(1) is None
+    assert tree.left(1) is None
+    assert tree.parent(1) == 2
+
+    assert tree.top == 2
+
+# def test_b_insert_rr(filled_tree_2):
+#     """tests inserting into at a rr place"""
+#     tree = filled_tree_2
+#     tree.b_insert(1.5)
+
+#     # make sure 0, 1, 1.5 pointers are ok.
+#     assert tree.parent(1.5) == 1
+#     assert tree.right(1.5) is None
+#     assert tree.left(1.5) is None
+
+#     assert tree.parent(1) == 2
+#     assert tree.right(1) == 1.5
+#     assert tree.left(1) == 0
+
+#     assert tree.parent(0) == 1
+#     assert tree.right(0) is None
+#     assert tree.left(0) is None
+
+
+def test_b_insert_rl(filled_tree_2):
+    """tests inserting into at a rl place"""
+    tree = filled_tree_2
+    tree.b_insert(12.5)
+
+    # make sure 12, 12.5, 13 pointers are ok.
+    assert tree.parent(12.5) == 11
+    assert tree.right(12.5) is 13
+    assert tree.left(12.5) is 12
+
+    assert tree.parent(12) == 12.5
+    assert tree.right(12) is None
+    assert tree.left(12) is None
+
+    assert tree.parent(13) == 12.5
+    assert tree.right(13) is None
+    assert tree.left(13) is None
+
+
+# def test_b_insert_ll(filled_tree_2):
+#     """tests inserting into at a ll place"""
+#     tree = filled_tree_2
+#     tree.b_insert(4.5)
+
+#     # make sure 4.5, 5, 6 pointers are ok.
+#     assert tree.parent(5) == 4
+#     assert tree.right(5) == 4.5
+#     assert tree.left(5) == 6
+
+#     assert tree.parent(4.5) == 5
+#     assert tree.right(4.5) is None
+#     assert tree.left(4.5) is None
+
+#     assert tree.parent(6) == 5
+#     assert tree.right(6) is None
+#     assert tree.left(6) is None
+
+
+# def test_b_insert_lr(filled_tree_2):
+#     """tests inserting into at a lr place"""
+#     tree = filled_tree_2
+#     tree.b_insert(5.5)
+
+#     # make sure 5, 5.5, 6 pointers are ok.
+#     assert tree.parent(5.5) == 4
+#     assert tree.right(5.5) == 5
+#     assert tree.left(5.5) == 6
+
+#     assert tree.parent(4) == 5.5
+#     assert tree.right(4) is None
+#     assert tree.left(4) is None
+
+#     assert tree.parent(6) == 5.5
+#     assert tree.right(6) is None
+#     assert tree.left(6) is None
+
+
+# def test_delete_lr(filled_tree_2):
+#     tree = filled_tree_2
+#     tree.delete(3)
+
+#     # make sure 5, 5.5, 6 pointers are ok.
+#     assert tree.parent(1) == 4
+#     assert tree.right(1) == 2
+#     assert tree.left(1) == 0
+
+#     assert tree.parent(0) == 1
+#     assert tree.right(0) is None
+#     assert tree.left(0) is None
+
+#     assert tree.parent(2) == 1
+#     assert tree.right(2) is None
+#     assert tree.left(2) is None  
+
+
+# def test_delete_ll(filled_tree_2):
+#     tree = filled_tree_2
+#     tree.insert(-1)
+#     tree.delete(1)
+
+#     # delete the node that unbalances the tree
+#     tree.delete(3)
+
+#     # make sure -1, 0, 2 pointers are ok.
+#     assert tree.parent(0) == 4
+#     assert tree.right(0) == 2
+#     assert tree.left(0) == -1
+
+#     assert tree.parent(-1) == 0
+#     assert tree.right(-1) is None
+#     assert tree.left(-1) is None
+
+#     assert tree.parent(2) == 0
+#     assert tree.right(2) is None
+#     assert tree.left(2) is None
+
+@pytest.fixture(scope='function')
+def l_tree():
+    """ Tree with 3 nodes (same depth) on the left and one on the right"""
+    tree = bst.Bst()
+    for i in [4, 5, 2, 1, 3]:
+        tree.insert(i)
+    return tree
 
 
 def test_llr_rightright_top():
