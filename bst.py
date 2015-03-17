@@ -200,7 +200,7 @@ class Bst(object):
             # Change parent/child references for the lower node
             self.tree[lower]['parent'] = parent
             was_left_child = self.tree[parent].get('left')
-            if was_left_child is not None:
+            if was_left_child is not None and was_left_child == upper:
                 self.tree[parent]['left'] = lower
             else:
                 self.tree[parent]['right'] = lower
@@ -234,7 +234,7 @@ class Bst(object):
             # Change parent/child references for the lower node
             self.tree[lower]['parent'] = parent
             was_left_child = self.tree[parent].get('left')
-            if was_left_child is not None:
+            if was_left_child is not None and was_left_child == upper:
                 self.tree[parent]['left'] = lower
             else:
                 self.tree[parent]['right'] = lower
