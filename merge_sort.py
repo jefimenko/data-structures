@@ -15,19 +15,20 @@ def timed_func(func):
 
 
 @timed_func
+def time_merge_sort(sequence):
+    return merge_sort(sequence)
+
+
 def merge_sort(sequence):
     """Mergesort."""
     for ind, num in enumerate(sequence):
-        #base case
+        # base case
         if len(sequence) <= 1:
             return sequence
-
+        # recursive case
         middle = len(sequence) / 2
-        left = sequence[:middle]
-        right = sequence[middle:]
-
-        left = merge_sort(left)
-        right = merge_sort(right)
+        left = merge_sort(sequence[:middle])
+        right = merge_sort(sequence[middle:])
 
         return merge(left, right)
 
@@ -47,13 +48,13 @@ def merge(left, right):
 
 if __name__ == "__main__":
     something = [x for x in range(1000)]
-    merge_sort(something)
+    time_merge_sort(something)
     something_else = [x for x in range(10000)]
-    merge_sort(something_else)
+    time_merge_sort(something_else)
     something_else = [x for x in range(1000, 0, -1)]
-    merge_sort(something_else)
+    time_merge_sort(something_else)
     something_else = [x for x in range(2000, 0, -1)]
-    merge_sort(something_else)
+    time_merge_sort(something_else)
     something_else = [x for x in range(1000)]
     random.shuffle(something_else)
     merge_sort(something_else)
