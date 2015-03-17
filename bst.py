@@ -171,6 +171,7 @@ class Bst(object):
             node_list = self.tree.items()
         else:
             node_list = []
+            print self.tree
             gen = self.in_order(top_subtree_node)
             try:
                 for i in gen:
