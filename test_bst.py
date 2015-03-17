@@ -392,23 +392,23 @@ def test_r_rotate_on_deeper_tree():
 
     assert tree.top == 2
 
-# def test_b_insert_rr(filled_tree_2):
-#     """tests inserting into at a rr place"""
-#     tree = filled_tree_2
-#     tree.b_insert(1.5)
+def test_b_insert_rr(filled_tree_2):
+    """tests inserting into at a rr place"""
+    tree = filled_tree_2
+    tree.b_insert(1.5)
 
-#     # make sure 0, 1, 1.5 pointers are ok.
-#     assert tree.parent(1.5) == 1
-#     assert tree.right(1.5) is None
-#     assert tree.left(1.5) is None
+    # make sure 0, 1, 1.5 pointers are ok.
+    assert tree.parent(1.5) == 1
+    assert tree.right(1.5) is None
+    assert tree.left(1.5) is None
 
-#     assert tree.parent(1) == 2
-#     assert tree.right(1) == 1.5
-#     assert tree.left(1) == 0
+    assert tree.parent(1) == 2
+    assert tree.right(1) == 1.5
+    assert tree.left(1) == 0
 
-#     assert tree.parent(0) == 1
-#     assert tree.right(0) is None
-#     assert tree.left(0) is None
+    assert tree.parent(0) == 1
+    assert tree.right(0) is None
+    assert tree.left(0) is None
 
 
 def test_b_insert_rl(filled_tree_2):
@@ -430,82 +430,82 @@ def test_b_insert_rl(filled_tree_2):
     assert tree.left(13) is None
 
 
-# def test_b_insert_ll(filled_tree_2):
-#     """tests inserting into at a ll place"""
-#     tree = filled_tree_2
-#     tree.b_insert(4.5)
+def test_b_insert_ll(filled_tree_2):
+    """tests inserting into at a ll place"""
+    tree = filled_tree_2
+    tree.b_insert(4.5)
 
-#     # make sure 4.5, 5, 6 pointers are ok.
-#     assert tree.parent(5) == 4
-#     assert tree.right(5) == 4.5
-#     assert tree.left(5) == 6
+    # make sure 4.5, 5, 6 pointers are ok.
+    assert tree.parent(5) == 4
+    assert tree.right(5) == 6
+    assert tree.left(5) == 4.5
 
-#     assert tree.parent(4.5) == 5
-#     assert tree.right(4.5) is None
-#     assert tree.left(4.5) is None
+    assert tree.parent(4.5) == 5
+    assert tree.right(4.5) is None
+    assert tree.left(4.5) is None
 
-#     assert tree.parent(6) == 5
-#     assert tree.right(6) is None
-#     assert tree.left(6) is None
-
-
-# def test_b_insert_lr(filled_tree_2):
-#     """tests inserting into at a lr place"""
-#     tree = filled_tree_2
-#     tree.b_insert(5.5)
-
-#     # make sure 5, 5.5, 6 pointers are ok.
-#     assert tree.parent(5.5) == 4
-#     assert tree.right(5.5) == 5
-#     assert tree.left(5.5) == 6
-
-#     assert tree.parent(4) == 5.5
-#     assert tree.right(4) is None
-#     assert tree.left(4) is None
-
-#     assert tree.parent(6) == 5.5
-#     assert tree.right(6) is None
-#     assert tree.left(6) is None
+    assert tree.parent(6) == 5
+    assert tree.right(6) is None
+    assert tree.left(6) is None
 
 
-# def test_delete_lr(filled_tree_2):
-#     tree = filled_tree_2
-#     tree.delete(3)
+def test_b_insert_lr(filled_tree_2):
+    """tests inserting into at a lr place"""
+    tree = filled_tree_2
+    tree.b_insert(5.5)
 
-#     # make sure 5, 5.5, 6 pointers are ok.
-#     assert tree.parent(1) == 4
-#     assert tree.right(1) == 2
-#     assert tree.left(1) == 0
+    # make sure 5, 5.5, 6 pointers are ok.
+    assert tree.parent(5.5) == 4
+    assert tree.right(5.5) == 6
+    assert tree.left(5.5) == 5
 
-#     assert tree.parent(0) == 1
-#     assert tree.right(0) is None
-#     assert tree.left(0) is None
+    assert tree.parent(5) == 5.5
+    assert tree.right(5) is None
+    assert tree.left(5) is None
 
-#     assert tree.parent(2) == 1
-#     assert tree.right(2) is None
-#     assert tree.left(2) is None  
+    assert tree.parent(6) == 5.5
+    assert tree.right(6) is None
+    assert tree.left(6) is None
 
 
-# def test_delete_ll(filled_tree_2):
-#     tree = filled_tree_2
-#     tree.insert(-1)
-#     tree.delete(1)
+def test_delete_lr(filled_tree_2):
+    tree = filled_tree_2
+    tree.delete(3)
 
-#     # delete the node that unbalances the tree
-#     tree.delete(3)
+    # make sure 5, 5.5, 6 pointers are ok.
+    assert tree.parent(1) == 4
+    assert tree.right(1) == 2
+    assert tree.left(1) == 0
 
-#     # make sure -1, 0, 2 pointers are ok.
-#     assert tree.parent(0) == 4
-#     assert tree.right(0) == 2
-#     assert tree.left(0) == -1
+    assert tree.parent(0) == 1
+    assert tree.right(0) is None
+    assert tree.left(0) is None
 
-#     assert tree.parent(-1) == 0
-#     assert tree.right(-1) is None
-#     assert tree.left(-1) is None
+    assert tree.parent(2) == 1
+    assert tree.right(2) is None
+    assert tree.left(2) is None  
 
-#     assert tree.parent(2) == 0
-#     assert tree.right(2) is None
-#     assert tree.left(2) is None
+
+def test_delete_ll(filled_tree_2):
+    tree = filled_tree_2
+    tree.insert(-1)
+    tree.delete(1)
+
+    # delete the node that unbalances the tree
+    tree.delete(3)
+
+    # make sure -1, 0, 2 pointers are ok.
+    assert tree.parent(0) == 4
+    assert tree.right(0) == 2
+    assert tree.left(0) == -1
+
+    assert tree.parent(-1) == 0
+    assert tree.right(-1) is None
+    assert tree.left(-1) is None
+
+    assert tree.parent(2) == 0
+    assert tree.right(2) is None
+    assert tree.left(2) is None
 
 @pytest.fixture(scope='function')
 def l_tree():
