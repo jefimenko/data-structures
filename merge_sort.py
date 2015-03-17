@@ -47,14 +47,16 @@ def merge(left, right):
     return result
 
 if __name__ == "__main__":
+    # in order
     something = [x for x in range(1000)]
     time_merge_sort(something)
-    something_else = [x for x in range(10000)]
-    time_merge_sort(something_else)
+    # reverse order
     something_else = [x for x in range(1000, 0, -1)]
     time_merge_sort(something_else)
-    something_else = [x for x in range(2000, 0, -1)]
+    # x10
+    something_else = [x for x in range(10000)]
     time_merge_sort(something_else)
-    something_else = [x for x in range(1000)]
+    # x100
+    something_else = [x for x in range(100000)]
     random.shuffle(something_else)
     merge_sort(something_else)
