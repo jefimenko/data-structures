@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+import time
+import random
+
+
+def timed_func(func):
+    """Decorator for timing our traversal methods."""
+    def timed(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        elapsed = time.time() - start
+        print "time expired: %s" % elapsed
+        return result
+    return timed
+
+
+@timed_func
+def merge_sort(sequence):
+    """Mergesort."""
+    for ind, num in enumerate(sequence):
+        #base case
+        if len(sequence) <= 1:
+            return sequence
+
+        middle = len(sequence) / 2
+        left = sequence[:middle]
+        right = sequence[middle:]
+
+        left = merge_sort(left)
+        right = merge_sort(right)
+
+        return merge(left, right)
+
+
+def merge(left, right):
+    result =[]
+    while left and right:
+        if left[0] <= right[0]:
+            result.append(left.pop(0))
+        else:
+            result.append(right.pop(0))
+    while left:
+            result.append(left.pop(0))
+    while right:
+            result.append(right.pop(0))
+    return result
+
+if __name__ == "__main__":
+    something = [x for x in range(1000)]
+    merge_sort(something)
+    something_else = [x for x in range(10000)]
+    merge_sort(something_else)
+    something_else = [x for x in range(1000, 0, -1)]
+    merge_sort(something_else)
+    something_else = [x for x in range(2000, 0, -1)]
+    merge_sort(something_else)
+    something_else = [x for x in range(1000)]
+    random.shuffle(something_else)
+    merge_sort(something_else)
