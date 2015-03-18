@@ -34,7 +34,7 @@ def merge_sort(sequence):
 
 
 def merge(left, right):
-    result =[]
+    result = []
     while left and right:
         if left[0] <= right[0]:
             result.append(left.pop(0))
@@ -59,4 +59,4 @@ if __name__ == "__main__":
     # x100
     something_else = [x for x in range(100000)]
     random.shuffle(something_else)
-    merge_sort(something_else)
+    time_merge_sort(something_else)
