@@ -29,9 +29,9 @@ def test_q_one():
 
 
 def test_q_two():
-    a = [5, 5, 5, 5]
+    a = [5, 5, 5, 5, 5, 5, 5, 5, 5]
     a = q_sort(a)
-    assert a == [5, 5, 5, 5]
+    assert a == [5, 5, 5, 5, 5, 5, 5, 5, 5]
 
 
 def test_q_mixed():

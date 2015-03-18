@@ -43,22 +43,18 @@ def get_pivot(sequence):
 def timed_q_sort(sequence):
     return q_sort(sequence)
 
-def worst_maker(da_size):
-    a = True
-    worst = []
-    for num in range(da_size):
-        if a:
-            worst.insert(0, num)
-            a = False
-        else:
-            worst.append(num)
-    return worst
+
+def same_maker(how_many):
+    moAr = []
+    for each in range(how_many):
+        moAr.append(1)
+    return moAr
 
 
 if __name__ == '__main__':
-    inputs = [range(1000), range(10000)]
-    inputs.append(worst_maker(1000))
-    inputs.append(worst_maker(10000))
+    inputs = [range(500), range(1000)]
+    inputs.append(same_maker(500))
+    inputs.append(same_maker(997))
 
     for inp in inputs:
         timed_q_sort(inp)
