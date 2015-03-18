@@ -26,3 +26,9 @@ def test_q_one():
     a = [4, 3, 2, 5, 7, 1, 6]
     a = q_sort(a)
     assert a == [1, 2, 3, 4, 5, 6, 7]
+
+
+def test_q_mixed():
+    a = [1, 2, 5, 4, 4, 6, 7, 9, 8, 0, 0]
+    a = q_sort(a)
+    assert a == [0, 0, 1, 2, 4, 4, 5, 6, 7, 8, 9]

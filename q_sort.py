@@ -1,3 +1,5 @@
+from merge_sort import timed_func
+
 def q_sort(sequence): 
     if len(sequence) <= 1:
         # Return a sequence of one sorted item, or stop if no input
@@ -31,3 +33,28 @@ def get_pivot(sequence):
     if last > middle > first or first > middle > last:
         return [middle]
     return [last]
+
+
+@timed_func
+def timed_q_sort(sequence):
+    return q_sort(sequence)
+
+def worst_maker(da_size):
+    a = True
+    worst = []
+    for num in range(da_size):
+        if a:
+            worst.insert(0, num)
+            a = False
+        else:
+            worst.append(num)
+    return worst
+
+
+if __name__ == '__main__':
+    inputs = [range(1000), range(10000)]
+    inputs.append(worst_maker(1000))
+    inputs.append(worst_maker(10000))
+
+    for inp in inputs:
+        timed_q_sort(inp)
