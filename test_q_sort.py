@@ -6,6 +6,8 @@ def test_get_pivot_f():
     assert get_pivot(a) == 2
     b = [2, 3, 1]
     assert get_pivot(b) == 2
+    c = [1, 2, 3, 4]
+    assert get_pivot(c) == 3
 
 
 def test_get_pivot_l():
