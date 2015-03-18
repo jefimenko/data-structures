@@ -1,31 +1,27 @@
 def q_sort(sequence):
-    print sequence
-    if len(sequence) == 1:
+    if len(sequence) <= 1:
+        # Return a sequence of one sorted item, or stop if no input
         return sequence
     if len(sequence) == 2:
-        if sequence[0] < sequence[1]:
+        # Return a sequence of two sorted items
+        if sequence[1] > sequence[0]:
             return sequence
         else:
             return sequence[::-1]
     pivot = get_pivot(sequence)
     left = []
     right = []
+    not_pivot = False
     for item in sequence:
-        if item != pivot:
-            if item > pivot:
-                right.append(item)
-            else:
-                left.append(item)
-    right = q_sort(right)
-    left = q_sort(left)
 
-    new_list = []
-    if left:
-        new_list += left
-    new_list.append(pivot)
-    if right:
-        new_list += right
-    return new_list
+        if item > pivot[0] and item is not pivot[0]:
+            right.append(item)
+        elif item is not pivot[0] or not_pivot:
+            left.append(item)
+        elif item == pivot[0]:
+            # after not putting the first pivot in, put the rest in
+            not_pivot = True
+    return q_sort(left) + pivot + q_sort(right)
 
 
 def get_pivot(sequence):
@@ -35,7 +31,7 @@ def get_pivot(sequence):
     middle = sequence[mid_index]
 
     if last > first > middle or middle > first > last:
-        return first
+        return [first]
     if last > middle > first or first > middle > last:
-        return middle
-    return last
+        return [middle]
+    return [last]
