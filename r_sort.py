@@ -8,12 +8,20 @@ def r_sort(sequence):
         bins = [[] for i in range(10)]
         for x in sequence:
             # the expression in bins returns the number in digit place
-            bins[x % 10 ** digit // 10 ** (digit -1)].append(x)
+            bins[abs(x) % 10 ** digit // 10 ** (digit -1)].append(x)
         sequence = [number for x in bins for number in x]
         digit += 1
         if len(sequence) == len(bins[0]):
-            return sequence
 
+            # Handling for negative numbers
+            final = []
+            for num in sequence:
+                if num < 0:
+                    final.insert(0, num)
+                else:
+                    final.append(num)
+
+            return final
 
 if __name__ == '__main__':
     inputs = [range(500), range(1000)]
