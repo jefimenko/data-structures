@@ -1,4 +1,4 @@
-from r_sort import r_sort_delta
+from r_sort import r_sort_delta, r_sort_alpha, r_sort
 from r_sort import r_sort
 
 
@@ -22,7 +22,7 @@ def test_r_mixed():
 
 def test_r_delta():
     a = [4, 3, 2, 5, 7, 1, 6]
-    a = r_sort_d(a)
+    a = r_sort_delta(a)
     assert a == [1, 2, 3, 4, 5, 6, 7]
 
 
@@ -36,3 +36,24 @@ def test_r_delta_posneg():
     a = [1, -3, -6, 7, -8, 10, -50]
     a = r_sort_delta(a)
     assert a == [-50, -8, -6, -3, 1, 7, 10]
+
+
+def test_r_alpha_empty():
+    """Test empty strings"""
+    a = ['a', 'b', 'aaa', '']
+    a = r_sort_alpha(a)
+    assert a == ['', 'a', 'aaa', 'b']
+
+
+def test_r_alpha_shortvlong():
+    """Test that 6 character string comes before 5 char string"""
+    a = ['bbbaa', 'b', 'aaabbb', '']
+    a = r_sort_alpha(a)
+    assert a == ['', 'aaabbb', 'b', 'bbbaa']
+
+
+def test_r_alpha_zero_char():
+    """Test that 6 character string comes before 5 char string"""
+    a = ['\x00', 'b', 'c', '']
+    a = r_sort_alpha(a)
+    assert a == ['', '\x00', 'b', 'c']

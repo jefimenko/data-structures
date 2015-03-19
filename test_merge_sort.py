@@ -1,6 +1,7 @@
 from merge_sort import merge_sort
 import random
 
+
 def test_ordered():
     something = [x for x in range(100)]
     actual =  merge_sort(something)
@@ -13,6 +14,7 @@ def test_reversed():
     actual = merge_sort(something_else)
     expected = [x for x in range(1, 1001)]
     assert actual == expected
+
 
 def test_random():
     something_else = [x for x in range(1000)]
