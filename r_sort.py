@@ -2,7 +2,7 @@
 from merge_sort import timed_func
 
 @timed_func
-def r_sort(sequence):
+def r_sort_delta(sequence):
     digit = 1
     while True:
         pos_bins = [[] for i in range(10)]
