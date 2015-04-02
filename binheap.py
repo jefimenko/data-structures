@@ -23,14 +23,14 @@ class Binheap(object):
             except TypeError:
                 raise TypeError('Binheap constructor values must be one iterable object.')
 
+
     def push(self, val):
         self.values.append(val)
         position = len(self.values) - 1
         while position != 0:
             parent_position = (position - 1) / 2
             if self.values[parent_position] < self.values[position]:
-                self.values[parent_position], self.values[position] \
-                 = self.values[position], self.values[parent_position]
+                self.values[parent_position], self.values[position] = self.values[position], self.values[parent_position]
                 position = parent_position
             else:
                 position = 0
