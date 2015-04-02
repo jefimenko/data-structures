@@ -10,6 +10,9 @@ class Hash(object):
         self.h_list[self.hash(key)].append(tup)
 
     def hash(self, key):
+        if not isinstance(key, str):
+            type_ = type(key)
+            raise TypeError('Cannot hash something of type {}'.format(type_))
         total = 0
         for letter in key:
             total += ord(letter)
