@@ -7,7 +7,12 @@ class Hash(object):
     def set(self, key, val):
         """store the given val using the given key"""
         tup = (key, val)
-        self.h_list[self.hash(key)].append(tup)
+        bucket = self.h_list[self.hash(key)]
+        for item in bucket:
+            if item[0] == key:
+                bucket.remove(item)
+                break
+        bucket.append(tup)
 
     def hash(self, key):
         if not isinstance(key, str):
