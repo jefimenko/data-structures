@@ -5,7 +5,10 @@ class Hash(object):
             self.h_list.append([])
 
     def set(self, key, val):
-        """store the given val using the given key"""
+        """Store the given val using the given key.
+
+        Replaces the value if setting with a key already in.
+        """
         tup = (key, val)
         bucket = self.h_list[self.hash(key)]
         for item in bucket:
@@ -15,7 +18,7 @@ class Hash(object):
         bucket.append(tup)
 
     def hash(self, key):
-        if not isinstance(key, str):
+        if not isinstance(key, (str, unicode)):
             type_ = type(key)
             raise TypeError('Cannot hash something of type {}'.format(type_))
         total = 0

@@ -13,20 +13,19 @@ def test_bad_create():
         something = Hash()
 
 
-
-def test_set_return_error():
+def test_set_integer_return_error():
     hash_table = Hash(10)
     word = 123
     with pytest.raises(TypeError):
         hash_table.set(word, word)
 
 
-def test_set_return_error():
+def test_set_list_return_error():
     hash_table = Hash(10)
     word = [1, 2, 3]
     with pytest.raises(TypeError):
         hash_table.set(word, word)
-        
+
 
 def test_duplicate_key_different_value():
     """a get on a hash table should return the last value put in"""
@@ -38,6 +37,19 @@ def test_duplicate_key_different_value():
     # last value in was 3
     assert hash_table.get(word) == 3
 
+
+def test_duplicate_key_different_value_in_only_once():
+    """a set on a hash table with duplicate keys should only put one in"""
+    hash_table = Hash(10)
+    word = 'asd'
+    values = range(4)
+    for value in values:
+        hash_table.set(word, value)
+    sum = 0
+    for char in word:
+        sum += ord(char)
+    # should only be one value in bucket
+    assert len(hash_table.h_list[sum % 10]) == 1
 
 def test_hash():
     something = Hash(10)
@@ -60,6 +72,7 @@ def test_get():
     something.set('asdf', 10)
     assert something.get('asdf') == 10
 
+
 def test_on_word():
     """testing on word dictionary built into UNIX"""
     infile = open('/usr/share/dict/words', 'r')
@@ -67,8 +80,8 @@ def test_on_word():
     for line in infile:
         full_text.append(line.strip())
     allbins = Hash(10000)
-    # for word in full_text:
-    #     allbins.set(word, word)
-    # for word in full_text:
-    #     assert allbins.get(word) == word
+    for word in full_text:
+        allbins.set(word, word)
+    for word in full_text:
+        assert allbins.get(word) == word
 
