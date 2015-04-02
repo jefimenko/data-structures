@@ -12,8 +12,6 @@ def q_sort(sequence):
         else:
             return sequence[::-1]
     pivot = get_pivot(sequence)
-    print "pivot: " + str(pivot)
-    print sequence
     left = []
     right = []
     center = []
