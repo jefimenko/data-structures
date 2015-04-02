@@ -25,9 +25,22 @@ def test_get_pivot_m():
 def test_q_one():
     a = [4, 3, 2, 5, 7, 1, 6]
     a = q_sort(a)
-    assert a == [1, 2, 3, 4, 5, 6, 7]
+    assert a == sorted(a)
+
 
 def test_q_two():
-    a = [5, 5, 5, 5]
+    a = [5, 5, 5, 5, 5, 5, 5, 5, 5]
     a = q_sort(a)
-    assert a == [5, 5, 5, 5]
+    assert a == sorted(a)
+
+
+def test_q_mixed():
+    a = [1, 2, 5, 4, 4, 6, 7, 9, 8, 0, 0]
+    a = q_sort(a)
+    assert a == sorted(a)
+
+
+def test_q_mixed():
+    a = [1, 2, 5, 10, 10]
+    a = q_sort(a)
+    assert a == sorted(a)

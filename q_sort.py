@@ -9,16 +9,18 @@ def q_sort(sequence):
         else:
             return sequence[::-1]
     pivot = get_pivot(sequence)
+    print "pivot: " + str(pivot)
+    print sequence
     left = []
     right = []
     for index, item in enumerate(sequence):
-        # to prevent recursion error
+        # to prevent recursion error when first two are the same
+        # put the first into the right sequence
         first_two_same = (index == 0 and (sequence[0] == sequence[1]))
-        if item > pivot[0] or first_two_same:
-            right.append(item)
-        elif item <= pivot[0]:
+        if item < pivot[0] or first_two_same:
             left.append(item)
-
+        elif item >= pivot[0]:
+            right.append(item)
     return q_sort(left) + q_sort(right)
 
 
