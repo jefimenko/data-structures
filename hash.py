@@ -1,23 +1,23 @@
 class Hash(object):
     def __init__(self, buckets):
-        self.heap = []
+        self.h_list = []
         for i in range(0, buckets):
-            self.heap.append([])
+            self.h_list.append([])
 
     def set(self, key, val):
         """store the given val using the given key"""
         tup = (key, val)
-        self.heap[self.hash(key)].append(tup)
+        self.h_list[self.hash(key)].append(tup)
 
     def hash(self, key):
         total = 0
         for letter in key:
             total += ord(letter)
-        return total % len(self.heap)
+        return total % len(self.h_list)
 
     def get(self, key):
         """return the value stored with the given key"""
-        bucket = self.heap[self.hash(key)]
+        bucket = self.h_list[self.hash(key)]
         for element in bucket:
             if element[0] == key:
                 return element[1]
