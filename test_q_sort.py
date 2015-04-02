@@ -28,6 +28,7 @@ def test_q_one():
     assert a == sorted(a)
 
 
+
 def test_q_two():
     a = [5, 5, 5, 5, 5, 5, 5, 5, 5]
     a = q_sort(a)
@@ -36,12 +37,6 @@ def test_q_two():
 
 def test_q_mixed():
     a = [1, 2, 5, 4, 4, 6, 7, 9, 8, 10, 10]
-    a = q_sort(a)
-    assert a == sorted(a)
-
-
-def test_q_mixed():
-    a = [5, 4, 4]
     a = q_sort(a)
     assert a == sorted(a)
 
@@ -56,3 +51,9 @@ def test_q_mixed_duplicate_last_values_lesser():
     a = [1, 2, 5, 0, 0]
     a = q_sort(a)
     assert a == sorted(a)
+
+
+def test_q_mixed():
+    a = [1, 2, 5, 4, 4, 6, 7, 9, 8, 0, 0]
+    a = q_sort(a)
+    assert a == [0, 0, 1, 2, 4, 4, 5, 6, 7, 8, 9]
