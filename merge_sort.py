@@ -21,29 +21,33 @@ def time_merge_sort(sequence):
 
 def merge_sort(sequence):
     """Mergesort."""
-    for ind, num in enumerate(sequence):
-        # base case
-        if len(sequence) <= 1:
-            return sequence
-        # recursive case
-        middle = len(sequence) / 2
-        left = merge_sort(sequence[:middle])
-        right = merge_sort(sequence[middle:])
+    # base case
+    if len(sequence) <= 1:
+        return sequence
 
-        return merge(left, right)
+    # recursive case
+    middle = len(sequence) // 2
+    left = merge_sort(sequence[:middle])
+    right = merge_sort(sequence[middle:])
+
+    return merge(left, right)
 
 
 def merge(left, right):
     result = []
-    while left and right:
-        if left[0] <= right[0]:
-            result.append(left.pop(0))
+    l_index, r_index = 0, 0
+    l_end, r_end = len(left), len(right)
+    while l_index < l_end and r_index < r_end:
+        if left[l_index] <= right[r_index]:
+            result.append(left[l_index])
+            l_index += 1
         else:
-            result.append(right.pop(0))
-    while left:
-            result.append(left.pop(0))
-    while right:
-            result.append(right.pop(0))
+            result.append(right[r_index])
+            r_index += 1
+    if l_index < l_end:
+        result.extend(left[l_index:])
+    if r_index < r_end:
+        result.extend(right[r_index:])
     return result
 
 if __name__ == "__main__":
