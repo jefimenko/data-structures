@@ -11,17 +11,15 @@ def q_sort(sequence):
     pivot = get_pivot(sequence)
     left = []
     right = []
-    not_pivot = False
-    for item in sequence:
-
-        if item > pivot[0] and item is not pivot[0]:
+    for index, item in enumerate(sequence):
+        # to prevent recursion error
+        first_two_same = (index == 0 and (sequence[0] == sequence[1]))
+        if item > pivot[0] or first_two_same:
             right.append(item)
-        elif item is not pivot[0] or not_pivot:
+        elif item <= pivot[0]:
             left.append(item)
-        elif item == pivot[0]:
-            # after not putting the first pivot in, put the rest in
-            not_pivot = True
-    return q_sort(left) + pivot + q_sort(right)
+
+    return q_sort(left) + q_sort(right)
 
 
 def get_pivot(sequence):
