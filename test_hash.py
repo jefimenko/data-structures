@@ -13,8 +13,20 @@ def test_bad_create():
         something = Hash()
 
 
-# def test_not_string():
-#     something = Hash(10)
+
+def test_set_return_error():
+    hash_table = Hash(10)
+    word = 123
+    with pytest.raises(TypeError):
+        hash_table.set(word, word)
+
+
+def test_set_return_error():
+    hash_table = Hash(10)
+    word = [1, 2, 3]
+    with pytest.raises(TypeError):
+        hash_table.set(word, word)
+        
 
 def test_duplicate_key_different_value():
     """a get on a hash table should return the last value put in"""
