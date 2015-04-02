@@ -13,15 +13,15 @@ def q_sort(sequence):
     print sequence
     left = []
     right = []
+    center = []
     for index, item in enumerate(sequence):
-        # to prevent recursion error when first two are the same
-        # put the first into the right sequence
-        first_two_same = (index == 0 and (sequence[0] == sequence[1]))
-        if item < pivot[0] or first_two_same:
+        if item < pivot:
             left.append(item)
-        elif item >= pivot[0]:
+        elif item > pivot:
             right.append(item)
-    return q_sort(left) + q_sort(right)
+        else:
+            center.append(item)
+    return q_sort(left) + center + q_sort(right)
 
 
 def get_pivot(sequence):
@@ -31,7 +31,7 @@ def get_pivot(sequence):
     middle = sequence[mid_index]
 
     if last > first > middle or middle > first > last:
-        return [first]
+        return first
     if last > middle > first or first > middle > last:
-        return [middle]
-    return [last]
+        return middle
+    return last
