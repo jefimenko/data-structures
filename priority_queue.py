@@ -3,9 +3,10 @@ from queue import Queue
 
 class Priority_Queue(object):
 
-    def __init__(self):
-        self.high = Queue()
-        self.low = Queue()
+    def __init__(self, size):
+        self.p = [Queue() for i in xrange(size)]
+        self.size = size
+
 
     def insert(self, item, priority=None):
         """
@@ -16,12 +17,10 @@ class Priority_Queue(object):
         behavior through pop() and insert() functions.
         Priority levels are abritrarily set to only 'high' or 'low'.
         """
-        if priority == "high":
-            self.high.enqueue(item)
-        elif priority == "low":
-            self.low.enqueue(item)
-        else:
-            raise ValueError("Priorty must be literal 'high' or 'low'.")
+        try:
+            self.p[priority].enqueue(item)
+        except ValueError:
+            return "the priority value must be in the range 0 to " + str(self.max)
 
     def pop(self):
         """
@@ -30,10 +29,15 @@ class Priority_Queue(object):
         If the Priority_Queue is empty, the Queue underneath will raise a
         IndexError.
         """
-        if self.high.size():
-            return self.high.dequeue()
-        else:
-            return self.low.dequeue()
+        current = 0
+        while current < self.size:
+            print current
+            if self.p[current].size() == 0:
+                current += 1
+            else:
+                return self.p[current].dequeue()
+        raise IndexError('The Priority_Queue is empty')
+
 
     def peek(self):
         """
@@ -41,7 +45,10 @@ class Priority_Queue(object):
 
         If the queue is empty, None is returned.
         """
-        if self.high.size():
-            return self.high.head.data
-        elif self.low.size():
-            return self.low.head.data
+        current = 0
+        while current < self.size:
+            if self.p[current].size() == 0:
+                current += 1
+            else:
+                return self.p[current].head.data
+        return None
