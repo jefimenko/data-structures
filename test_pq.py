@@ -44,7 +44,6 @@ def test_insert(m_eq, m_lbh, m_hbl):
 
 # Test pop()
 def test_pop(m_eq, m_lbh, m_hbl):
-    # pop() an empty Priority_Queue.
     with pytest.raises(IndexError):
         m_eq.pop()
     # Low before high priority and high before low enqueued should not
@@ -76,5 +75,3 @@ def test_peek(m_eq, m_lbh, m_hbl):
     assert q.peek() == 'eh'
     q.insert('again', 1)
     assert q.peek() == 'eh'
-    # Does peek look at the next to be popped, or the next chronologically
-    # enqueued item?
