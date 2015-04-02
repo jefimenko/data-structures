@@ -206,6 +206,13 @@ def popd_graph_weighted(request):
 
     return g
 
+# def test_djkst_false():
+#     g = Graph()
+#     g.add_edge('a', 'b', 10)
+#     g.add_edge('a', 'c', 1)
+#     g.add_edge('a', 'd', 1)
+#     g.add_edge('b', 'e', 10)
+#     assert g.dijkstra('a', 'e') == (['a', 'b', 'e'], 20)
 
 def test_djkst_short():
     """
