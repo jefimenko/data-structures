@@ -41,6 +41,9 @@ def test_insert(m_eq, m_lbh, m_hbl):
     assert q.p[0].head.data == 'a'
     assert q.p[1].head.data == 'b'
 
+    with pytest.raises(IndexError):
+        q.insert('c', 9)
+
 
 # Test pop()
 def test_pop(m_eq, m_lbh, m_hbl):

@@ -20,7 +20,7 @@ class Priority_Queue(object):
         try:
             self.p[priority].enqueue(item)
         except ValueError:
-            return "the priority value must be in the range 0 to " + str(self.max)
+            return "the priority value must be in the range 0 to " + str(self.size)
 
     def pop(self):
         """
@@ -31,7 +31,6 @@ class Priority_Queue(object):
         """
         current = 0
         while current < self.size:
-            print current
             if self.p[current].size() == 0:
                 current += 1
             else:
